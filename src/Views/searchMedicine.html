@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../App.js"></script>
+    <script src="../Routes/medicineController"></script>
+    <title>Medicine Search</title>
+</head>
+<body>
+    <h1>Medicine Search</h1>
+
+    <!-- Search Form -->
+    <form id="searchForm">
+        <label for="medicineName">Medicine Name:</label>
+        <input type="text" id="medicineName" name="medicineName" required>
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Results Container -->
+    <div id="results">
+        <!-- Results will be displayed here -->
+    </div>
+
+    <!-- JavaScript to Handle Form Submission and Display Results -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchForm = document.getElementById('searchForm');
+            const resultsContainer = document.getElementById('results');
+
+            searchForm.addEventListener('submit', async function(event) {
+                event.preventDefault();
+
+                // Get the medicine name from the form input
+                const medicineName = document.getElementById('medicineName').value;
+
+                // Perform an AJAX request to search for the medicine
+                try {
+                    const response = await fetch(`/search?medicineName=${medicineName}`);
+                    const data = await response.json();
+
+                    // Display the results
+                    if (data.length > 0) {
+                        let resultsHTML = '<h2>Search Results:</h2>';
+                        resultsHTML += '<ul>';
+                        data.forEach(medicine => {
+                            resultsHTML += `<li>${medicine.name}: ${medicine.description}</li>`;
+                        });
+                        resultsHTML += '</ul>';
+                        resultsContainer.innerHTML = resultsHTML;
+                    } else {
+                        resultsContainer.innerHTML = '<p>No results found.</p>';
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    resultsContainer.innerHTML = '<p>An error occurred while searching.</p>';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
