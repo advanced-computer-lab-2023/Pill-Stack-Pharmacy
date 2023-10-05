@@ -13,9 +13,12 @@ const {createPharmacistReq} = require("./Routes/pharmacistController");
 const app = express();
 const path = require("path");
 
+
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "Views"));
+const admin = require("./Routers/adminRoute");
+
 
 app.use(bodyParser.urlencoded({extended:false}));
 const port = process.env.PORT || "8000";
@@ -42,11 +45,14 @@ dbName: "pharmacy"})
   })
 })
 .catch(err => console.log(err));
+app.use("/admin",admin)
+
 
 // pharmacist register request
 app.route('/pharmacist_register')
   .get((req, res) => { res.render('pharmacistRegister')})
   .post(createPharmacistReq);
+
 
 app.use(express.json());
 app.post("/addMedicine",createMedicine);
