@@ -4,11 +4,19 @@ const bodyParser=require('body-parser');
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
 require("dotenv").config();
-const {createMedicine, getMedicine, searchMedicine, deleteMedicine} = require("./Routes/medicineController");
 const MongoURI = process.env.MONGO_URI ;
+
+const {createMedicine, getMedicine, searchMedicine, deleteMedicine} = require("./Routes/medicineController");
+const {createPharmacistReq} = require("./Routes/pharmacistController");
 
 //App variables
 const app = express();
+const path = require("path");
+
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.set("views", path.join(__dirname, "views"));
+
 app.use(bodyParser.urlencoded({extended:false}));
 const port = process.env.PORT || "8000";
 
@@ -17,9 +25,15 @@ app.get("/searchMedicine", (req, res) => {
     // res.render('./Views/register')
     });
 
+
+
+
 // configurations
 // Mongo DB
-mongoose.connect(MongoURI)
+mongoose.connect(MongoURI, {
+useNewUrlParser: true,
+useUnifiedTopology: true,
+dbName: "pharmacy"})
 .then(()=>{
   console.log("MongoDB is now connected!")
 // Starting server
@@ -28,6 +42,11 @@ mongoose.connect(MongoURI)
   })
 })
 .catch(err => console.log(err));
+
+// pharmacist register request
+app.route('/pharmacist_register')
+  .get((req, res) => { res.render('pharmacistRegister')})
+  .post(createPharmacistReq);
 
 app.use(express.json());
 app.post("/addMedicine",createMedicine);
