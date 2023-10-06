@@ -1,4 +1,6 @@
 const pharmaReqModel = require('../Models/Pharmacist_Request.js');
+const medModel = require('../Models/Medicine.js');
+
 const { default: mongoose } = require('mongoose');
 
 
@@ -34,6 +36,33 @@ const createPharmacistReq = async (req, res) => {
  }
 
 
+// add a new medicine
+ const createMedicine = async (req, res) => {  
+    console.log(req.body.name);
+    const medicine = new medModel({
+        Name: req.body.name, 
+        Details: req.body.details,
+        Price:req.body.price, 
+        Quantity:req.body.quantity
+        });
+    
+        //check for duplicate username
+      const medExists  = await medModel.findOne({Name: req.body.name});
+      if (medExists) return res.status(400).send("Medicine already exists");
+        
+      medicine.save(function(err){
+        if (err) {
+            res.status(400).send("Medicine not added");
+            return console.log(err);
+        }
+        console.log('Med INSERTED!');
+    
+      });
+      // res.render('patient_home');
+    res.status(200).send("Medicine added successfully.")
+ }
+
 module.exports = {
     createPharmacistReq,
+    createMedicine
 };

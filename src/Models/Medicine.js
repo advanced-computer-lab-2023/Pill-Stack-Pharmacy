@@ -2,46 +2,23 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 
+
 const medicineSchema = new Schema({
 
-    Username: {
-        type: String,
-        required: true,
-      },
       Name: {
         type: String,
         required: true,
       },
-      Email: {
-        type: String,
-        required: true
-      },
-      Password: {
+      Details: {
         type: String,
         required: true,
       },
-      DateOfBirth:{
-        type: Date,
-        required: true,
-      },
-      Gender: {
-        type: String,
-        required: true,
-      },
-      MobileNumber: {
+      Price: {
         type: Number,
         required: true,
       },
-      Emergency_Name: {
-        type: String,
-        required: true,
-      },
-      Emergency_MobileNumber: {
+      Quantity: {
         type: Number,
-        required: true,
-      },
-      Emergency_relation_to_patient:{
-        type: String,
         required: true,
       }
     

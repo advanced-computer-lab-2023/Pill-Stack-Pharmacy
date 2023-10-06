@@ -18,6 +18,8 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.set("views", path.join(__dirname, "Views"));
 const admin = require("./Routers/adminRoute");
+const pharmacist = require("./Routers/pharmacistRoute");
+
 
 
 app.use(bodyParser.urlencoded({extended:false}));
@@ -27,9 +29,6 @@ app.get("/searchMedicine", (req, res) => {
     res.sendFile(__dirname + "/Views/searchMedicine.html");
     // res.render('./Views/register')
     });
-
-
-
 
 // configurations
 // Mongo DB
@@ -45,7 +44,12 @@ dbName: "pharmacy"})
   })
 })
 .catch(err => console.log(err));
+
+
+// Routes
 app.use("/admin",admin)
+app.use("/pharmacist",pharmacist)
+
 
 
 // pharmacist register request
