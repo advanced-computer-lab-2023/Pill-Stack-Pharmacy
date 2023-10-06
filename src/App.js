@@ -19,16 +19,11 @@ app.set('view engine', 'html');
 app.set("views", path.join(__dirname, "Views"));
 const admin = require("./Routers/adminRoute");
 const pharmacist = require("./Routers/pharmacistRoute");
-
+ 
 
 
 app.use(bodyParser.urlencoded({extended:false}));
 const port = process.env.PORT || "8000";
-
-app.get("/searchMedicine", (req, res) => {
-    res.sendFile(__dirname + "/Views/searchMedicine.html");
-    // res.render('./Views/register')
-    });
 
 // configurations
 // Mongo DB
@@ -59,9 +54,5 @@ app.route('/pharmacist_register')
 
 
 app.use(express.json());
-app.post("/addMedicine",createMedicine);
-app.get("/medicines", getMedicine);
-app.put("/searchMedicine", searchMedicine);
-app.delete("/deleteMedicine", deleteMedicine);
 
 
