@@ -45,7 +45,6 @@ const createPharmacistReq = async (req, res) => {
         Price:req.body.price, 
         Quantity:req.body.quantity
         });
-    
         //check for duplicate username
       const medExists  = await medModel.findOne({Name: req.body.name});
       if (medExists) return res.status(400).send("Medicine already exists");
@@ -56,13 +55,28 @@ const createPharmacistReq = async (req, res) => {
             return console.log(err);
         }
         console.log('Med INSERTED!');
-    
       });
       // res.render('patient_home');
     res.status(200).send("Medicine added successfully.")
  }
 
+ //search for a medicine in the database
+ const searchMedicine = async (req, res) => {
+  const searchString = { Name:req.body.name};
+  // await medicineModel.find(search);
+  const regex = new RegExp(searchString, 'i'); // 'i' for case-insensitive search
+  // Search for medicine by name using the regular expression
+  medModel.find({ name: { $regex: regex } }, (err, medicines) => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log('Found Medicines:', medicines);
+    }
+  });
+ }
+
 module.exports = {
     createPharmacistReq,
-    createMedicine
+    createMedicine,
+    searchMedicine
 };

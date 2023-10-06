@@ -5,9 +5,7 @@ const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
 require("dotenv").config();
 const MongoURI = process.env.MONGO_URI ;
-
-const {createMedicine, getMedicine, searchMedicine, deleteMedicine} = require("./Routes/medicineController");
-const {createPharmacistReq} = require("./Routes/pharmacistController");
+const {createPharmacistReq,createMedicine,searchMedicine} = require("./Routes/pharmacistController");
 
 //App variables
 const app = express();
