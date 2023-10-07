@@ -6,6 +6,7 @@ mongoose.set('strictQuery', false);
 require("dotenv").config();
 const MongoURI = process.env.MONGO_URI ;
 const {createPharmacistReq,createMedicine,searchMedicine} = require("./Routes/pharmacistController");
+const {addAdmin} = require("./Routes/adminController");
 
 //App variables
 const app = express();
@@ -40,8 +41,14 @@ dbName: "pharmacy"})
 
 
 // Routes
-app.use("/admin",admin)
 app.use("/pharmacist",pharmacist)
+
+app.use("/admin",admin)
+app.get("/admin_home", (req, res) => {
+  res.render('admin_home')
+  });
+
+
 
 
 

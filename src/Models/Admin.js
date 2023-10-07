@@ -4,27 +4,17 @@ const Schema = mongoose.Schema;
 
 const adminSchema = new Schema({
 
-    Username: {
+    username: {
         type: String,
         required: true,
       },
-      Name: {
+    
+      password: {
         type: String,
         required: true,
       },
-      Email: {
-        type: String,
-        required: true
-      },
-      Password: {
-        type: String,
-        required: true,
-      },
-      DateOfBirth:{
-        type: Date,
-        required: true,
-      }
+      
     }, { timestamps: true});
 
-const Admin = mongoose.model('Admin', adminSchema);
+const Admin = mongoose.model('admins', adminSchema);
 module.exports = Admin;
