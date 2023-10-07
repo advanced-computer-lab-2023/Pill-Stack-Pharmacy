@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
 require("dotenv").config();
 const MongoURI = process.env.MONGO_URI ;
+const {patientRegister} = require("./Routes/userController");
 const {createPharmacistReq,createMedicine,searchMedicine} = require("./Routes/pharmacistController");
 const {addAdmin} = require("./Routes/adminController");
 
@@ -48,9 +49,12 @@ app.get("/admin_home", (req, res) => {
   res.render('admin_home')
   });
 
+app.get("/register", (req, res) => {
+  res.render('register')
+  });
 
 
-
+app.post("/addUser",patientRegister);
 
 // pharmacist register request
 app.route('/pharmacist_register')

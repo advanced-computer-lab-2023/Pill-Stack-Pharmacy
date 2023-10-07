@@ -32,20 +32,20 @@ const patientSchema = new Schema({
         type: Number,
         required: true,
       },
-      Emergency_Name: {
+      EmergencyContact_Name: {
         type: String,
         required: true,
       },
-      Emergency_MobileNumber: {
+      EmergencyContact_MobileNumber: {
         type: Number,
         required: true,
       },
-      Emergency_relation_to_patient:{
+      EmergencyContact_Relation:{
         type: String,
         required: true,
       }
     
     }, { timestamps: true});
 
-const Patient = mongoose.model('Patient', medicineSchema);
+const Patient = mongoose.model('Patient',patientSchema);
 module.exports = Patient;
