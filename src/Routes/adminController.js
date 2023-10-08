@@ -1,5 +1,6 @@
 const adminModel = require('../Models/Admin.js');
 const pharmaReqModel = require('../Models/Pharmacist_Request.js');
+const medModel = require('../Models/Medicine.js');
 
 const { default: mongoose } = require('mongoose');
 const viewPharmacistApp= async (req, res) => {
@@ -31,10 +32,20 @@ const addAdmin = async (req, res) => {
       res.status(500).send("Error adding admin.");
     }
   };
-  
+  async function getAvailableMedicines(req, res) {
+    try {
+      // Use Mongoose to find medicines with quantity > 0
+      const availableMedicines = await medModel.find({ Quantity: { $gt: 0 } });
+      console.log(availableMedicines)
+      res.render('availableMedicines.ejs', { data: availableMedicines });
+    } catch (error) {
+      console.error('Error fetching available medicines:', error);
+      throw error;
+    }
+  }
 
 
 
 module.exports = {
-    viewAllApp,viewPharmacistApp,addAdmin
+    viewAllApp,viewPharmacistApp,addAdmin,getAvailableMedicines
 };

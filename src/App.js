@@ -53,7 +53,10 @@ app.get("/register", (req, res) => {
   res.render('register')
   });
 
-
+  app.get("/availableMedicines", (req, res) => {
+    res.render('availableMedicines')
+    });
+    
 app.post("/addUser",patientRegister);
 
 // pharmacist register request
