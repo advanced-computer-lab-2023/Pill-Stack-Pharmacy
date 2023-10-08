@@ -37,28 +37,31 @@ const createPharmacistReq = async (req, res) => {
 
 
 // add a new medicine
- const createMedicine = async (req, res) => {  
-    console.log(req.body.name);
+ const createMedicine = async (req, res) => {
+  console.log(req.body.name);
+  try {
+    const medExists = await medModel.findOne({ Name: req.body.name });
+
+    if (medExists) {
+      return res.status(400).send("Medicine already exists");
+    }
+
     const medicine = new medModel({
-        Name: req.body.name, 
-        Details: req.body.details,
-        Price:req.body.price, 
-        Quantity:req.body.quantity
-        });
-        //check for duplicate username
-      const medExists  = await medModel.findOne({Name: req.body.name});
-      if (medExists) return res.status(400).send("Medicine already exists");
-        
-      medicine.save(function(err){
-        if (err) {
-            res.status(400).send("Medicine not added");
-            return console.log(err);
-        }
-        console.log('Med INSERTED!');
-      });
-      // res.render('patient_home');
-    res.status(200).send("Medicine added successfully.")
- }
+      Name: req.body.name,
+      Details: req.body.details,
+      Price: req.body.price,
+      Quantity: req.body.quantity,
+    });
+
+    await medicine.save();
+    console.log('Med INSERTED!');
+    res.status(200).send("Medicine added successfully.");
+  } catch (err) {
+    console.error(err);
+    res.status(400).send("Medicine not added");
+  }
+};
+
 
  //search for a medicine in the database
  const searchMedicine = async (req, res) => {
