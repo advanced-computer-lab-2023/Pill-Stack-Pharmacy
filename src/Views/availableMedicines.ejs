@@ -36,6 +36,7 @@
         <tr>
           <td><%= medicine.Price %></td>
           <td><%= medicine.Details %></td>
+          <td><img src="data:<%= medicine.Image.contentType %>;base64,<%= medicine.Image.data.toString('base64') %>" alt="<%= medicine.Name %>"></td>
         </tr>
       <% }); %>
     </tbody>

@@ -10,7 +10,7 @@
         // Details: req.body.details,
         // Price:req.body.price, 
         // Quantity:req.body.quantity -->
-    <form action="/pharmacist/createMedicine" method="POST">
+    <form action="/pharmacist/createMedicine" method="POST" enctype="multipart/form-data">
         <label for="name">Name</label>
         <input type="text" name="name" id="name" placeholder="Name">
         <label for="details">Details</label>
@@ -19,6 +19,8 @@
         <input type="text" name="price" id="price" placeholder="Price">
         <label for="quantity">Quantity</label>
         <input type="text" name="quantity" id="quantity" placeholder="Quantity">
+        <label for="image">Image</label>
+        <input type="file" name="file" id="image">
         <button type="submit">Submit</button>
     </form>
     

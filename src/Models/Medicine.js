@@ -20,7 +20,11 @@ const medicineSchema = new Schema({
       Quantity: {
         type: Number,
         required: true,
-      }
+      },
+      Image: {
+        data: Buffer, // Store the filename as a string
+        contentType: String,
+      },
     
     }, { timestamps: true});
 

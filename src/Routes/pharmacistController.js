@@ -1,6 +1,8 @@
 const pharmaReqModel = require('../Models/Pharmacist_Request.js');
 const medModel = require('../Models/Medicine.js');
-
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 const { default: mongoose } = require('mongoose');
 
 
@@ -37,13 +39,13 @@ const createPharmacistReq = async (req, res) => {
 
 
 // add a new medicine
- const createMedicine = async (req, res) => {
-  console.log(req.body.name);
+const createMedicine = async (req, res) => {
   try {
-    const medExists = await medModel.findOne({ Name: req.body.name });
+    console.log(req.file);
+    const image = req.file;
 
-    if (medExists) {
-      return res.status(400).send("Medicine already exists");
+    if (!image) {
+      return res.status(400).send('Please upload an image.');
     }
 
     const medicine = new medModel({
@@ -51,14 +53,28 @@ const createPharmacistReq = async (req, res) => {
       Details: req.body.details,
       Price: req.body.price,
       Quantity: req.body.quantity,
+      Image: {
+        data: image.buffer,
+        contentType: image.mimetype,
+      },
     });
+    console.log(image.buffer);
+    console.log(image.mimetype)
 
-    await medicine.save();
-    console.log('Med INSERTED!');
+    // Check for duplicate medicine
+    const medExists = await medModel.findOne({ Name: req.body.name });
+
+    if (medExists) {
+      return res.status(400).send("Medicine already exists");
+    }
+
+    // Save the medicine using await
+    const savedMedicine = await medicine.save();
+    console.log('Medicine saved successfully:', savedMedicine);
     res.status(200).send("Medicine added successfully.");
-  } catch (err) {
-    console.error(err);
-    res.status(400).send("Medicine not added");
+  } catch (error) {
+    console.error('Error saving medicine:', error);
+    res.status(500).send("An error occurred while saving medicine.");
   }
 };
 
@@ -81,5 +97,6 @@ const createPharmacistReq = async (req, res) => {
 module.exports = {
     createPharmacistReq,
     createMedicine,
-    searchMedicine
+    searchMedicine,
+    upload,
 };

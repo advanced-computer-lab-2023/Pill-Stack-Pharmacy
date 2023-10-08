@@ -12,6 +12,7 @@ const {addAdmin,viewPatientDet, PatientDetailsResults} = require("./Routes/admin
 //App variables
 const app = express();
 const path = require("path");
+app.use(express.static('uploads'));
 
 
 app.engine('html', require('ejs').renderFile);
@@ -52,11 +53,15 @@ app.get("/admin_home", (req, res) => {
 app.get("/register", (req, res) => {
   res.render('register')
   });
-
+  app.get("/patient", (req, res) => {
+    res.render('patient')
+    });
   app.get("/availableMedicines", (req, res) => {
     res.render('availableMedicines')
     });
-
+    app.get("/pharmacist_home", (req, res) => {
+      res.render('pharmacist_home')
+      });
    
 app.post("/addUser",patientRegister);
 
