@@ -1,9 +1,13 @@
+//importing user models
 const adminModel = require('../Models/Admin.js');
 const pharmaReqModel = require('../Models/Pharmacist_Request.js');
-const medModel = require('../Models/Medicine.js');
 const Patient = require('../Models/patient.js'); 
-
+const pharmacistModel=require('../Models/Pharmacist.js');
+//importing medicines model
+const medModel = require('../Models/Medicine.js');
+//importing mongoose 
 const { default: mongoose } = require('mongoose');
+
 const viewPharmacistApp= async (req, res) => {
     const applicationId = req.params.id;
     const application = await pharmaReqModel.findById(applicationId);
@@ -34,7 +38,6 @@ const PatientDetailsResults = async (req, res) => {
     res.status(500).send("Internal server error");
   }
 };
-
 
 const addAdmin = async (req, res) => {
     try {
@@ -76,8 +79,45 @@ const addAdmin = async (req, res) => {
   // }
 
 
+//removing a user (admin, patient or pharmacist) from the system
+  const removeUser= async (req, res) => {
+    const toBeDeleted={username:req.body.username};
+    //var e = document.getElementById("userType");
+    var userType =req.body.usertype ;
+    console.log({username:req.body.username});
+    console.log(userType);
+     // Determine which model to use based on the userType
+  switch (userType) {
+    case 'pharmacist':
+      UserModel =pharmacistModel;
+      break;
+    case 'patient':
+      UserModel = Patient;
+      break;
+    case 'admin':
+      UserModel = adminModel;
+      break;
+    default:
+      return res.status(400).send('Invalid user type');
+  }
+    try {
+      // Find and delete the user by username
+      const deletedUser = await UserModel.findOneAndDelete({username:req.body.username });
+  
+      if (deletedUser) {
+        res.send(`User '${toBeDeleted}' deleted successfully.`);
+      } else {
+        res.send(`User '${toBeDeleted}' not found.`);
+      }
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Internal server error');
+    }
+   
+}
 
 
 module.exports = {
-    viewAllApp,viewPharmacistApp,addAdmin,getAvailableMedicines,viewPatientDet,PatientDetailsResults
+    viewAllApp,viewPharmacistApp,addAdmin,getAvailableMedicines,viewPatientDet
+    ,PatientDetailsResults,removeUser
 };

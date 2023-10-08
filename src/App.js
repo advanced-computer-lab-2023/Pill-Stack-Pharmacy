@@ -6,8 +6,8 @@ mongoose.set('strictQuery', false);
 require("dotenv").config();
 const MongoURI = process.env.MONGO_URI ;
 const {patientRegister} = require("./Routes/userController");
-const {createPharmacistReq,createMedicine,searchMedicine} = require("./Routes/pharmacistController");
-const {addAdmin,viewPatientDet, PatientDetailsResults} = require("./Routes/adminController");
+const {createPharmacistReq,searchMedicine} = require("./Routes/pharmacistController");
+const {addAdmin,viewPatientDet, PatientDetailsResults,removeUser} = require("./Routes/adminController");
 
 //App variables
 const app = express();
@@ -44,28 +44,27 @@ dbName: "pharmacy"})
 
 // Routes
 app.use("/pharmacist",pharmacist)
-
 app.use("/admin",admin)
+
+
 app.get("/admin_home", (req, res) => {
   res.render('admin_home')
   });
 
-app.get("/register", (req, res) => {
+  app.get("/register", (req, res) => {
   res.render('register')
-  });
+    });
   app.get("/patient", (req, res) => {
     res.render('patient')
     });
   app.get("/availableMedicines", (req, res) => {
     res.render('availableMedicines')
     });
-    app.get("/pharmacist_home", (req, res) => {
-      res.render('pharmacist_home')
-      });
+  app.get("/pharmacist_home", (req, res) => {
+    res.render('pharmacist_home')
+    });
    
 app.post("/addUser",patientRegister);
-
-
 
 app.get("/PatientDetailsResults",PatientDetailsResults);
 
@@ -76,6 +75,9 @@ app.route('/pharmacist_register')
   .get((req, res) => { res.render('pharmacistRegister')})
   .post(createPharmacistReq);
 
+  app.route('/removeUser')
+  .get((req, res) => { res.render('removeUser')})
+  .post(removeUser);
 
 app.use(express.json());
 
