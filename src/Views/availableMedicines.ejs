@@ -27,13 +27,16 @@
   <table>
     <thead>
       <tr>
+        <th>Name</th>
         <th>Price</th>
         <th>Details</th>
+        <th>Image</th>
       </tr>
     </thead>
     <tbody>
       <% data.forEach(medicine => { %>
         <tr>
+          <td><%= medicine.Name %></td>
           <td><%= medicine.Price %></td>
           <td><%= medicine.Details %></td>
           <td><img src="data:<%= medicine.Image.contentType %>;base64,<%= medicine.Image.data.toString('base64') %>" alt="<%= medicine.Name %>"></td>
