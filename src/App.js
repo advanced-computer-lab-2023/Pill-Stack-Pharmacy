@@ -7,7 +7,7 @@ require("dotenv").config();
 const MongoURI = process.env.MONGO_URI ;
 const {patientRegister} = require("./Routes/userController");
 const {createPharmacistReq,createMedicine,searchMedicine} = require("./Routes/pharmacistController");
-const {addAdmin} = require("./Routes/adminController");
+const {addAdmin,viewPatientDet, PatientDetailsResults} = require("./Routes/adminController");
 
 //App variables
 const app = express();
@@ -56,8 +56,15 @@ app.get("/register", (req, res) => {
   app.get("/availableMedicines", (req, res) => {
     res.render('availableMedicines')
     });
-    
+
+   
 app.post("/addUser",patientRegister);
+
+
+
+app.get("/PatientDetailsResults",PatientDetailsResults);
+
+
 
 // pharmacist register request
 app.route('/pharmacist_register')

@@ -1,6 +1,7 @@
 const adminModel = require('../Models/Admin.js');
 const pharmaReqModel = require('../Models/Pharmacist_Request.js');
 const medModel = require('../Models/Medicine.js');
+const Patient = require('../Models/patient.js'); 
 
 const { default: mongoose } = require('mongoose');
 const viewPharmacistApp= async (req, res) => {
@@ -13,6 +14,27 @@ const viewAllApp= async (req, res) => {
     const applications = await pharmaReqModel.find({});
 res.render('pharmacist_App.ejs',{userData:applications});
 }
+
+const PatientDetailsResults = async (req, res) => {
+  const username = req.query.username;
+
+  try {
+    const patients = await Patient.find({ Username: username });
+
+    if (!patients || patients.length === 0) {
+      // If no patient is found, you can handle it here
+      return res.status(404).send("Patient not found");
+    }
+
+    // Render the EJS template with the patient data
+    res.render('patientDetailsResults.ejs', { patients: patients });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal server error");
+  }
+};
+
 
 const addAdmin = async (req, res) => {
     try {
@@ -44,8 +66,18 @@ const addAdmin = async (req, res) => {
     }
   }
 
+  const viewPatientDet = async (req, res) => {
+    res.render('PatientDetails');
+  }
+
+  // const PatientDetailsResults = async (req, res) => {
+  //   const patients = await Patient.find({});
+  //  res.send(patients);  
+  // }
+
+
 
 
 module.exports = {
-    viewAllApp,viewPharmacistApp,addAdmin,getAvailableMedicines
+    viewAllApp,viewPharmacistApp,addAdmin,getAvailableMedicines,viewPatientDet,PatientDetailsResults
 };

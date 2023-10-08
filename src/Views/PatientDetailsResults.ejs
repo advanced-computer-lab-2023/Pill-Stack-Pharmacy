@@ -1,0 +1,61 @@
+<!-- patientDetails.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Details</title>
+    <style>
+        /* CSS styles for the table */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Patient Details</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Date of Birth</th>
+                <th>Gender</th>
+                <th>Mobile Number</th>
+                <th>Emergency Contact Name</th>
+                <th>Emergency Contact Mobile Number</th>
+                <th>Emergency Contact Relation</th>
+                <!-- Add more table headers for other patient details as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            <% for (const patient of patients) { %>
+                <tr>
+                    <td><%= patient.Username %></td>
+                    <td><%= patient.Name %></td>
+                    <td><%= patient.Email %></td>
+                    <td><%= patient.DateOfBirth.toISOString().split('T')[0] %></td>
+                    <td><%= patient.Gender %></td>
+                    <td><%= patient.MobileNumber %></td>
+                    <td><%= patient.EmergencyContact_Name %></td>
+                    <td><%= patient.EmergencyContact_MobileNumber %></td>
+                    <td><%= patient.EmergencyContact_Relation %></td>
+                    <!-- Add more table cells for other patient details as needed -->
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>
