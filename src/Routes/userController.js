@@ -35,7 +35,23 @@ const patientRegister = async (req, res) => {
       res.status(500).json({ message: 'Internal server error' });
    }
 }
+const searchMedicine = async (req, res) => {
+   const searchTerm = req.body.name;
+   console.log(searchTerm);
+   try {
+     const result = await medModel.findOne({ Name: searchTerm });
+     console.log(result.Name);
+     console.log(result.Details);
+     const name = result.Name;
+     const detail = result.Details;
+     const price = result.Price;
+     const quantity = result.Quantity;
+     res.status(200).json({ name, detail, price, quantity });
+   } catch (error) {
+     res.status(500).send('Error searching for medicines');
+   }
+ }
 
 
 
-module.exports = {patientRegister};
+module.exports = {patientRegister,searchMedicine};

@@ -82,23 +82,23 @@ const createMedicine = async (req, res) => {
 
 
  //search for a medicine in the database
- const searchMedicine= async(req, res) =>{
+ const searchMedicine = async (req, res) => {
   const searchTerm = req.body.name;
   console.log(searchTerm);
   try {
     const result = await medModel.findOne({ Name: searchTerm });
     console.log(result.Name);
     console.log(result.Details);
-    const name=result.Name;
-    const detail=result.Details;
-    const price =result.Price;
-    const quantity=result.Quantity;
-    //, {name,detail,price,quantity}
-    res.status(200).send('search');
+    const name = result.Name;
+    const detail = result.Details;
+    const price = result.Price;
+    const quantity = result.Quantity;
+    res.status(200).json({ name, detail, price, quantity });
   } catch (error) {
     res.status(500).send('Error searching for medicines');
   }
- }
+}
+
  
 
 
