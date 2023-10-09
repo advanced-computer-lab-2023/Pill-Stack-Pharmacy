@@ -82,19 +82,25 @@ const createMedicine = async (req, res) => {
 
 
  //search for a medicine in the database
- const searchMedicine = async (req, res) => {
-  const searchString = { Name:req.body.name};
-  // await medicineModel.find(search);
-  const regex = new RegExp(searchString, 'i'); // 'i' for case-insensitive search
-  // Search for medicine by name using the regular expression
-  medModel.find({ name: { $regex: regex } }, (err, medicines) => {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log('Found Medicines:', medicines);
-    }
-  });
+ const searchMedicine= async(req, res) =>{
+  const searchTerm = req.body.name;
+  console.log(searchTerm);
+  try {
+    const result = await medModel.findOne({ Name: searchTerm });
+    console.log(result.Name);
+    console.log(result.Details);
+    const name=result.Name;
+    const detail=result.Details;
+    const price =result.Price;
+    const quantity=result.Quantity;
+    //, {name,detail,price,quantity}
+    res.status(200).send('search');
+  } catch (error) {
+    res.status(500).send('Error searching for medicines');
+  }
  }
+ 
+
 
 module.exports = {
     createPharmacistReq,

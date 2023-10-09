@@ -79,6 +79,10 @@ app.route('/pharmacist_register')
   .get((req, res) => { res.render('removeUser')})
   .post(removeUser);
 
+  app.route('/searchMedicine')
+  .get((req, res) => { res.render('searchMedicine')})
+  .post(searchMedicine);
+
 app.use(express.json());
 
 
