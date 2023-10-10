@@ -1,6 +1,6 @@
 const express = require('express');
 let router = express.Router();
-const {createMedicine,searchMedicine,upload} = require('../Routes/pharmacistController.js');
+const {createMedicine,searchMedicine,upload, filterMedicinesByMedicinalUse} = require('../Routes/pharmacistController.js');
 const {getAvailableMedicines} = require('../Routes/adminController.js');
 
 //const { searchMedicine } = require('../Routes/medicineController.js');
@@ -15,6 +15,9 @@ router.route('/searchMedicine')
    .get((req,res) => { res.render('searchMedicine')})
    .post(searchMedicine);
 
+
+// Handle filtering medicines by medicinal use
+router.get('/filter-medicines',filterMedicinesByMedicinalUse);
 
 
 module.exports = router;

@@ -20,6 +20,8 @@ app.set('view engine', 'html');
 app.set("views", path.join(__dirname, "Views"));
 const admin = require("./Routers/adminRoute");
 const pharmacist = require("./Routers/pharmacistRoute");
+const patient = require("./Routers/patientRoute");
+
  
 
 
@@ -45,6 +47,8 @@ dbName: "pharmacy"})
 // Routes
 app.use("/pharmacist",pharmacist)
 app.use("/admin",admin)
+app.use("/patient",patient)
+
 
 
 app.get("/admin_home", (req, res) => {

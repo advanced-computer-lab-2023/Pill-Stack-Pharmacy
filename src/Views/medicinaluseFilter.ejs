@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtered Medicines</title>
+</head>
+<body>
+    <h1>Filter Medicines by Medicinal Use</h1>
+
+    <!-- Create a form to select medicinal use -->
+    <form action="/patient/filter-medicines" method="GET">
+        <label for="medicinalUse">Select Medicinal Use:</label>
+        <select name="medicinalUse" id="medicinalUse">
+            <option value="Pain Relief">Pain Relief</option>
+            <option value="Fever">Fever</option>
+            <option value="Allergies">Allergies</option>
+            <option value="Flu">Flu</option>
+            <!-- Add more options as needed -->
+        </select>
+
+        <button type="submit">Filter Medicines</button>
+    </form>
+
+    <!-- Display filtered medicines here -->
+    <h2>Filtered Medicines:</h2>
+    <table border="1">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Details</th>
+            <th>Price</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% medicines.forEach(medicine => { %>
+            <tr>
+              <td><%= medicine.Name %></td>
+              <td><%= medicine.Details %></td>
+              <td>$<%= medicine.Price %></td>
+              <td><%= medicine.Quantity %></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+      
+
+</body>
+</html>

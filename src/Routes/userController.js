@@ -1,6 +1,9 @@
 // #Task route solution
 const userModel = require('../Models/patient.js');
+const medModel = require('../Models/Medicine.js');
+
 const { default: mongoose } = require('mongoose');
+
 
 
 
@@ -52,6 +55,27 @@ const searchMedicine = async (req, res) => {
    }
  }
 
+ // Function to filter medicines based on medicinal use
+const filterMedicinesByMedicinalUse = async (req, res) => {
+
+  try {
+   const medicinalUse = req.query.medicinalUse;
+
+    // Use Mongoose to find medicines where medicinal use matches any element in the array   
+    const filteredMedicines = await medModel.find({
+      MedicinalUse: { $in: medicinalUse },
+    });
+
+    res.render('medicinaluseFilter.ejs', { medicines: filteredMedicines });
+  } catch (error) {
+    console.error('Error filtering medicines by medicinal use:', error);
+    res.status(500).send('Internal server error');
+  }
+ };
 
 
-module.exports = {patientRegister,searchMedicine};
+
+
+
+
+module.exports = {patientRegister,searchMedicine, filterMedicinesByMedicinalUse};

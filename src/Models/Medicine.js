@@ -25,8 +25,10 @@ const medicineSchema = new Schema({
         data: Buffer, // Store the filename as a string
         contentType: String,
       },
-    
-    }, { timestamps: true});
+      MedicinalUse: [{
+        type: String,
+      }],
+    }, { timestamps: true });
 
 const Medicines = mongoose.model('Medicines', medicineSchema);
 module.exports = Medicines;

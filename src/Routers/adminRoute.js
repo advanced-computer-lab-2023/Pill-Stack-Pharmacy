@@ -1,6 +1,6 @@
 const express = require('express');
 let router = express.Router();
-const {viewPharmacistApp,getAvailableMedicines,viewAllApp,addAdmin,viewPatientDet, PatientDetailsResults,removeUser} = require('../Routes/adminController.js');
+const {viewPharmacistApp,getAvailableMedicines,viewAllApp,addAdmin,viewPatientDet, PatientDetailsResults,removeUser, filterMedicinesByMedicinalUse} = require('../Routes/adminController.js');
 router.get("/", async(req,res) => {res.render('admin_home')});
 router.get("/applications",viewAllApp);
 router.get('/applications/view/:id',viewPharmacistApp);
@@ -20,5 +20,9 @@ router.route('/removeUser')
 // .get((req,res) => {res.render('PatientDetails')})
 router.get('/availableMedicines.ejs',getAvailableMedicines);
 router.get('/PatientDetails',viewPatientDet);
+
+// Handle filtering medicines by medicinal use
+router.get('/filter-medicines',filterMedicinesByMedicinalUse);
+
 
 module.exports = router;
