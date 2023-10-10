@@ -81,6 +81,50 @@ const createMedicine = async (req, res) => {
 };
 
 
+const editMedicine = async(req, res) => {
+  res.render('editmed')
+}
+
+
+
+  const editMedicineResults = async (req, res) => {
+    try {
+      const medicineName = req.query.medicineName;
+      const newPrice = req.query.newPrice;
+      const newDetails = req.query.newDetails;
+  
+      // Assuming you have a model named medModel for your database
+  
+      // Find the medicine by name
+      const existingMedicine = await medModel.findOne({ Name: medicineName });
+  
+      if (existingMedicine) {
+        // Update the medicine information
+        existingMedicine.Price = newPrice;
+        existingMedicine.Details = newDetails;
+  
+        // Save the updated medicine
+        await existingMedicine.save();
+  
+        console.log('Medicine information updated successfully.');
+        res.send('Medicine information updated successfully.');
+      } else {
+        console.log('Medicine not found in the database.');
+        res.send('Medicine not found in the database.');
+      }
+    } catch (error) {
+      console.error('Error updating medicine information:', error);
+      res.status(500).send('Error updating medicine information');
+    }
+  }
+  
+
+
+
+
+
+
+
  //search for a medicine in the database
  const searchMedicine = async (req, res) => {
   const searchTerm = req.body.name;
@@ -107,4 +151,6 @@ module.exports = {
     createMedicine,
     searchMedicine,
     upload,
+    editMedicine,
+    editMedicineResults
 };
