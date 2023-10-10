@@ -57,9 +57,9 @@ app.get("/admin_home", (req, res) => {
   app.get("/patient", (req, res) => {
     res.render('patient')
     });
-  app.get("/availableMedicines", (req, res) => {
-    res.render('availableMedicines')
-    });
+  // app.get("/availableMedicines", (req, res) => {
+  //   res.render('availableMedicines')
+  //   });
   app.get("/pharmacist_home", (req, res) => {
     res.render('pharmacist_home')
     });

@@ -1,6 +1,6 @@
 const express = require('express');
 let router = express.Router();
-const {createMedicine,searchMedicine,editMedicine,editMedicineResults,upload} = require('../Routes/pharmacistController.js');
+const {createMedicine,searchMedicine,editMedicine,editMedicineResults,upload, getMedSQ} = require('../Routes/pharmacistController.js');
 const {getAvailableMedicines} = require('../Routes/adminController.js');
 
 //const { searchMedicine } = require('../Routes/medicineController.js');
@@ -8,6 +8,7 @@ const {getAvailableMedicines} = require('../Routes/adminController.js');
 router.get('/availableMedicines.ejs',getAvailableMedicines);
 router.get('/editmed',editMedicine);
 router.get('/editmedResults',editMedicineResults);
+router.get('/avMed.ejs',getMedSQ);
 
 router.route('/createMedicine')
     .get((req, res) => { res.render('createMed')})

@@ -21,6 +21,10 @@ const medicineSchema = new Schema({
         type: Number,
         required: true,
       },
+      Sales: {
+        type: Number,
+        required: true,
+      },
       Image: {
         data: Buffer, // Store the filename as a string
         contentType: String,

@@ -85,6 +85,18 @@ const editMedicine = async(req, res) => {
   res.render('editmed')
 }
 
+async function getMedSQ(req, res) {
+  try {
+    // Use Mongoose to find medicines with quantity > 0
+    const availableMedicines = await medModel.find({});
+    console.log(availableMedicines)
+    res.render('avMed.ejs', { data: availableMedicines });
+  } catch (error) {
+    console.error('Error fetching available medicines:', error);
+    throw error;
+  }
+}
+
 
 
   const editMedicineResults = async (req, res) => {
@@ -152,5 +164,6 @@ module.exports = {
     searchMedicine,
     upload,
     editMedicine,
-    editMedicineResults
+    editMedicineResults,
+    getMedSQ
 };
