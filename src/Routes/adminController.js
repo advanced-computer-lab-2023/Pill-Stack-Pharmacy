@@ -73,6 +73,8 @@ const addAdmin = async (req, res) => {
     res.render('PatientDetails');
   }
 
+  
+
   // const PatientDetailsResults = async (req, res) => {
   //   const patients = await Patient.find({});
   //  res.send(patients);  

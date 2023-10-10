@@ -19,6 +19,7 @@ router.route('/removeUser')
 
 // .get((req,res) => {res.render('PatientDetails')})
 router.get('/availableMedicines.ejs',getAvailableMedicines);
+
 router.get('/PatientDetails',viewPatientDet);
 
 // Handle filtering medicines by medicinal use
