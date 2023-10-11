@@ -38,7 +38,7 @@ const patientRegister = async (req, res) => {
       res.status(500).json({ message: 'Internal server error' });
    }
 }
-const searchMedicine = async (req, res) => {
+const searchMedicinePat = async (req, res) => {
    const searchTerm = req.body.name;
    console.log(searchTerm);
    try {
@@ -78,4 +78,4 @@ const filterMedicinesByMedicinalUse = async (req, res) => {
 
 
 
-module.exports = {patientRegister,searchMedicine, filterMedicinesByMedicinalUse};
+module.exports = {patientRegister,searchMedicinePat, filterMedicinesByMedicinalUse};

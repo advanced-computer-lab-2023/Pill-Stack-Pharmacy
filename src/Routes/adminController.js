@@ -117,7 +117,7 @@ const addAdmin = async (req, res) => {
     }
    
 }
-const searchMedicine = async (req, res) => {
+const searchMedicineA = async (req, res) => {
   const searchTerm = req.body.name;
   console.log(searchTerm);
   try {
@@ -133,6 +133,7 @@ const searchMedicine = async (req, res) => {
     res.status(500).send('Error searching for medicines');
   }
 }
+
 
 // Function to filter medicines based on medicinal use
 // Function to filter medicines based on medicinal use
@@ -152,9 +153,10 @@ const filterMedicinesByMedicinalUse = async (req, res) => {
     res.status(500).send('Internal server error');
   }
  };
+ 
 
 
 module.exports = {
     viewAllApp,viewPharmacistApp,addAdmin,getAvailableMedicines,viewPatientDet
-    ,PatientDetailsResults,removeUser,searchMedicine,filterMedicinesByMedicinalUse
+    ,PatientDetailsResults,removeUser,searchMedicineA,filterMedicinesByMedicinalUse
 };

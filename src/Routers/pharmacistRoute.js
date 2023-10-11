@@ -1,6 +1,6 @@
 const express = require('express');
 let router = express.Router();
-const {createMedicine,searchMedicine,editMedicine,editMedicineResults,upload, getMedSQ, filterMedicinesByMedicinalUse} = require('../Routes/pharmacistController.js');
+const {createMedicine,searchMedicinePh,editMedicine,editMedicineResults,upload, getMedSQ, filterMedicinesByMedicinalUse} = require('../Routes/pharmacistController.js');
 const {getAvailableMedicines} = require('../Routes/adminController.js');
 
 //const { searchMedicine } = require('../Routes/medicineController.js');
@@ -15,8 +15,8 @@ router.route('/createMedicine')
     .post(upload.single('file'), createMedicine);
 
 router.route('/searchMedicine')
-   .get((req,res) => { res.render('searchMedicine')})
-   .post(searchMedicine);
+   .get((req,res) => { res.render('searchMedicinePh.html')})
+   .post(searchMedicinePh);
    
 
 

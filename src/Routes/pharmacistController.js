@@ -139,7 +139,7 @@ async function getMedSQ(req, res) {
 
 
  //search for a medicine in the database
- const searchMedicine = async (req, res) => {
+ const searchMedicinePh = async (req, res) => {
   const searchTerm = req.body.name;
   console.log(searchTerm);
   try {
@@ -180,7 +180,7 @@ const filterMedicinesByMedicinalUse = async (req, res) => {
 module.exports = {
     createPharmacistReq,
     createMedicine,
-    searchMedicine,
+    searchMedicinePh,
     upload,
     filterMedicinesByMedicinalUse,
     editMedicine,
