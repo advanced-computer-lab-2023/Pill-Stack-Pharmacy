@@ -8,15 +8,13 @@ router.get('/applications/view/:id',viewPharmacistApp);
 router.get('/adminstration',addAdmin);
 router.get('/PatientDetails',viewPatientDet);
 router.get('/PatientDetailsResults',PatientDetailsResults);
-router.get('/removeUser',removeUser);
-
 router.route('/administration')
 .get((req,res) => {res.render('administration')})
 .post(addAdmin);
 
 router.route('/removeUser')
-.get((req,res) => {res.render('removeUser')})
-.post(removeUser);
+   .get((req,res) => { res.render('removeUser.html')})
+   .post(removeUser);
 
 // .get((req,res) => {res.render('PatientDetails')})
 router.get('/availableMedicines.ejs',getAvailableMedicines);
@@ -30,7 +28,5 @@ router.get('/avMed.ejs',getMedSQ);
 router.route('/searchMedicine')
    .get((req,res) => { res.render('searchMedicineA.html')})
    .post(searchMedicineA);
-
-
 
 module.exports = router;
