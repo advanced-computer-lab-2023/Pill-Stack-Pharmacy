@@ -17,6 +17,7 @@ router.route('/createMedicine')
 router.route('/searchMedicine')
    .get((req,res) => { res.render('searchMedicine')})
    .post(searchMedicine);
+   
 
 
 // Handle filtering medicines by medicinal use
