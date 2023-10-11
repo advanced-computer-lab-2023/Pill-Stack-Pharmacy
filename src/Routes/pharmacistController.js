@@ -182,11 +182,8 @@ module.exports = {
     createMedicine,
     searchMedicine,
     upload,
-<<<<<<< HEAD
-    filterMedicinesByMedicinalUse
-=======
+    filterMedicinesByMedicinalUse,
     editMedicine,
     editMedicineResults,
     getMedSQ
->>>>>>> f5327364cf6e1915420e23a65cab4ecf18ee98ed
 };
