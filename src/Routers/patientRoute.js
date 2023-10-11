@@ -4,6 +4,11 @@ const {filterMedicinesByMedicinalUse, searchMedicinePat} = require('../Routes/us
 const {getAvailableMedicines} = require('../Routes/adminController.js');
 
 
+  //patient home page 
+  router.get("/", (req, res) => {
+   res.render('patient')
+   });
+
 router.get('/availableMedicines.ejs',getAvailableMedicines);
 
 

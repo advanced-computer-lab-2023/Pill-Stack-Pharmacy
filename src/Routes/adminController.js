@@ -83,10 +83,10 @@ const addAdmin = async (req, res) => {
 
 //removing a user (admin, patient or pharmacist) from the system
   const removeUser= async (req, res) => {
-    const toBeDeleted=req.body.username;
+    const toBeDeleted={username: req.body.username};
     const userType =req.body.usertype ;
-    // console.log({username:req.body.username});
-    // console.log(userType);
+    console.log(toBeDeleted);
+    console.log(userType);
      // Determine which model to use based on the userType
   switch (userType) {
     case 'pharmacist':
@@ -103,7 +103,7 @@ const addAdmin = async (req, res) => {
   }
     try {
       // Find and delete the user by username
-      const deletedUser = await UserModel.findOneAndDelete({toBeDeleted});
+      const deletedUser = await UserModel.findOneAndDelete(toBeDeleted);
       if (deletedUser) {
         res.send(`User '${toBeDeleted}' deleted successfully.`);
       } else {

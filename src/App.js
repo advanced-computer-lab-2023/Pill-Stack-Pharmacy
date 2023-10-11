@@ -50,17 +50,13 @@ app.use("/admin",admin)
 app.use("/patient",patient)
 
 
-//Renders the admin home page 
- app.get("/admin_home", (req, res) => {
-   res.render('admin_home')
-   });
-
+app.get("/", (req, res) => {
+  res.render('home')
+  });
 //render the user home page
   app.get("/register", (req, res) => {
   res.render('register')
     });
-
-//Adds the user to the database
   app.post("/addUser",patientRegister);
 
 // pharmacist register request
@@ -70,16 +66,6 @@ app.use("/patient",patient)
 
  
 
-  //patient home page 
-  app.get("/patient", (req, res) => {
-    res.render('patient')
-    });
-
- //pharmacist home page 
-  app.get("/pharmacist_home", (req, res) => {
-    res.render('pharmacist_home')
-    });
-   
 
 
 //app.get("/PatientDetailsResults",PatientDetailsResults);
