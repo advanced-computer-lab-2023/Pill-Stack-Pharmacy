@@ -39,6 +39,28 @@ const PatientDetailsResults = async (req, res) => {
   }
 };
 
+const PharmacistDetailsResults = async (req, res) => {
+  const username = req.query.username;
+
+  try {
+    const pharmacists = await pharmacistModel.find({});
+
+    if (!pharmacists || pharmacists.length === 0) {
+      // If no pharmacist is found, you can handle it here
+      return res.status(404).send("Pharmacist not found");
+    }
+
+    // Render the EJS template with the Pharmacist data
+    res.render('pharmacistDetailsResults.ejs', { pharmacists: pharmacists });
+    console.log(pharmacists);
+    
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal server error");
+  }
+};
+
 const addAdmin = async (req, res) => {
     try {
       const admin = new adminModel({
@@ -71,6 +93,9 @@ const addAdmin = async (req, res) => {
 
   const viewPatientDet = async (req, res) => {
     res.render('PatientDetails');
+  }
+  const viewPharmacistDet = async (req, res) => {
+    res.render('PharmacistDetails');
   }
 
   
@@ -156,5 +181,6 @@ const filterMedicinesByMedicinalUse = async (req, res) => {
 
 module.exports = {
     viewAllApp,viewPharmacistApp,addAdmin,getAvailableMedicines,viewPatientDet
-    ,PatientDetailsResults,removeUser,searchMedicineA,filterMedicinesByMedicinalUse
+    ,PatientDetailsResults,removeUser,searchMedicineA,filterMedicinesByMedicinalUse,
+    PharmacistDetailsResults, viewPharmacistDet
 };

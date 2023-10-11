@@ -1,0 +1,57 @@
+<!-- pharmacistDetails.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacist Details</title>
+    <style>
+        /* CSS styles for the table */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pharmacist Details</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Date of Birth</th>
+                <th>Hourly Rate</th>
+                <th>Affiliation</th>
+                <th>Education Background</th>
+                <!-- Add more table headers for other pharmacist details as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            <% for (const pharmacist of pharmacists) { %>
+                <tr>
+                    <td><%= pharmacist.Username %></td>
+                    <td><%= pharmacist.Name %></td>
+                    <td><%= pharmacist.Email %></td>
+                    <td><%= pharmacist.DateOfBirth.toISOString().split('T')[0] %></td>
+                    <td><%= pharmacist.hourly_rate %></td>
+                    <td><%= pharmacist.affiliation %></td>
+                    <td><%= pharmacist.education_background %></td>
+                    <!-- Add more table cells for other pharmacist details as needed -->
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>
