@@ -64,8 +64,8 @@ const PharmacistDetailsResults = async (req, res) => {
 const addAdmin = async (req, res) => {
     try {
       const admin = new adminModel({
-        username: req.body.username,
-        password: req.body.password,
+        Username: req.body.username,
+        Password: req.body.password,
       });
   
       console.log(req.body.username);
@@ -107,18 +107,20 @@ const addAdmin = async (req, res) => {
 
 
 //removing a user (admin, patient or pharmacist) from the system
-  const removeUser= async (req, res) => {
-    const toBeDeleted={username: req.body.username};
-    const userType =req.body.usertype ;
-    console.log(toBeDeleted);
-    console.log(userType);
-     // Determine which model to use based on the userType
+const removeUser = async (req, res) => {
+  const toBeDeleted = { Username: req.body.username };
+  const userType = req.body.usertype; // This will hold the selected user type
+  console.log({ Username: req.body.username });
+  console.log(req.body.username);
+  console.log(userType);
+  // Determine which model to use based on the userType
+  let UserModel;
   switch (userType) {
-    case 'pharmacist':
-      UserModel =pharmacistModel;
-      break;
     case 'patient':
       UserModel = Patient;
+      break;
+    case 'pharmacist':
+      UserModel=pharmacistModel;
       break;
     case 'admin':
       UserModel = adminModel;
@@ -126,20 +128,22 @@ const addAdmin = async (req, res) => {
     default:
       return res.status(400).send('Invalid user type');
   }
-    try {
-      // Find and delete the user by username
-      const deletedUser = await UserModel.findOneAndDelete(toBeDeleted);
-      if (deletedUser) {
-        res.send(`User '${toBeDeleted}' deleted successfully.`);
-      } else {
-        res.send(`User '${toBeDeleted}' not found.`);
-      }
-    } catch (err) {
-      console.error(err);
-      res.status(500).send('Internal server error');
+  try {
+    // Find and delete the user by username
+    const deletedUser = await UserModel.findOneAndDelete({ Username: req.body.username });
+
+    if (deletedUser) {
+      res.send(`User '${toBeDeleted.Username}' of type '${userType}' deleted successfully.`);
+    } else {
+      res.send(`User '${toBeDeleted.Username}' not found.`);
     }
-   
-}
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal server error');
+  }
+};
+
+
 const searchMedicineA = async (req, res) => {
   const searchTerm = req.body.name;
   console.log(searchTerm);
