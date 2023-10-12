@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Result</title>
+</head>
+<body>
+    <h1>Medicine Result</h1>
+    <table border="1">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Details</th>
+            <th>Price</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td><%= medicine.Name %></td>
+              <td><%= medicine.Details %></td>
+              <td>$<%= medicine.Price %></td>
+              <td><%= medicine.Quantity %></td>
+            </tr>
+        </tbody>
+      </table>
+</body>
+</html>

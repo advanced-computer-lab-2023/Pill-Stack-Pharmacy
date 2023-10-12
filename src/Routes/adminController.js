@@ -21,9 +21,12 @@ res.render('pharmacist_App.ejs',{userData:applications});
 
 const PatientDetailsResults = async (req, res) => {
   const username = req.query.username;
-
+  let patients
   try {
-    const patients = await Patient.find({ Username: username });
+    if (username ==="All")
+    patients = await Patient.find({ });
+    else
+    patients = await Patient.find({ Username: username });
 
     if (!patients || patients.length === 0) {
       // If no patient is found, you can handle it here
@@ -32,6 +35,8 @@ const PatientDetailsResults = async (req, res) => {
 
     // Render the EJS template with the patient data
     res.render('patientDetailsResults.ejs', { patients: patients });
+
+
 
   } catch (error) {
     console.error(error);
@@ -148,14 +153,12 @@ const searchMedicineA = async (req, res) => {
   const searchTerm = req.body.name;
   console.log(searchTerm);
   try {
-    const result = await medModel.findOne({ Name: searchTerm });
-    console.log(result.Name);
-    console.log(result.Details);
-    const name = result.Name;
-    const detail = result.Details;
-    const price = result.Price;
-    const quantity = result.Quantity;
-    res.status(200).json({ name, detail, price, quantity });
+    const medicine = await medModel.findOne({ Name: searchTerm });
+
+    if(medicine)
+    res.render('searchMedResult.ejs', {medicine});
+    else
+    res.send("Medicine not found");
   } catch (error) {
     res.status(500).send('Error searching for medicines');
   }

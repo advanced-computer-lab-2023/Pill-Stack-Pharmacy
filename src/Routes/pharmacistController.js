@@ -10,6 +10,7 @@ const { default: mongoose } = require('mongoose');
 
 
 const createPharmacistReq = async (req, res) => {
+  try {
     console.log(req.body.name);
     // register as a doctor using username, name, email, password, date of birth,
     //  hourly rate, affiliation (hospital), educational background. 
@@ -29,15 +30,14 @@ const createPharmacistReq = async (req, res) => {
       const docExists = await pharmaReqModel.findOne({Username: req.body.username});
       if (docExists) return res.status(400).send("Username already exists");
        
-      pharmacistReq.save(function(err){
-       if (err) {
-          throw err;
-       }
-       console.log('INSERTED!');
+      pharmacistReq.save();
  
-   });
    // res.render('patient_home');
     res.status(200).send("Your Request has been sent to the admin.")
+  } catch (error) {
+    console.error('Error saving pharmacist request:', error);
+    res.status(500).send("An error occurred while saving pharmacist request.");
+  }
  }
 
 
@@ -56,11 +56,14 @@ const createMedicine = async (req, res) => {
       Details: req.body.details,
       Price: req.body.price,
       Quantity: req.body.quantity,
+      Sales: req.body.sales,
       Image: {
         data: image.buffer,
         contentType: image.mimetype,
       },
-    });
+      // Split the medicinal use string into an array
+      MedicinalUse: req.body.medicinalUse.split(',')
+      });
     console.log(image.buffer);
     console.log(image.mimetype)
 
@@ -113,7 +116,9 @@ async function getMedSQ(req, res) {
   
       if (existingMedicine) {
         // Update the medicine information
+        if (newPrice)
         existingMedicine.Price = newPrice;
+        if (newDetails)
         existingMedicine.Details = newDetails;
   
         // Save the updated medicine
@@ -143,14 +148,12 @@ async function getMedSQ(req, res) {
   const searchTerm = req.body.name;
   console.log(searchTerm);
   try {
-    const result = await medModel.findOne({ Name: searchTerm });
-    console.log(result.Name);
-    console.log(result.Details);
-    const name = result.Name;
-    const detail = result.Details;
-    const price = result.Price;
-    const quantity = result.Quantity;
-    res.status(200).json({ name, detail, price, quantity });
+    const medicine = await medModel.findOne({ Name: searchTerm });
+
+    if(medicine)
+    res.render('searchMedResult.ejs', {medicine});
+    else
+    res.send("Medicine not found");
   } catch (error) {
     res.status(500).send('Error searching for medicines');
   }

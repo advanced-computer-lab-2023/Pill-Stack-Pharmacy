@@ -3,7 +3,7 @@ let router = express.Router();
 const {createMedicine,searchMedicinePh,editMedicine,editMedicineResults,upload, getMedSQ, filterMedicinesByMedicinalUse} = require('../Routes/pharmacistController.js');
 const {getAvailableMedicines} = require('../Routes/adminController.js');
 
-router.get("/", async(req,res) => {res.render('pharmacist_home')});
+router.get("/", (req,res) => {res.render('pharmacist_home')});
 router.get('/availableMedicines.ejs',getAvailableMedicines);
 router.get('/editmed',editMedicine);
 router.get('/editmedResults',editMedicineResults);
