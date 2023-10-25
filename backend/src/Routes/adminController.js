@@ -66,24 +66,7 @@ const PharmacistDetailsResults = async (req, res) => {
   }
 };
 
-const addAdmin = async (req, res) => {
-    try {
-      const admin = new adminModel({
-        Username: req.body.username,
-        Password: req.body.password,
-      });
-  
-      console.log(req.body.username);
-  
-      await admin.save(); // Use await to wait for the save operation to complete
-  
-      console.log('Added!');
-      res.status(200).send("Admin added successfully.");
-    } catch (error) {
-      console.error(error);
-      res.status(500).send("Error adding admin.");
-    }
-  };
+
   async function getAvailableMedicines(req, res) {
     try {
       // Use Mongoose to find medicines with quantity > 0
@@ -187,7 +170,7 @@ const filterMedicinesByMedicinalUse = async (req, res) => {
 
 
 module.exports = {
-    viewAllApp,viewPharmacistApp,addAdmin,getAvailableMedicines,viewPatientDet
+    viewAllApp,viewPharmacistApp,getAvailableMedicines,viewPatientDet
     ,PatientDetailsResults,removeUser,searchMedicineA,filterMedicinesByMedicinalUse,
     PharmacistDetailsResults, viewPharmacistDet
 };

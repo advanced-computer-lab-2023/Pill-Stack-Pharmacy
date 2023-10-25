@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require("bcryptjs");
 
 const pharmaReqSchema = new Schema({
   Username: {
@@ -36,6 +37,26 @@ const pharmaReqSchema = new Schema({
     }
 
 }, { timestamps: true });
+pharmaReqSchema.pre('save', function(next) {
+  const user = this;
+  if (!user.isModified('password')) {
+    return next();
+  }
+  bcrypt.genSalt(10, (err, salt) => {
+    if (err) {
+      return next(err);
+    }
+    bcrypt.hash(user.Password, salt, null, (error, hash) => {
+      if (error) {
+        return next(error);
+      }
+      console.log('HASH: ', hash);
+      user.password = hash;
+      console.log('USER.PASSWORD: ', user.Password);
+      next();
+    });
+  });
+});
 
 const pharma_req = mongoose.model('Pharmacist_Request', pharmaReqSchema);
 module.exports = pharma_req;
