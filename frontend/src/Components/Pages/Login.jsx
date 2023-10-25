@@ -104,7 +104,7 @@ export const Login = () => {
           w={'100%'} h={'100%'}   height='100vh'  
           className="gradBG">
           
-          <Box bg={'#4bbbf3'} p={50} rounded={10} display='flex' justifyContent={'center'} alignItems={'center'}  flexDirection={'column'} 
+          <Box bg={'#f3eb0077'} p={50} rounded={10} display='flex' justifyContent={'center'} alignItems={'center'}  flexDirection={'column'} 
             boxShadow={'2xl'}>
             <Text fontSize={'5xl'} color={'black'} textAlign={'center'}>Login</Text>
           <Flex p={5} >

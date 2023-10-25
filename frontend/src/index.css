@@ -1,6 +1,5 @@
 .gradBG{
-  background: rgb(39,92,159);
-background: linear-gradient(90deg, rgba(39,92,159,0.583158263305322) 12%, rgba(0,177,219,0.5887605042016807) 78%);
+  background-image: url('./Assets/Imgs/skyscraper.png');
 }
 
 

@@ -8,6 +8,28 @@ const medModel = require('../Models/Medicine.js');
 //importing mongoose 
 const { default: mongoose } = require('mongoose');
 
+
+const getAllUsers = async (req, res) => {
+  try {
+    const patients = await Patient.find({});
+    const doctors = await pharmacistModel.find({});
+    const admins = await adminModel.find();
+
+    // Add the 'role' property to each user object
+    const patientsWithRole = patients.map(patient => ({ ...patient._doc, role: 'patient' }));
+    const doctorsWithRole = doctors.map(doctor => ({ ...doctor._doc, role: 'pharmacist' }));
+    const adminsWithRole = admins.map(admin => ({ ...admin._doc, role: 'admin' }));
+
+    // Combine all user types into a single array
+    const allUsers = [...adminsWithRole, ...doctorsWithRole, ...patientsWithRole];
+    // console.log(allUsers);
+    res.send(allUsers);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
 const viewPharmacistApp= async (req, res) => {
     const applicationId = req.params.id;
     const application = await pharmaReqModel.findById(applicationId);
@@ -16,7 +38,7 @@ const viewPharmacistApp= async (req, res) => {
 
 const viewAllApp= async (req, res) => {
     const applications = await pharmaReqModel.find({});
-res.render('pharmacist_App.ejs',{userData:applications});
+    res.send(applications);
 }
 
 const PatientDetailsResults = async (req, res) => {
@@ -96,10 +118,10 @@ const PharmacistDetailsResults = async (req, res) => {
 
 //removing a user (admin, patient or pharmacist) from the system
 const removeUser = async (req, res) => {
-  const toBeDeleted = { Username: req.body.username };
-  const userType = req.body.usertype; // This will hold the selected user type
-  console.log({ Username: req.body.username });
-  console.log(req.body.username);
+  const toBeDeleted =  req.body.id ;
+  const userType = req.body.role; // This will hold the selected user type
+  // console.log({ Username: req.body.username });
+  console.log(toBeDeleted);
   console.log(userType);
   // Determine which model to use based on the userType
   let UserModel;
@@ -118,7 +140,7 @@ const removeUser = async (req, res) => {
   }
   try {
     // Find and delete the user by username
-    const deletedUser = await UserModel.findOneAndDelete({ Username: req.body.username });
+    const deletedUser = await UserModel.findOneAndDelete({ _id:  toBeDeleted});
 
     if (deletedUser) {
       res.send(`User '${toBeDeleted.Username}' of type '${userType}' deleted successfully.`);
@@ -172,5 +194,5 @@ const filterMedicinesByMedicinalUse = async (req, res) => {
 module.exports = {
     viewAllApp,viewPharmacistApp,getAvailableMedicines,viewPatientDet
     ,PatientDetailsResults,removeUser,searchMedicineA,filterMedicinesByMedicinalUse,
-    PharmacistDetailsResults, viewPharmacistDet
+    PharmacistDetailsResults, viewPharmacistDet, getAllUsers
 };

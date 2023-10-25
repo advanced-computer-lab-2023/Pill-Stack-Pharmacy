@@ -1,7 +1,8 @@
 const express = require('express');
 let router = express.Router();
 const{ getMedSQ}=require('../Routes/pharmacistController.js');
-const {viewPharmacistApp,getAvailableMedicines,searchMedicineA,viewAllApp,viewPatientDet, PatientDetailsResults,viewPharmacistDet,PharmacistDetailsResults,removeUser, filterMedicinesByMedicinalUse} = require('../Routes/adminController.js');
+const {viewPharmacistApp,getAvailableMedicines,searchMedicineA,viewAllApp,viewPatientDet, PatientDetailsResults,viewPharmacistDet,PharmacistDetailsResults,removeUser, filterMedicinesByMedicinalUse, getAllUsers} = require('../Routes/adminController.js');
+
 router.get("/", async(req,res) => {res.render('admin_home')});
 router.get("/applications",viewAllApp);
 router.get('/applications/view/:id',viewPharmacistApp);
@@ -9,6 +10,8 @@ router.get('/PatientDetails',viewPatientDet);
 router.get('/PatientDetailsResults',PatientDetailsResults);
 router.get('/PharmacistDetails',viewPharmacistDet);
 router.get('/PharmacistDetailsResults',PharmacistDetailsResults);
+router.get('/allUsers' , getAllUsers )
+
 
 
 router.route('/removeUser')
