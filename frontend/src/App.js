@@ -8,6 +8,9 @@ import AdminHome from "./Components/Pages/AdminHome";
 import DoctorHome from "./Components/Pages/DoctorHome";
 import UserManagement from "./Components/Pages/UserManagement";
 import PharmacistReqs from "./Components/Pages/PharmacistReqs";
+import{MedicineList} from "./Components/UI/MedicineList";
+import{MedicineListwithSales} from "./Components/UI/MedicineListWithSales";
+import {AddMedicine} from "./Components/UI/AddMed";
 
 
 function App() {
@@ -35,7 +38,9 @@ function App() {
         <Route path="/doctor-home" element={<DoctorHome />} />
         <Route path="/admin-users" element={<UserManagement />} />
         <Route path="/admin-requests" element={<PharmacistReqs />} />
-
+        <Route path="/medicine" element={<MedicineList />} />
+        <Route path="/medicine/sales" element={<MedicineListwithSales />} />
+        <Route path="/addMed" element={<AddMedicine />} />
 
 
       

@@ -12,13 +12,28 @@ const { default: mongoose } = require('mongoose');
 
 
 // add a new medicine
+// add a new medicine
 const createMedicine = async (req, res) => {
   try {
-    console.log(req.file);
     const image = req.file;
 
     if (!image) {
-      return res.status(400).send('Please upload an image.');
+      return res.status(400).send({message:'Please upload an image.'});
+    }
+    if (!req.body.name) {
+      return res.status(400).send({message:'Please enter medicine name'});
+    }
+    if (!req.body.details) {
+      return res.status(400).send({message:'Please enter medicine details '});
+    }
+    if (!req.body.quantity) {
+      return res.status(400).send({message:'Please enter medicine quantity'});
+    }
+    if (!req.body.price) {
+      return res.status(400).send({message:'Please enter medicine price'});
+    }
+    if (!req.body.medicinalUse) {
+      return res.status(400).send({message:'Please enter medicine medicinal use'});
     }
 
     const medicine = new medModel({
@@ -26,38 +41,37 @@ const createMedicine = async (req, res) => {
       Details: req.body.details,
       Price: req.body.price,
       Quantity: req.body.quantity,
-      Sales: req.body.sales,
       Image: {
         data: image.buffer,
         contentType: image.mimetype,
       },
+      Sales:0,
       // Split the medicinal use string into an array
-      MedicinalUse: req.body.medicinalUse.split(',')
+      MedicinalUse: req.body.medicinalUse.split(','), // Split by comma and trim spaces
       });
-    console.log(image.buffer);
-    console.log(image.mimetype)
 
     // Check for duplicate medicine
     const medExists = await medModel.findOne({ Name: req.body.name });
 
     if (medExists) {
-      return res.status(400).send("Medicine already exists");
+      const currentQuantity=medExists.Quantity;
+      medExists.Quantity=currentQuantity+parseInt(req.body.quantity, 10);;
+      await medExists.save();
+    }else{
+      await medicine.save();
+      console.log('Medicine saved successfully:', medicine);
+
+
     }
 
     // Save the medicine using await
-    const savedMedicine = await medicine.save();
-    console.log('Medicine saved successfully:', savedMedicine);
     res.status(200).send("Medicine added successfully.");
   } catch (error) {
     console.error('Error saving medicine:', error);
-    res.status(500).send("An error occurred while saving medicine.");
+    res.status(400).send({message:"An error occurred in the server"});
   }
 };
 
-
-const editMedicine = async(req, res) => {
-  res.render('editmed')
-}
 
 async function getMedSQ(req, res) {
   try {
@@ -156,7 +170,6 @@ module.exports = {
     searchMedicinePh,
     upload,
     filterMedicinesByMedicinalUse,
-    editMedicine,
     editMedicineResults,
     getMedSQ
 };

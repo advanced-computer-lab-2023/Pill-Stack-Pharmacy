@@ -93,13 +93,23 @@ const PharmacistDetailsResults = async (req, res) => {
     try {
       // Use Mongoose to find medicines with quantity > 0
       const availableMedicines = await medModel.find({ Quantity: { $gt: 0 } });
-      console.log(availableMedicines)
-      res.render('availableMedicines.ejs', { data: availableMedicines });
+      res.send( availableMedicines );
     } catch (error) {
       console.error('Error fetching available medicines:', error);
       throw error;
     }
   }
+  async function getMedicinalUse (req,res) {
+
+    const result=await  medModel.aggregate([
+       { $unwind: '$MedicinalUse' }, // Unwind the array
+       { $group: { _id: '$MedicinalUse' } }, // Group by MedicinalUse
+     ]);
+     const uniqueMedicinalUses = result.map((use) => use._id);
+     res.send( uniqueMedicinalUses);
+   
+ 
+   }
 
   const viewPatientDet = async (req, res) => {
     res.render('PatientDetails');
@@ -194,5 +204,6 @@ const filterMedicinesByMedicinalUse = async (req, res) => {
 module.exports = {
     viewAllApp,viewPharmacistApp,getAvailableMedicines,viewPatientDet
     ,PatientDetailsResults,removeUser,searchMedicineA,filterMedicinesByMedicinalUse,
-    PharmacistDetailsResults, viewPharmacistDet, getAllUsers
+    PharmacistDetailsResults, viewPharmacistDet, getAllUsers,
+    getMedicinalUse
 };
