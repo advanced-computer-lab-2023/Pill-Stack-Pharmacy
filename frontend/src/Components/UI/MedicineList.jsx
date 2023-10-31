@@ -1,24 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import MedicinalUseFilter from '../UI/MedicinalUseFilter';
-import { Buffer } from 'buffer';
 import '../../index.css'
 import { Navbar } from '../UI/navbar';
 import axios from "axios";
+import MedicineItem from '../UI/MedicineItem'; // Import the MedicineItem component
 
-import {
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
-} from '@chakra-ui/react'
+
+
 
 export function MedicineList() {
   const [medicines, setMedicines] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedMedicinalUse, setSelectedMedicinalUse] = useState('');
   const [medicinalUses, setMedicinalUses] = useState([]);
-  const [quantity, setQuantity] = useState(1); // Quantity state
 
 
   useEffect(() => {
@@ -34,11 +28,12 @@ export function MedicineList() {
       .then((data) => setMedicinalUses(data))
       .catch((error) => console.error('Error fetching medicinal uses:', error));
   }, []);
-  const addToCart = async (medicine) => {
-    const response= await axios.post('http://localhost:8000/cart',{productId:medicine._id,quantity:quantity },  { withCredentials: true }
-    )
+  const addToCart = async (medicine, quantity) => {
+    const response = await axios.post('http://localhost:8000/cart', {
+      productId: medicine._id,
+      quantity,
+    }, { withCredentials: true });
   };
-
   // Filter the medicines based on the search term and selected medicinal use
   const filteredMedicines = medicines
     .filter((medicine) =>
@@ -69,35 +64,15 @@ export function MedicineList() {
         />
       </div>
       <div className="medicine-grid">
+      <div className="medicine-grid">
         {filteredMedicines.map((medicine) => (
-          <div key={medicine._id} className="medicine-card">
-            <img
-              width="150"
-              height="150"
-              src={`data:${medicine.Image.contentType};base64, ${Buffer.from(
-                medicine.Image.data
-              ).toString('base64')}`}
-            />
-            <h2>{medicine.Name}</h2>
-            <p>{medicine.Details}</p>
-            <p>Price: ${medicine.Price}</p>
-            <div className="quantity-control">
-              <label>Quantity:</label>
-              <NumberInput
-                value={quantity}
-                onChange={(value) => setQuantity(value)}
-                min={1}
-              >
-                <NumberInputField />
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
-              </NumberInput>
-            </div>
-            <button onClick={() => addToCart(medicine)}>Add to Cart</button>
-          </div>
+          <MedicineItem
+            key={medicine._id}
+            medicine={medicine}
+            addToCart={addToCart}
+          />
         ))}
+      </div>
       </div>
    
     </div>
