@@ -1,23 +1,18 @@
 const express = require('express');
 let router = express.Router();
-const {filterMedicinesByMedicinalUse, searchMedicinePat} = require('../Routes/userController');
+const {filterMedicinesByMedicinalUse, searchMedicinePat,getAddresses} = require('../Routes/userController');
 const {getAvailableMedicines} = require('../Routes/adminController.js');
+const { userVerification } = require('../Middleware/AuthMiddleware');
 
 
-  //patient home page 
-  router.get("/", (req, res) => {
-   res.render('patient')
-   });
+router.get('/Address',userVerification,getAddresses)
 
-router.get('/availableMedicines.ejs',getAvailableMedicines);
 
 
 // Handle filtering medicines by medicinal use
 router.get('/filter-medicines',filterMedicinesByMedicinalUse);
 
-router.route('/searchMedicine')
-   .get((req,res) => { res.render('searchMedicinePat.html')})
-   .post(searchMedicinePat);
+router.route('/searchMedicine').post(searchMedicinePat);
 
 
 module.exports = router;

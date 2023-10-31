@@ -11,6 +11,11 @@ import PharmacistReqs from "./Components/Pages/PharmacistReqs";
 import{MedicineList} from "./Components/UI/MedicineList";
 import{MedicineListwithSales} from "./Components/UI/MedicineListWithSales";
 import {AddMedicine} from "./Components/UI/AddMed";
+import {Cart} from "./Components/Pages/Cart";
+import  Completion from "./Components/Pages/Completion";
+import  CreditPayment from "./Components/Pages/CreditPayment";
+
+
 
 
 function App() {
@@ -41,6 +46,11 @@ function App() {
         <Route path="/medicine" element={<MedicineList />} />
         <Route path="/medicine/sales" element={<MedicineListwithSales />} />
         <Route path="/addMed" element={<AddMedicine />} />
+        <Route path="/cart" element={<Cart/>} />
+        <Route path="/home/creditPayment/:address" element={<CreditPayment />} />
+        <Route path="/completion/:address" element={<Completion />} />
+
+
 
 
       

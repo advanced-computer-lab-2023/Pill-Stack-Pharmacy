@@ -26,6 +26,10 @@ const admin = require("./Routers/adminRoute");
 const pharmacist = require("./Routers/pharmacistRoute");
 const patient = require("./Routers/patientRoute");
 const auth = require("./Routers/authRoute");
+const cart = require("./Routers/cartRoute");
+const order = require("./Routers/orderRoute");
+
+
 
 
 app.use(bodyParser.urlencoded({extended:false}));
@@ -63,6 +67,8 @@ app.use("/",auth);
 app.use("/pharmacist",pharmacist)
 app.use("/admin",admin)
 app.use("/patient",patient)
+app.use("/cart",cart);
+app.use("/order",order)
 
 
 

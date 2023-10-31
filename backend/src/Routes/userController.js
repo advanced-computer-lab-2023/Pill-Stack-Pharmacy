@@ -41,9 +41,21 @@ const filterMedicinesByMedicinalUse = async (req, res) => {
   }
  };
 
+ const getAddresses=async(req,res)=>{
+   const username=req.user.Username;
+   const user=await userModel.findOne({Username:username});
+   if(user){
+    const address=user.DeliveryAddress;
+    res.send(address);
+ 
+   }else{
+    res.send('could not find user');
+   }
+ }
 
 
 
 
 
-module.exports = {searchMedicinePat, filterMedicinesByMedicinalUse};
+
+module.exports = {searchMedicinePat, filterMedicinesByMedicinalUse,getAddresses};

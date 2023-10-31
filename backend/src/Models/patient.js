@@ -44,8 +44,14 @@ const patientSchema = new Schema({
       EmergencyContact_Relation:{
         type: String,
         required: true,
-      }
-    
+      },
+      Wallet:{
+        type:Number,
+        default: 0
+      },
+      DeliveryAddress:[{
+        type:String
+      }]    
     }, { timestamps: true});
     patientSchema.pre('save', function(next) {
       const user = this;

@@ -1,24 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import MedicinalUseFilter from '../UI/MedicinalUseFilter';
 import { Buffer } from 'buffer';
-import '../../index.css'
-import { Navbar } from '../UI/navbar';
-import axios from "axios";
+import '../../index.css';
 
-import {
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
-} from '@chakra-ui/react'
 
 export function MedicineList() {
   const [medicines, setMedicines] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedMedicinalUse, setSelectedMedicinalUse] = useState('');
   const [medicinalUses, setMedicinalUses] = useState([]);
-  const [quantity, setQuantity] = useState(1); // Quantity state
 
 
   useEffect(() => {
@@ -34,11 +24,8 @@ export function MedicineList() {
       .then((data) => setMedicinalUses(data))
       .catch((error) => console.error('Error fetching medicinal uses:', error));
   }, []);
-  const addToCart = async (medicine) => {
-    const response= await axios.post('http://localhost:8000/cart',{productId:medicine._id,quantity:quantity },  { withCredentials: true }
-    )
-  };
 
+  
   // Filter the medicines based on the search term and selected medicinal use
   const filteredMedicines = medicines
     .filter((medicine) =>
@@ -52,7 +39,6 @@ export function MedicineList() {
   return (
 
     <div className="med_page">
-          <Navbar /> 
 
     <h1>Available Medicines</h1>
       <MedicinalUseFilter
@@ -81,25 +67,11 @@ export function MedicineList() {
             <h2>{medicine.Name}</h2>
             <p>{medicine.Details}</p>
             <p>Price: ${medicine.Price}</p>
-            <div className="quantity-control">
-              <label>Quantity:</label>
-              <NumberInput
-                value={quantity}
-                onChange={(value) => setQuantity(value)}
-                min={1}
-              >
-                <NumberInputField />
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
-              </NumberInput>
-            </div>
-            <button onClick={() => addToCart(medicine)}>Add to Cart</button>
+         
           </div>
         ))}
       </div>
-   
+     
     </div>
   );
 }
