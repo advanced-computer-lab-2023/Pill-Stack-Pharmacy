@@ -5,7 +5,7 @@ const {viewPharmacistApp,getAvailableMedicines,
    searchMedicineA,viewAllApp,viewPatientDet, 
    PatientDetailsResults,viewPharmacistDet,
    PharmacistDetailsResults,removeUser, 
-   filterMedicinesByMedicinalUse, getAllUsers,getMedicinalUse} = require('../Routes/adminController.js');
+   filterMedicinesByMedicinalUse, getAllUsers,getMedicinalUse,acceptRegRequest,rejectRegRequest } = require('../Routes/adminController.js');
 
 router.get("/", async(req,res) => {res.render('admin_home')});
 router.get("/applications",viewAllApp);
@@ -16,6 +16,9 @@ router.get('/PharmacistDetails',viewPharmacistDet);
 router.get('/PharmacistDetailsResults',PharmacistDetailsResults);
 router.get('/allUsers' , getAllUsers )
 
+
+router.post('/applications/accept-registeration/:id',acceptRegRequest);
+router.post('/applications/reject-registeration/:id',rejectRegRequest);
 
 
 router.route('/removeUser')

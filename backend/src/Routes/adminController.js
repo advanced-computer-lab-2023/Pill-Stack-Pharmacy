@@ -201,9 +201,55 @@ const filterMedicinesByMedicinalUse = async (req, res) => {
  
 
 
+ const acceptRegRequest = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const request = await pharmaReqModel.findById(id);
+    if (!request) {
+      return res.status(404).json({ error: 'Request not found' });
+    }
+    
+    const newDoctor = new pharmacistModel({
+      Username: request.Username,
+      Name: request.Name,
+      Email: request.Email,
+      Password: request.Password,
+      DateOfBirth: request.DateOfBirth,
+      hourly_rate: request.HourlyRate,
+      affiliation: request.Affiliation,
+      education_background: request.EducationalBackground,
+    });
+    await newDoctor.save();
+    await pharmaReqModel.findByIdAndRemove(id);
+
+    res.json({ message: 'Request accepted' });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+const rejectRegRequest = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const request = await pharmaReqModel.findById(id);
+    if (!request) {
+      return res.status(404).json({ error: 'Request not found' });
+    }
+
+    await pharmaReqModel.findByIdAndRemove(id);
+
+    res.json({ message: 'Request rejected' });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
 module.exports = {
     viewAllApp,viewPharmacistApp,getAvailableMedicines,viewPatientDet
     ,PatientDetailsResults,removeUser,searchMedicineA,filterMedicinesByMedicinalUse,
     PharmacistDetailsResults, viewPharmacistDet, getAllUsers,
-    getMedicinalUse
+    getMedicinalUse, acceptRegRequest, rejectRegRequest
 };
