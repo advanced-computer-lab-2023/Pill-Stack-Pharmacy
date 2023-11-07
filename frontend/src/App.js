@@ -14,7 +14,8 @@ import {AddMedicine} from "./Components/UI/AddMed";
 import {Cart} from "./Components/Pages/Cart";
 import  Completion from "./Components/Pages/Completion";
 import  CreditPayment from "./Components/Pages/CreditPayment";
-
+import ForgotPassword from './Components/Pages/ForgotPassword.jsx';
+import PasswordReset from './Components/Pages/PasswordReset.jsx';
 
 
 
@@ -49,6 +50,8 @@ function App() {
         <Route path="/cart" element={<Cart/>} />
         <Route path="/home/creditPayment/:address" element={<CreditPayment />} />
         <Route path="/completion/:address" element={<Completion />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/PasswordReset" element={<PasswordReset/>} />
 
 
 
