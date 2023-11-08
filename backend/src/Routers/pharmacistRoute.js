@@ -2,7 +2,7 @@ const express = require('express');
 let router = express.Router();
 const {createMedicine,searchMedicinePh,
     editMedicineResults,upload, getMedSQ, 
-    filterMedicinesByMedicinalUse} = require('../Routes/pharmacistController.js');
+    filterMedicinesByMedicinalUse, createPharmacistReq} = require('../Routes/pharmacistController.js');
 const {getAvailableMedicines} = require('../Routes/adminController.js');
 
 router.get("/", (req,res) => {res.render('pharmacist_home')});
@@ -22,6 +22,12 @@ router.route('/searchMedicine')
 // Handle filtering medicines by medicinal use
 router.get('/filter-medicines',filterMedicinesByMedicinalUse);
 
+router.route('/createPharmacistReq')
+  .post(upload.fields([
+    { name: 'IDDocument', maxCount: 1 },
+    { name: 'pharmacyDegreeDocument', maxCount: 1 },
+    { name: 'workingLicenseDocument', maxCount: 1 },
+  ]), createPharmacistReq);
 
 
 module.exports = router;

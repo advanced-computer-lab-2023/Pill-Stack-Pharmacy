@@ -36,6 +36,21 @@ const pharmacistSchema = new Schema({
     education_background:{
         type:String,
         required:true,
+    },
+    IDDocument: {
+      data: Buffer, 
+      contentType: String, // content type ( application/pdf)
+      
+    },
+    pharmacyDegreeDocument: {
+      data: Buffer,
+      contentType: String,
+      
+    },
+    workingLicenseDocument: {
+      data: Buffer,
+      contentType: String,
+    
     }
     
     }, { timestamps: true});
