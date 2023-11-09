@@ -16,6 +16,7 @@ import  Completion from "./Components/Pages/Completion";
 import  CreditPayment from "./Components/Pages/CreditPayment";
 import ForgotPassword from './Components/Pages/ForgotPassword.jsx';
 import PasswordReset from './Components/Pages/PasswordReset.jsx';
+import PharmacistRegisterPage from './Components/Pages/PharmacistRegisterPage';
 
 
 
@@ -52,6 +53,8 @@ function App() {
         <Route path="/completion/:address" element={<Completion />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/PasswordReset" element={<PasswordReset/>} />
+        <Route path="/pharmacist-register" element={<PharmacistRegisterPage />} />
+
 
 
 

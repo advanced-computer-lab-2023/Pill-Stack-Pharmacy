@@ -59,9 +59,10 @@ module.exports.pharmaRegister = async (req, res, next) => {
     const existingUserinPharma = await pharmaModel.findOne({ Username:req.body.username });
     const existingUserinAdmin = await adminModel.findOne({ Username:req.body.username });
     // Handle file uploads
-    const IDDocument = req.file;
-    const pharmacyDegreeDocument = req.file;
-    const workingLicenseDocument = req.file;
+    const IDDocument = req.files.IDDocument ? req.files.IDDocument[0] : null;
+    const pharmacyDegreeDocument = req.files.pharmacyDegreeDocument ? req.files.pharmacyDegreeDocument[0] : null;
+    const workingLicenseDocument = req.files.workingLicenseDocument ? req.files.workingLicenseDocument[0] : null;
+
 
     if (!IDDocument || !pharmacyDegreeDocument || !workingLicenseDocument) {
       return res.status(400).send({ message: 'Please upload all required documents.' });
