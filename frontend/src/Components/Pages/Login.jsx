@@ -125,7 +125,8 @@ export const Login = () => {
               Login
           </Button>
           <Link to="/forgot-password">Forgot Password?</Link>
-          <Link to="/pharmacist-register">Don't have an account? Register as pharmacist </Link>
+          <Text mt={2}>Don't have an account?</Text>
+          <Link to="/patient-register">Register as Patient</Link>
           </Box>
 
           
