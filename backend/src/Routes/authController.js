@@ -34,9 +34,9 @@ const secPass = await bcrypt.hash(req.body.password, salt)
       DateOfBirth: req.body.dob,
       Gender: req.body.gender,
       MobileNumber: req.body.mobile,
-      EmergencyContact_Name: req.body.EmergencyContact_name,
-      EmergencyContact_MobileNumber: req.body.EmergencyContact_mobileNumber,
-      EmergencyContact_Relation: req.body.emergency_relation
+      EmergencyContact_Name: req.body.EmergencyContact_Name,
+      EmergencyContact_MobileNumber: req.body.EmergencyContact_MobileNumber,
+      EmergencyContact_Relation: req.body.EmergencyContact_Relation
 
     });
     const token = createSecretToken(user._id);
