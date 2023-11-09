@@ -1,6 +1,7 @@
 const orderModel = require('../Models/Order');
 const cartModel = require('../Models/Cart');
 const userModel = require('../Models/patient');
+const paymentIntentModel=require('../Models/PaymentIntent');
 const stripe = require('stripe')(process.env.SECRETKEY);
 
 module.exports.get_orders = async (req,res) => {
@@ -21,13 +22,15 @@ module.exports.checkoutCredit = async (req,res) => {
         let user = await userModel.findOne({_id: userId});
         if(cart){
             const paymentIntent = await stripe.paymentIntents.create({
-                amount: cart.bill*1000,
+                amount: cart.bill*100,
                 currency: "usd",
                 payment_method_types: ['card'],  // Specify the payment method(s) you want to use
 
               });
+              const intent=await paymentIntentModel.create({ intentId:paymentIntent.id})
+
               res.send({
-                clientSecret: paymentIntent.client_secret,
+                clientSecret: paymentIntent.client_secret,paymentIntentId:intent._id
               });
         
         }
@@ -45,12 +48,16 @@ module.exports.creditConfirm=async(req,res)=>{
     let cart = await cartModel.findOne({userId});
     let user = await userModel.findOne({_id: userId});
     let address=req.body.address;
+    let intentId=req.body.intentId;
+    const paymentIntent=await paymentIntentModel.findByIdAndDelete(intentId);
     const order = await orderModel.create({
         userId,
         items: cart.items,
         bill: cart.bill,
         status:'Processing',
-        address:address
+        address:address,
+        payment_method:'credit',
+        paymentIntentId:paymentIntent.intentId,
 
     });
     const data = await cartModel.findByIdAndDelete({_id:cart.id});
@@ -71,7 +78,9 @@ module.exports.checkoutCash = async (req,res) => {
                     items: cart.items,
                     bill: cart.bill,
                     status:'Processing',
-                    address:address
+                    address:address,
+                    payment_method:'cash',
+
 
                 });
                 const data = await cartModel.findByIdAndDelete({_id:cart.id});
@@ -108,7 +117,9 @@ module.exports.checkoutWallet = async (req,res) => {
                         items: cart.items,
                         bill: cart.bill,
                         status:'Processing',
-                        address:address
+                        address:address,
+                        payment_method:'wallet'
+
                     });
                     const data = await cartModel.findByIdAndDelete({_id:cart.id});
                     return res.status(201).send(order);
@@ -121,6 +132,45 @@ module.exports.checkoutWallet = async (req,res) => {
         }
     }
     catch(err){
+        console.log(err);
+        res.status(500).send("Something went wrong");
+    }
+}
+module.exports.cancelOrder = async (req, res) => {
+    try {
+        const orderId = req.body.orderId; 
+        const userId = req.user._id;
+        const order = await orderModel.findById(orderId);
+
+        if (order) {
+            switch (order.payment_method) {
+                case 'credit':
+                    // Handle Stripe payment refund
+                    const paymentIntent = await stripe.paymentIntents.retrieve(order.paymentIntentId);
+                    await stripe.refunds.create({ payment_intent: paymentIntent.id });
+                    break;
+    
+                case 'wallet':
+                    // Refund amount to user's wallet
+                    const user = await userModel.findOne({ _id: userId });
+                    user.Wallet += order.bill;
+                    await user.save();
+                    break;
+    
+                // Add more cases for other payment methods if needed
+    
+                default:
+                    break;
+            }
+    
+            order.status = 'Cancelled';
+            await order.save();
+
+            res.status(200).send("Order cancelled successfully");
+        } else {
+            res.status(404).send("Order not found");
+        }
+    } catch (err) {
         console.log(err);
         res.status(500).send("Something went wrong");
     }

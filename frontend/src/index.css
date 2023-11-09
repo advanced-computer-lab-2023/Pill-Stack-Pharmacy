@@ -137,6 +137,8 @@ span a {
 } 
 
 .med_page {
+  margin: 0;
+  padding: 0;
   color: #000;
   background: white;
   display: flex;
@@ -214,7 +216,7 @@ span a {
   top: 50%; /* Center vertically */
   left: 50%; /* Center horizontally */
   transform: translate(-50%, -50%); 
-  background-color: #56799a;
+  background-color: #ffffff;
   border-radius: 8px;
   padding: 20px;
   width: 400px; /* Customize the width as needed */

@@ -12,6 +12,7 @@ router.post('/orderCredit/confirm',userVerification,orderController.creditConfir
 
 router.post('/orderCash',userVerification,orderController.checkoutCash);
 router.post('/orderWallet',userVerification,orderController.checkoutWallet);
+router.post('/cancel-order',userVerification, orderController.cancelOrder);
 
 
 
