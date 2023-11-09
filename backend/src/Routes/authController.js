@@ -58,6 +58,14 @@ module.exports.pharmaRegister = async (req, res, next) => {
     const existingUserinPatient = await patientModel.findOne({ Username:req.body.username });
     const existingUserinPharma = await pharmaModel.findOne({ Username:req.body.username });
     const existingUserinAdmin = await adminModel.findOne({ Username:req.body.username });
+    // Handle file uploads
+    const IDDocument = req.file;
+    const pharmacyDegreeDocument = req.file;
+    const workingLicenseDocument = req.file;
+
+    if (!IDDocument || !pharmacyDegreeDocument || !workingLicenseDocument) {
+      return res.status(400).send({ message: 'Please upload all required documents.' });
+    }
 
 
     if (existingUserinPatient || existingUserinPharma || existingUserinAdmin) {
@@ -73,7 +81,19 @@ const secPass = await bcrypt.hash(req.body.password, salt)
        DateOfBirth: req.body.dob,
        HourlyRate: req.body.hourly_rate,
        Affiliation: req.body.affiliation,
-       EducationalBackground: req.body.educational_background   });
+       EducationalBackground: req.body.educational_background  ,
+       IDDocument: {
+        data: IDDocument.buffer,
+        contentType: IDDocument.mimetype,
+      },
+      pharmacyDegreeDocument: {
+        data: pharmacyDegreeDocument.buffer,
+        contentType: pharmacyDegreeDocument.mimetype,
+      },
+      workingLicenseDocument: {
+        data: workingLicenseDocument.buffer,
+        contentType: workingLicenseDocument.mimetype,
+      }, });
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
       withCredentials: true,

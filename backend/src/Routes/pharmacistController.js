@@ -163,59 +163,6 @@ const filterMedicinesByMedicinalUse = async (req, res) => {
  };
 
 
- //e
- const createPharmacistReq = async (req, res) => {
-   try {
-     const { Username, Name, Email, Password, DateOfBirth, hourly_rate, affiliation, education_background } = req.body;
-     // Handle file uploads
-     const IDDocument = req.file;
-     const pharmacyDegreeDocument = req.file;
-     const workingLicenseDocument = req.file;
- 
-     if (!IDDocument || !pharmacyDegreeDocument || !workingLicenseDocument) {
-       return res.status(400).send({ message: 'Please upload all required documents.' });
-     }
- 
-     // A hash el password
-     const salt = await bcrypt.genSalt(10);
-     const hashedPassword = await bcrypt.hash(Password, salt);
- 
-     // Create a new pharmacist bl uploaded documents wl hashed password
-     const newPharmacist = new Pharmacist({
-       Username,
-       Name,
-       Email,
-       Password: hashedPassword, // Store el hashed password
-       DateOfBirth,
-       hourly_rate,
-       affiliation,
-       education_background,
-       IDDocument: {
-         data: IDDocument.buffer,
-         contentType: IDDocument.mimetype,
-       },
-       pharmacyDegreeDocument: {
-         data: pharmacyDegreeDocument.buffer,
-         contentType: pharmacyDegreeDocument.mimetype,
-       },
-       workingLicenseDocument: {
-         data: workingLicenseDocument.buffer,
-         contentType: workingLicenseDocument.mimetype,
-       },
-     });
- 
-     // a save el pharmacist fl database
-     await newPharmacist.save();
- 
-     // arg3 a success message
-     res.status(200).send('Pharmacist registered successfully.');
-   } catch (error) {
-     console.error('Error registering pharmacist:', error);
-     res.status(400).send({ message: 'An error occurred in the server' });
-   }
- };
- 
- //e
 
 
 module.exports = {
@@ -226,5 +173,5 @@ module.exports = {
     filterMedicinesByMedicinalUse,
     editMedicineResults,
     getMedSQ,
-    createPharmacistReq
+    
 };
