@@ -190,7 +190,7 @@ export const Home = () => {
                 icon={<FontAwesomeIcon icon={faCartShopping} fontSize={'35px'}/>} 
                 text={'View Cart'}/>
               <Shortcut 
-                link={'/cart'} 
+                link={'/orderDetails'} 
                 icon={<FontAwesomeIcon icon={faBagShopping} fontSize={'35px'}/>} 
                 text={'Track Orders'}/>
             </SimpleGrid>

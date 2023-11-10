@@ -5,7 +5,35 @@ const medModel = require('../Models/Medicine.js');
 const { default: mongoose } = require('mongoose');
 
 
+const orderDetails = async (req, res) => {
+  console.log("DAREEENNN");
+  const id = req.user._id;
+  const objectIdValue = id.valueOf();
+  console.log(objectIdValue);
 
+  try {
+    // Use await to wait for the result of the query
+    const order = await orderModel.find({ userId: objectIdValue });
+
+    if (!order) {
+      // Handle the case where no order is found
+      return res.status(404).send({ message: "Order not found" });
+    }
+
+    console.log(order.status);
+
+    res.send({
+      Status: order.status,
+      Items: order.items,
+      address: order.address,
+      bill: order.bill,
+      dateAdded: order.date_added,
+    });
+  } catch (error) {
+    console.error('Error fetching order details:', error);
+    res.status(500).send({ message: 'Internal Server Error' });
+  }
+};
 
 
 const searchMedicinePat = async (req, res) => {
@@ -94,4 +122,4 @@ const getFullInfo = async (req, res) => {
 
 
 
-module.exports = {searchMedicinePat, filterMedicinesByMedicinalUse,getAddresses,addDeliveryAddress, getFullInfo};
+module.exports = {searchMedicinePat, filterMedicinesByMedicinalUse,getAddresses,addDeliveryAddress, orderDetails,getFullInfo};

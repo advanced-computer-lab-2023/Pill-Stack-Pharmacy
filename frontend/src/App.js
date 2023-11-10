@@ -19,7 +19,7 @@ import ForgotPassword from './Components/Pages/ForgotPassword.jsx';
 import PasswordReset from './Components/Pages/PasswordReset.jsx';
 import PharmacistRegisterPage from './Components/Pages/PharmacistRegisterPage';
 import PatientRegisterForm from './Components/Pages/PatientRegisterForm';
-
+import OrderDetails from './Components/UI/orderDetails';
 
 
 function App() {
@@ -58,7 +58,7 @@ function App() {
         <Route path="/PasswordReset" element={<PasswordReset/>} />
         <Route path="/pharmacist-register" element={<PharmacistRegisterPage />} />
         <Route path="/patient-register" element={<PatientRegisterForm />} />
-
+        <Route path="/orderdetails" element={<OrderDetails/>} />
 
 
 
