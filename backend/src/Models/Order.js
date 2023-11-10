@@ -35,6 +35,9 @@ const OrderSchema = new Schema({
         type: String,
         enum: ['Cancelled', 'Delivered','Processing'],
 
+    },
+    paymentIntentId:{
+        type:String,
     }
 })
 

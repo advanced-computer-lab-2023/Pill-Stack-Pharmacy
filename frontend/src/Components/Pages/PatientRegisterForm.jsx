@@ -16,12 +16,12 @@ const PatientRegisterForm = () => {
     dob: '',
     gender: '',
     mobile: '',
-    EmergencyContact_name: '',
-    EmergencyContact_mobileNumber: '',
+    EmergencyContact_Name: '',
+    EmergencyContact_MobileNumber: '',
     EmergencyContact_Relation: '',
   });
 
-  const { username, name, email, password, dob, gender, mobile, EmergencyContact_name, EmergencyContact_mobileNumber,  EmergencyContact_Relation } = formData;
+  const { username, name, email, password, dob, gender, mobile, EmergencyContact_Name, EmergencyContact_MobileNumber, EmergencyContact_Relation } = formData;
 
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -31,7 +31,7 @@ const PatientRegisterForm = () => {
     e.preventDefault();
     try {
       const response = await Axios.post('http://localhost:8000/Patientregister', formData);
-    
+      if(response.data.message==='User signed in successfully'){
       toast({
         title: 'Registration Successful',
         description: response.data.message,
@@ -40,6 +40,19 @@ const PatientRegisterForm = () => {
         isClosable: true,
       });
       navigate('/');
+    }else{
+      let errorMessage = "Username already exists"; // Default error message
+    
+    toast({
+      title: 'Registration Failed',
+      description: errorMessage,
+      status: 'error',
+      duration: 5000,
+      isClosable: true,
+    });
+  
+
+    }
     } catch (error) {
       let errorMessage = "Registration failed due to an unexpected error."; // Default error message
       // Check if the error response has a data property and if it contains a message
@@ -100,12 +113,12 @@ const PatientRegisterForm = () => {
 
         <FormControl isRequired mt={4}>
           <FormLabel>Emergency Contact Name</FormLabel>
-          <Input type="text" name="EmergencyContact_name" value={EmergencyContact_name} onChange={onChange} />
+          <Input type="text" name="EmergencyContact_Name" value={EmergencyContact_Name} onChange={onChange} />
         </FormControl>
 
         <FormControl isRequired mt={4}>
           <FormLabel>Emergency Contact Mobile Number</FormLabel>
-          <Input type="tel" name="EmergencyContact_mobileNumber" value={EmergencyContact_mobileNumber} onChange={onChange} />
+          <Input type="tel" name="EmergencyContact_MobileNumber" value={EmergencyContact_MobileNumber} onChange={onChange} />
         </FormControl>
 
         <FormControl isRequired mt={4}>

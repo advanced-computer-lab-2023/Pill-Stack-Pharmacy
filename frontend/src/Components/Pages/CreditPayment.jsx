@@ -38,7 +38,7 @@ export default function CreditPayment() {
             console.log(response.data);
 
             setClientSecret(response.data.clientSecret);
-            setPaymentParams({address});
+            setPaymentParams({address:address,intentid:response.data.paymentIntentId});
 
           })
           .catch((error) => {

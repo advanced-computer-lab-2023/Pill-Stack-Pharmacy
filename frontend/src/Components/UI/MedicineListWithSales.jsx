@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import MedicinalUseFilter from '../UI/MedicinalUseFilter';
 import EditMedicine from '../UI/EditMedicine';
-import { Button, ButtonGroup } from '@chakra-ui/react'
-import axios from 'axios'; // Import axios for making HTTP requests
-
+import { Button, Input, VStack, HStack, Heading, Text, Box } from '@chakra-ui/react';
+import axios from 'axios';
 
 export function MedicineListwithSales() {
   const [medicines, setMedicines] = useState([]);
@@ -13,15 +12,12 @@ export function MedicineListwithSales() {
   const [editMedicine, setEditMedicine] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
   useEffect(() => {
-    // Fetch medicines and their medicinal uses from your server's API endpoint
     fetch('http://localhost:8000/admin/availableMedicines')
       .then((response) => response.json())
       .then((data) => setMedicines(data))
       .catch((error) => console.error('Error fetching medicine data:', error));
 
-    // Fetch the list of unique medicinal uses
     fetch('http://localhost:8000/admin/MedicinalUse')
       .then((response) => response.json())
       .then((data) => setMedicinalUses(data))
@@ -29,8 +25,6 @@ export function MedicineListwithSales() {
   }, []);
 
   const openEditModal = (medicine) => {
-    console.log('Edit button clicked'); // Add this line
-  console.log(medicine);
     setEditMedicine(medicine);
     setIsModalOpen(true);
   };
@@ -40,74 +34,65 @@ export function MedicineListwithSales() {
     setIsModalOpen(false);
   };
 
-  const updateMedicine = (updatedMedicine) => {
-    // Update the medicine's details and price in your local state
-    const updatedMedicines = medicines.map((medicine) => {
-      if (medicine._id === updatedMedicine._id) {
-        return updatedMedicine;
-      }
-      return medicine;
-    });
-    setMedicines(updatedMedicines);
+  const updateMedicine = async (updatedMedicine) => {
+    try {
+      // Update the medicine's details and price on your server
+      await axios.put(`http://localhost:8000/admin/availableMedicines/${updatedMedicine._id}`, updatedMedicine);
 
-    // You should also send a PUT request to update the data on your server
-    closeEditModal();
+      // Update the medicine in your local state
+      const updatedMedicines = medicines.map((medicine) => (
+        medicine._id === updatedMedicine._id ? updatedMedicine : medicine
+      ));
+      setMedicines(updatedMedicines);
+
+      closeEditModal();
+    } catch (error) {
+      console.error('Error updating medicine:', error);
+    }
   };
 
-  
-
-  // Filter the medicines based on the search term and selected medicinal use
   const filteredMedicines = medicines
-    .filter((medicine) =>
-      medicine.Name.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    .filter((medicine) =>
-      selectedMedicinalUse === '' ||
-      medicine.MedicinalUse.includes(selectedMedicinalUse)
-    );
+    .filter((medicine) => medicine.Name.toLowerCase().includes(searchTerm.toLowerCase()))
+    .filter((medicine) => selectedMedicinalUse === '' || medicine.MedicinalUse.includes(selectedMedicinalUse));
 
   return (
-    <div>
-      <h1>Available Medicines</h1>
+    <VStack align="start" spacing={6} p={6}  w="100%">
+      <Heading as="h1"  color='teal' mb={4}>Available Medicines</Heading>
       <MedicinalUseFilter
         selectedMedicinalUse={selectedMedicinalUse}
         onMedicinalUseChange={setSelectedMedicinalUse}
         medicinalUses={medicinalUses}
       />
-      <div>
-        <input
-          type="text"
-          placeholder="Search medicines..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
-      <div>
-        {filteredMedicines.map((medicine,index) => (
-          <div key={medicine._id} className="medicine-card">
-          
-            <h2>{medicine.Name}</h2>
-            <p>{medicine.Details}</p>
-            <p>Price: ${medicine.Price}</p>
-            <p>Available Quantity: {medicine.Quantity}</p>
-            <p>Sales: {medicine.Sales}</p>
-            <button onClick={() => openEditModal(medicine)}>Edit</button>
+      <Input
+      htmlSize={15} width='auto'
+        type="text"
+        placeholder="Search medicines..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+      <VStack align="start" w="100%" >
+        {filteredMedicines.map((medicine, index) => (
+          <Box key={medicine._id} w='100%' p={4} borderWidth="10px" borderRadius="md">
+            <Text>Name: {medicine.Name}</Text>
+            <Text>Details: {medicine.Details}</Text>
+            <Text>Price: ${medicine.Price}</Text>
+            <Text>Available Quantity: {medicine.Quantity}</Text>
+            <Text>Sales: {medicine.Sales}</Text>
+            <Button size="sm" colorScheme="teal" onClick={() => openEditModal(medicine)}>Edit</Button>
 
             {index !== filteredMedicines.length - 1 && (
-              <div className="separator"></div>
+              <Box h="1px" bg="gray.200" w="100%" my={4}></Box>
             )}
-          </div>
+          </Box>
         ))}
-      </div>
+      </VStack>
       {isModalOpen && (
-          <div className="modal">
-            <EditMedicine medicine={editMedicine} onUpdate={updateMedicine} />
-            <br />
-            <Button colorScheme='teal' size='sm' onClick={closeEditModal}>Close</Button>
-          </div>
+        <Box className="modal"  p={4} borderWidth="1px" borderRadius="md">
+          <EditMedicine medicine={editMedicine} onUpdate={updateMedicine} />
+          <Button mt={4} size='sm' colorScheme='teal' onClick={closeEditModal}>Close</Button>
+        </Box>
       )}
-    
-    </div>
+    </VStack>
   );
 }
 
