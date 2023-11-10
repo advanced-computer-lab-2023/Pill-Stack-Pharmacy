@@ -1,7 +1,7 @@
 // #Task route solution
 const userModel = require('../Models/patient.js');
 const medModel = require('../Models/Medicine.js');
-
+const orderModel=require('../Models/Order.js');
 const { default: mongoose } = require('mongoose');
 
 
@@ -13,27 +13,29 @@ const orderDetails = async (req, res) => {
 
   try {
     // Use await to wait for the result of the query
-    const order = await orderModel.find({ userId: objectIdValue });
+    const orders = await orderModel.find({ userId: objectIdValue });
 
-    if (!order) {
-      // Handle the case where no order is found
-      return res.status(404).send({ message: "Order not found" });
+    if (!orders || orders.length === 0) {
+      // Handle the case where no orders are found
+      return res.status(404).send({ message: "Orders not found" });
     }
 
-    console.log(order.status);
-
-    res.send({
+    // Map through each order and extract details
+    const orderDetailsArray = orders.map((order) => ({
       Status: order.status,
       Items: order.items,
       address: order.address,
       bill: order.bill,
       dateAdded: order.date_added,
-    });
+    }));
+
+    res.send(orderDetailsArray);
   } catch (error) {
     console.error('Error fetching order details:', error);
     res.status(500).send({ message: 'Internal Server Error' });
   }
 };
+
 
 
 const searchMedicinePat = async (req, res) => {
