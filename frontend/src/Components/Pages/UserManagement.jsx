@@ -189,7 +189,7 @@ function UserManagement() {
                                 <Td w={'20%'} >
                                 <Flex align="center"> 
                                     {
-                                    user.role === "doctor" ? <FontAwesomeIcon icon={faUserDoctor} />
+                                    user.role === "pharmacist" ? <FontAwesomeIcon icon={faUserDoctor} />
                                     : user.role === "patient" ? <FontAwesomeIcon icon={faBedPulse} />
                                     : user.role === "admin" ? <FontAwesomeIcon icon={faUserCog} />: <></>
                                     }
