@@ -23,7 +23,8 @@ import { faCartShopping,
   faUser,
   faNotesMedical,
   faCapsules,
-  faFile
+  faFile,
+  faArrowRightFromBracket
  } from "@fortawesome/free-solid-svg-icons";
 import Shortcut from "../UI/Shortcut";
 
@@ -79,7 +80,7 @@ export const AdminHome = () => {
         <Flex bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
           <Text fontSize={'3xl'} color={'white'} >Admin Home Welcome {username} </Text>
           <Spacer/>
-          <Button onClick={Logout}>LOGOUT</Button>
+          <Button onClick={Logout}>Logout <FontAwesomeIcon icon={faArrowRightFromBracket} style={{marginLeft:"7px"}}/></Button>
         </Flex>
         <Box  m={10}>
           {/* {fullUser && */}

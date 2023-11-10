@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, ButtonGroup } from '@chakra-ui/react'
+import { Button, ButtonGroup, Center } from '@chakra-ui/react'
 import { Input } from '@chakra-ui/react'
 import { Text } from '@chakra-ui/react'
 import {
@@ -94,9 +94,11 @@ export const AddMedicine = () => {
   };
 
   return (
-    <div>
-      <Text fontSize='lg'>Add New Medicine</Text>
-      <form onSubmit={handleSubmit}>
+    <Center>
+    <div style={{margin:"50px", width:"50%"}}>
+      
+      <Text fontSize='3xl'>Add New Medicine</Text>
+      <form onSubmit={handleSubmit} style={{}}>
         <div>
           <label>Name:</label>
           <Input variant='filled' type="text" name="name" onChange={handleInputChange} />
@@ -122,7 +124,7 @@ export const AddMedicine = () => {
           <Input variant='filled' type="file" name="image" accept="image/*" onChange={handleImageUpload} />
         </div>
         
-        <Button colorScheme='blue' type="submit">Add Medicine</Button>
+        <Button colorScheme='blue' type="submit" m={5}>Add Medicine</Button>
       </form>
       {successMessage && (
        <Alert status='success'>
@@ -141,6 +143,8 @@ export const AddMedicine = () => {
       
 
     </div>
+    </Center>
+
   );
 };
 

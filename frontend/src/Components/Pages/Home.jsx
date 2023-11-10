@@ -23,7 +23,7 @@ import {
   Grid,
 } from "@chakra-ui/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping,faShop,faBagShopping } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping,faShop,faBagShopping, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import Shortcut from "../UI/Shortcut";
 
 
@@ -148,7 +148,7 @@ export const Home = () => {
         <Flex bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
           <Text fontSize={'3xl'} color={'white'} >Welcome To Pill lorem </Text>
           <Spacer/>
-          <Button onClick={Logout}> Logout </Button>
+          <Button onClick={Logout}> Logout <FontAwesomeIcon icon={faArrowRightFromBracket} style={{marginLeft:"7px"}}/> </Button>
         </Flex>
         <Box  m={10}>
           <Flex m={5}>
@@ -174,7 +174,7 @@ export const Home = () => {
               <Text fontSize={'3xl'}> My Delivery Addresses </Text>
               { fullUser && 
                 fullUser.DeliveryAddress.map((address, index) => (
-                  <Text key={index} m={2} p={1} bg={'#ebe9f3'} fontSize={'xl'}> {address} </Text>
+                  <Text key={index} m={2} p={1} bg={'#fcfafc'} fontSize={'xl'}> {address} </Text>
                 ))
               }
               <Spacer/>

@@ -14,9 +14,9 @@ function Shortcut(
 
   return (
     <Box 
-    bg={'#ebe9f3'}
+    bg={'#ebe9f3'} boxShadow={'xl'} 
     _hover={{ bg: "#8d8f8c", color: "white" }}
-    height='100px'  
+    height='100px'  rounded={10}
     as="button" onClick={() => navigate(link)}>
         {icon}
         <Text>{text}</Text>
