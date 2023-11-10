@@ -1,6 +1,7 @@
 const orderModel = require('../Models/Order');
 const cartModel = require('../Models/Cart');
 const userModel = require('../Models/patient');
+const medModel = require('../Models/Medicine.js');
 const paymentIntentModel=require('../Models/PaymentIntent');
 const stripe = require('stripe')(process.env.SECRETKEY);
 
@@ -50,6 +51,14 @@ module.exports.creditConfirm=async(req,res)=>{
     let address=req.body.address;
     let intentId=req.body.intentId;
     const paymentIntent=await paymentIntentModel.findByIdAndDelete(intentId);
+    for (const item of cart.items) {
+        const product = await medModel.findOne({ _id: item.productId });
+        if (product) {
+            // Increase the sales by the quantity in the cart
+            product.Sales += item.quantity;
+            await product.save();
+        }
+    }
     const order = await orderModel.create({
         userId,
         items: cart.items,
@@ -70,6 +79,14 @@ module.exports.checkoutCash = async (req,res) => {
         let address=req.body.address;
         let cart = await cartModel.findOne({userId});
         let user = await userModel.findOne({_id: userId});
+        for (const item of cart.items) {
+            const product = await medModel.findOne({ _id: item.productId });
+            if (product) {
+                // Increase the sales by the quantity in the cart
+                product.Sales += item.quantity;
+                await product.save();
+            }
+        }
         if(cart){
            
             
@@ -112,6 +129,14 @@ module.exports.checkoutWallet = async (req,res) => {
                    user.Wallet-=cart.bill;
            
                    user.save();
+                   for (const item of cart.items) {
+                    const product = await medModel.findOne({ _id: item.productId });
+                    if (product) {
+                        // Increase the sales by the quantity in the cart
+                        product.Sales += item.quantity;
+                        await product.save();
+                    }
+                }
                     const order = await orderModel.create({
                         userId,
                         items: cart.items,

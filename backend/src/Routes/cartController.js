@@ -28,6 +28,11 @@ module.exports.add_cart_item = async (req,res) => {
         if(!item){
             res.status(404).send('Item not found!')
         }
+        if(item.Quantity<quantity){
+            res.status(404).send('Not enough items in stock')
+        }
+        item.Quantity=item.Quantity-quantity;
+        item.save();
         const price = item.Price;
         const name = item.Name;
         const image=item.Image;
@@ -58,7 +63,8 @@ module.exports.add_cart_item = async (req,res) => {
                 bill: quantity*price
             });
             return res.status(201).send(newCart);
-        }       
+        }
+      
     }
     catch (err) {
         console.log(err);
@@ -70,11 +76,14 @@ module.exports.delete_item = async (req,res) => {
     const productId = req.params.itemId;
     try{
         let cart = await cartModel.findOne({userId});
+        let item = await medModel.findOne({_id: productId});
         let itemIndex = cart.items.findIndex(p => p.productId == productId);
         if(itemIndex > -1)
         {
             let productItem = cart.items[itemIndex];
             cart.bill -= productItem.quantity*productItem.price;
+            item.Quantity=item.Quantity+productItem.quantity;
+            item.save();
             cart.items.splice(itemIndex,1);
         }
         cart = await cart.save();
@@ -109,6 +118,26 @@ module.exports.update_cart_item = async (req,res) => {
             if(itemIndex > -1)
             {
                 let productItem = cart.items[itemIndex];
+                ///edit quantity
+                console.log(quantity);
+                console.log(productItem.quantity)
+                if(quantity===productItem.quantity){
+                    console.log('here');
+                    return res.status(201).send(cart);
+                } else{
+                if(quantity>productItem.quantity){ //adding to cart
+                    const addition=quantity-productItem.quantity
+                    if(item.Quantity<addition){
+                        res.status(404).send('not enough item in stock')
+                    }else{
+                        item.Quantity=item.Quantity-addition;
+                    }
+                }else{
+                    const deduction=productItem.quantity-quantity;
+                    item.Quantity=item.Quantity+deduction;
+                }
+                item.save();
+            }
                 editedPrice=productItem.quantity*productItem.price;
                 productItem.quantity = quantity;
                 cart.items[itemIndex] = productItem;
