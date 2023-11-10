@@ -200,7 +200,7 @@ module.exports.Login = async (req, res, next) => {
         if(data.role==='patient'){
          user = await patientModel.findById(data.id);
         }
-        if(data.role==='doctor'){
+        if(data.role==='pharmacist'){
            user = await pharmaModel.findById(data.id);
           }
           if(data.role==='admin'){
@@ -336,13 +336,12 @@ console.log(username);
   }else{
     if(pharma){
       loggedIn=pharma;
-      role='doctor';
+      role='pharmacist';
     }else{
       loggedIn=admin;
       role='admin';
     }
   }
-     
       if (!newPassword.match(/^(?=.*[A-Z])(?=.*[0-9]).{8,}$/)) {
         return res.status(400).json({ message: 'New password does not meet requirements' });
     }
