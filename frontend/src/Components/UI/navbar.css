@@ -1,7 +1,7 @@
 .navbar {
     width: 100%;
     height: 80px;
-    background-color: rgb(19, 19, 19);
+    background-color:#4bbbf3;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -15,7 +15,7 @@
   
   .links a {
     text-decoration: none;
-    color: white;
+    color: rgb(4, 4, 4);
     margin-left: 20px;
     font-size: 25px;
   }

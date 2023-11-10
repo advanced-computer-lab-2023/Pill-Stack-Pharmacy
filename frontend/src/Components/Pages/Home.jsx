@@ -23,7 +23,7 @@ import {
   Grid,
 } from "@chakra-ui/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping,faShop } from "@fortawesome/free-solid-svg-icons";
 import Shortcut from "../UI/Shortcut";
 
 
@@ -180,7 +180,11 @@ export const Home = () => {
               <Spacer/>
               <Button onClick={openModal} w={'50%'} >Add address</Button>
             </Flex>
-            <SimpleGrid minChildWidth='150px' spacing='1px' m={5} > 
+            <SimpleGrid minChildWidth='150px' spacing='1px' m={5} >
+            <Shortcut 
+                link={'/medicine'} 
+                icon={<FontAwesomeIcon icon={faShop} fontSize={'35px'}/>} 
+                text={'Shop'}/> 
               <Shortcut 
                 link={'/cart'} 
                 icon={<FontAwesomeIcon icon={faCartShopping} fontSize={'35px'}/>} 
@@ -188,11 +192,7 @@ export const Home = () => {
               <Shortcut 
                 link={'/cart'} 
                 icon={<FontAwesomeIcon icon={faCartShopping} fontSize={'35px'}/>} 
-                text={'View Cart'}/>
-              <Shortcut 
-                link={'/cart'} 
-                icon={<FontAwesomeIcon icon={faCartShopping} fontSize={'35px'}/>} 
-                text={'View Cart'}/>
+                text={'View Orders'}/>
             </SimpleGrid>
 
           </Grid>

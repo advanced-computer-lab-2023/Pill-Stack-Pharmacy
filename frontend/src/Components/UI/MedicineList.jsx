@@ -3,7 +3,7 @@ import MedicinalUseFilter from '../UI/MedicinalUseFilter';
 import { Navbar } from '../UI/navbar';
 import axios from "axios";
 import MedicineItem from '../UI/MedicineItem';
-import { SimpleGrid,Heading, Input, Box } from '@chakra-ui/react';
+import { Text,SimpleGrid, Input, Box } from '@chakra-ui/react';
 import '../../index.css'
 
 export function MedicineList() {
@@ -46,10 +46,11 @@ export function MedicineList() {
   return (
     <Box className="med_page" >
       <Navbar />
+      <Text fontSize={'3xl'} color={'Black'} >Over-the-counter medicine</Text>
 
-      <Heading as="h1" mb={4}>
+      {/* <Heading as="h1" mb={4}>
         Available Medicines
-      </Heading>
+      </Heading> */}
       <MedicinalUseFilter
         selectedMedicinalUse={selectedMedicinalUse}
         onMedicinalUseChange={setSelectedMedicinalUse}

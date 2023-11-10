@@ -1,13 +1,15 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {ShoppingCart} from "phosphor-react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping} from "@fortawesome/free-solid-svg-icons";
+
 import '../UI/navbar.css'
 export const Navbar=()=>{
     return(
 <div className="navbar">
     <div className="links">
 <Link to="/cart">
-    <ShoppingCart size={32}/>
+    <FontAwesomeIcon icon={faCartShopping} fontSize={'35px'}/>
 </Link>
     </div>
 </div>
