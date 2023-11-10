@@ -237,6 +237,7 @@ console.log(username);
   const user = await patientModel.findOne({ Username:username });
   const pharma= await pharmaModel.findOne({ Username:username });
   const admin = await adminModel.findOne({ Username:username });
+  
   var loggedIn=null;
   var role=null;
   if(user){
