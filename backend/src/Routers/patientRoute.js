@@ -1,11 +1,12 @@
 const express = require('express');
 let router = express.Router();
-const {filterMedicinesByMedicinalUse, searchMedicinePat,getAddresses,addDeliveryAddress} = require('../Routes/userController');
+const {filterMedicinesByMedicinalUse, searchMedicinePat,getAddresses,addDeliveryAddress, getFullInfo} = require('../Routes/userController');
 const {getAvailableMedicines} = require('../Routes/adminController.js');
 const { userVerification } = require('../Middleware/AuthMiddleware');
 
 
 router.get('/Address',userVerification,getAddresses)
+router.get('/myInfo/:username' , getFullInfo )
 
 
 

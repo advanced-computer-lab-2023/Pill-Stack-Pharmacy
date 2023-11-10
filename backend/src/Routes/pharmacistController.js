@@ -164,6 +164,22 @@ const filterMedicinesByMedicinalUse = async (req, res) => {
 
 
 
+const getFullInfo = async (req, res) => {
+  try {
+    const {username} = req.params;
+    const user = await Pharmacist.findOne({Username:username});
+    res.status(200).send(user);
+    // if (!user) {
+    //   return res.status(404).json({ error: 'User not found' });
+    // }
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
+
+
 
 module.exports = {
     
@@ -173,5 +189,5 @@ module.exports = {
     filterMedicinesByMedicinalUse,
     editMedicineResults,
     getMedSQ,
-    
+    getFullInfo
 };

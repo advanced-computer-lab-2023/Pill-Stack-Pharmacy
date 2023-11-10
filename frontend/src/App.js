@@ -49,8 +49,8 @@ function App() {
         <Route path="/medicine" element={<MedicineList />} />
         <Route path="/medicine/sales" element={<MedicineListwithSales />} />
         <Route path="/addMed" element={<AddMedicine />} />
-        <Route path="/cart" element={<Cart/>} />
-        <Route path="/home/creditPayment/:address" element={<CreditPayment />} />
+        <Route path="/cart" element={<Cart/>} /> {/* patient */}
+        <Route path="/home/creditPayment/:address" element={<CreditPayment />} /> 
         <Route path="/completion/:address" element={<Completion />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/PasswordReset" element={<PasswordReset/>} />

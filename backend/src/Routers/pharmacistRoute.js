@@ -2,7 +2,7 @@ const express = require('express');
 let router = express.Router();
 const {createMedicine,searchMedicinePh,
     editMedicineResults,upload, getMedSQ, 
-    filterMedicinesByMedicinalUse} = require('../Routes/pharmacistController.js');
+    filterMedicinesByMedicinalUse, getFullInfo} = require('../Routes/pharmacistController.js');
 const {getAvailableMedicines} = require('../Routes/adminController.js');
 
 router.get("/", (req,res) => {res.render('pharmacist_home')});
@@ -21,6 +21,7 @@ router.route('/searchMedicine')
 
 // Handle filtering medicines by medicinal use
 router.get('/filter-medicines',filterMedicinesByMedicinalUse);
+router.get('/myInfo/:username' , getFullInfo )
 
 
 

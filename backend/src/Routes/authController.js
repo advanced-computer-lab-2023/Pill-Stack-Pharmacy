@@ -187,6 +187,7 @@ module.exports.Login = async (req, res, next) => {
   module.exports.currentUser=(req, res,next) => {
 
     const token = req.cookies.token
+    console.log(token);
     if (!token) {
       return res.json({ status: false })
     }

@@ -79,7 +79,19 @@ const filterMedicinesByMedicinalUse = async (req, res) => {
   }
 };
 
+const getFullInfo = async (req, res) => {
+  try {
+    const {username} = req.params;
+    const user = await userModel.findOne({Username:username});
+    res.status(200).send(user);
+    // if (!user) {
+    //   return res.status(404).json({ error: 'User not found' });
+    // }
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
 
 
 
-module.exports = {searchMedicinePat, filterMedicinesByMedicinalUse,getAddresses,addDeliveryAddress};
+module.exports = {searchMedicinePat, filterMedicinesByMedicinalUse,getAddresses,addDeliveryAddress, getFullInfo};

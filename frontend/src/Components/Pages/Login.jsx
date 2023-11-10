@@ -49,7 +49,7 @@ export const Login = () => {
           setTimeout(() => {
             if (role === 'patient') {
               navigate('/home');
-            } else if (role === 'pharmcist') {
+            } else if (role === 'pharmacist') { 
               navigate('/doctor-home');
             } else if (role === 'admin') {
               navigate('/admin-home');

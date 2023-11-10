@@ -246,10 +246,24 @@ const rejectRegRequest = async (req, res) => {
   }
 };
 
+const getFullInfo = async (req, res) => {
+  try {
+    console.log("iin=kasndfasn");
+    const {username} = req.params;
+    console.log("the ",username);
+    const user = await adminModel.findOne({Username:username});
+    res.status(200).send(user);
+    // if (!user) {
+    //   return res.status(404).json({ error: 'User not found' });
+    // }
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
 
 module.exports = {
     viewAllApp,viewPharmacistApp,getAvailableMedicines,viewPatientDet
     ,PatientDetailsResults,removeUser,searchMedicineA,filterMedicinesByMedicinalUse,
     PharmacistDetailsResults, viewPharmacistDet, getAllUsers,
-    getMedicinalUse, acceptRegRequest, rejectRegRequest
+    getMedicinalUse, acceptRegRequest, rejectRegRequest, getFullInfo 
 };
