@@ -22,6 +22,7 @@ const orderDetails = async (req, res) => {
 
     // Map through each order and extract details
     const orderDetailsArray = orders.map((order) => ({
+      _id:order._id,
       Status: order.status,
       Items: order.items,
       address: order.address,

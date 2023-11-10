@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {
+  Button,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+} from '@chakra-ui/react';
+
 
 const OrderDetailsPage = () => {
   const [orderDetailsArray, setOrderDetailsArray] = useState([]);
+  const [cancelSuccess, setCancelSuccess] = useState(false); // State for success message
 
   useEffect(() => {
     const fetchOrderDetails = async () => {
@@ -37,9 +46,45 @@ const OrderDetailsPage = () => {
         return {};
     }
   };
+  const handleCancelOrder = async (orderId) => {
+    try {
+      const response = await axios.post('http://localhost:8000/order/cancel-order', {
+        orderId:orderId,
+      }, { withCredentials: true });
+  
+      if (response.status === 200 && response.data === 'Order cancelled successfully') {
+        // Order cancellation was successful, update the local state
+        setOrderDetailsArray((orders) => {
+          return orders.map((order) => {
+            if (order._id === orderId) {
+              return { ...order, Status: 'Cancelled' };
+            }
+            return order;
+          });
+        });
+        setCancelSuccess(true); // Show success message
 
+      } else if (response.status === 404) {
+        // Order not found, handle as needed
+        console.log('Order not found');
+      } else {
+        // Handle other errors
+        console.log('Order cancellation failed');
+      }
+    } catch (error) {
+      console.error('Error canceling order:', error);
+    }
+  };
+  
   return (
     <div style={styles.container}>
+      {cancelSuccess && (
+      <Alert status="success">
+        <AlertIcon />
+        <AlertTitle>Confirmation</AlertTitle>
+        <AlertDescription>Order was successfully Cancelled </AlertDescription>
+      </Alert>
+    )}
       {orderDetailsArray.length > 0 ? (
         orderDetailsArray.map((order, index) => (
           <div key={index} style={{ ...styles.orderContainer, ...getStatusStyle(order.Status) }}>
@@ -63,6 +108,14 @@ const OrderDetailsPage = () => {
               </>
             ) : (
               <p>No items in this order.</p>
+            )}
+            {order.Status === 'Processing' && (
+              <Button
+                onClick={() => handleCancelOrder(order._id)}
+                style={styles.cancelButton}
+              >
+                Cancel Order
+              </Button>
             )}
           </div>
         ))
