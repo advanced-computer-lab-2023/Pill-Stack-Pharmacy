@@ -187,6 +187,14 @@ module.exports.cancelOrder = async (req, res) => {
                 default:
                     break;
             }
+            for (const item of order.items) {
+                const product = await medModel.findOne({ _id: item.productId });
+                if (product) {
+                    product.Sales -= item.quantity;
+                    product.Quantity+=item.quantity;
+                    await product.save();
+                }
+            }
     
             order.status = 'Cancelled';
             await order.save();
