@@ -4,14 +4,11 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping,
-  faShop,
-  faNotesMedical,
-  faBagShopping,
+import {
   faCubesStacked,
   faCapsules,
-  faArrowRightFromBracket
-
+  faArrowRightFromBracket,
+  faListCheck 
  } from "@fortawesome/free-solid-svg-icons";
 import {
   Flex,
@@ -93,7 +90,7 @@ function DoctorHome() {
               <Spacer/>
               <Text >Wallet: </Text>
               <Text m={2} fontSize={'3xl'}> 
-                $ {fullUser.Wallet}
+                $0.00
               </Text>
           </Flex>
           <Divider orientation="horizontal" />
@@ -107,18 +104,18 @@ function DoctorHome() {
 
             </Flex>
             <SimpleGrid minChildWidth='150px' spacing='1px' m={5} >
-            <Shortcut 
+              <Shortcut 
                 link={'/medicine/sales'} 
-                icon={<FontAwesomeIcon icon={faCubesStacked} fontSize={'35px'}/>} 
-                text={'Medicine Stock'}/> 
+                icon={<FontAwesomeIcon icon={faListCheck} fontSize={'35px'}/>} 
+                text={'Stock Management'}/> 
               <Shortcut 
                 link={'/addMed'} 
                 icon={<FontAwesomeIcon icon={faCapsules} fontSize={'35px'}/>} 
                 text={'Add Meds'}/>
-              {/* <Shortcut 
-                link={'/cart'} 
-                icon={<FontAwesomeIcon icon={faBagShopping} fontSize={'35px'}/>} 
-                text={'Track Orders'}/> */}
+              <Shortcut 
+                link={'/medicineControl'} 
+                icon={<FontAwesomeIcon icon={faCubesStacked}  fontSize={'35px'}/>} 
+                text={'Med Stock'}/>
             </SimpleGrid>
 
           </Grid>
