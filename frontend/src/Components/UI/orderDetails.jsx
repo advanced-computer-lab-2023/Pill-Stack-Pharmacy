@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import '../UI/button.css'
+import {
+  Box,
+  Text} from '@chakra-ui/react';
 
 const OrderDetailsPage = () => {
   const [orderDetailsArray, setOrderDetailsArray] = useState([]);
-
+  const navigate = useNavigate();
+  const back =()=>  navigate(-1);
   useEffect(() => {
     const fetchOrderDetails = async () => {
       try {
@@ -39,37 +45,41 @@ const OrderDetailsPage = () => {
   };
 
   return (
+    <><Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
+      <Text fontSize={'3xl'} color={'white'}>Order Details</Text>
+      <button className="btn" onClick={back}>back</button>
+    </Box>
     <div style={styles.container}>
-      {orderDetailsArray.length > 0 ? (
-        orderDetailsArray.map((order, index) => (
-          <div key={index} style={{ ...styles.orderContainer, ...getStatusStyle(order.Status) }}>
-            <h2 style={styles.heading}>Order Details</h2>
-            <p>Status: {order.Status}</p>
-            <p>Address: {order.address}</p>
-            <p>Bill: {order.bill}</p>
-            <p>Date Added: {order.dateAdded}</p>
+        {orderDetailsArray.length > 0 ? (
+          orderDetailsArray.map((order, index) => (
+            <div key={index} style={{ ...styles.orderContainer, ...getStatusStyle(order.Status) }}>
+              <h2 style={styles.heading}>Order Details</h2>
+              <p>Status: {order.Status}</p>
+              <p>Address: {order.address}</p>
+              <p>Bill: {order.bill}</p>
+              <p>Date Added: {order.dateAdded}</p>
 
-            {order.Items && order.Items.length > 0 ? (
-              <>
-                <h3 style={styles.subHeading}>Items:</h3>
-                <div style={styles.itemsContainer}>
-                  {order.Items.map((item, itemIndex) => (
-                    <div key={itemIndex} style={styles.item}>
-                      <p>Product ID: {item.productId}</p>
-                      <p>Quantity: {item.quantity}</p>
-                    </div>
-                  ))}
-                </div>
-              </>
-            ) : (
-              <p>No items in this order.</p>
-            )}
-          </div>
-        ))
-      ) : (
-        <p>No orders found.</p>
-      )}
-    </div>
+              {order.Items && order.Items.length > 0 ? (
+                <>
+                  <h3 style={styles.subHeading}>Items:</h3>
+                  <div style={styles.itemsContainer}>
+                    {order.Items.map((item, itemIndex) => (
+                      <div key={itemIndex} style={styles.item}>
+                        <p>Product ID: {item.productId}</p>
+                        <p>Quantity: {item.quantity}</p>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <p>No items in this order.</p>
+              )}
+            </div>
+          ))
+        ) : (
+          <p>No orders found.</p>
+        )}
+      </div></>
   );
 };
 

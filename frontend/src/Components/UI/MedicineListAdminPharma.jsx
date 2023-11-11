@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import MedicinalUseFilter from '../UI/MedicinalUseFilter';
 import { Buffer } from 'buffer';
-import { SimpleGrid, Box, Heading, Input } from '@chakra-ui/react';
+import { SimpleGrid, Box, Heading, Input,Text } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
+import '../UI/button.css'
 
 export function MedicineListControl() {
   const [medicines, setMedicines] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedMedicinalUse, setSelectedMedicinalUse] = useState('');
   const [medicinalUses, setMedicinalUses] = useState([]);
-
+  const navigate = useNavigate();
+  const back =()=> navigate(-1);
   useEffect(() => {
     // Fetch medicines and their medicinal uses from your server's API endpoint
     fetch('http://localhost:8000/admin/availableMedicines')
@@ -35,23 +38,24 @@ export function MedicineListControl() {
     );
 
   return (
-    <Box className="med_page" >
-      <Heading as="h1" mb={4}>
-        Available Medicines
-      </Heading>
+    <><Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
+    <Text fontSize={'3xl'} color={'white'} >Available Medicines</Text>
+    <button className="btn" onClick={back}>back</button>
+</Box>
+    <Box className="med_page">
+
+    
       <MedicinalUseFilter
         selectedMedicinalUse={selectedMedicinalUse}
         onMedicinalUseChange={setSelectedMedicinalUse}
-        medicinalUses={medicinalUses}
-      />
+        medicinalUses={medicinalUses} />
       <Input
-      htmlSize={15} width='auto'
+        htmlSize={15} width='auto'
         type="text"
         placeholder="Search medicines..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        mb={4}
-      />
+        mb={4} />
       <SimpleGrid columns={3} spacing={10}>
         {filteredMedicines.map((medicine) => (
           <Box
@@ -67,8 +71,7 @@ export function MedicineListControl() {
               src={`data:${medicine.Image.contentType};base64, ${Buffer.from(
                 medicine.Image.data
               ).toString('base64')}`}
-              alt={medicine.Name}
-            />
+              alt={medicine.Name} />
             <Heading as="h2" size="md" mt={2}>
               {medicine.Name}
             </Heading>
@@ -77,7 +80,7 @@ export function MedicineListControl() {
           </Box>
         ))}
       </SimpleGrid>
-    </Box>
+    </Box></>
   );
 }
 

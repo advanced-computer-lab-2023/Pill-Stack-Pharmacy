@@ -1,11 +1,8 @@
-const {  Login,PatientRegister ,pharmaRegister,addAdmin, currentUser,Logout,ChangePassword,SendOTP,ResetPassword} = require('../Routes/authController')
+const {  Login,PatientRegister,upload ,pharmaRegister,addAdmin, currentUser,Logout,ChangePassword,SendOTP,ResetPassword} = require('../Routes/authController')
 const {  userVerification } = require('../Middleware/AuthMiddleware')
 
 
-const multer = require('multer');
-const storage = multer.diskStorage({
-});
-const upload = multer({ storage: storage });
+
 const router = require('express').Router()
 router.post('/',currentUser)
 

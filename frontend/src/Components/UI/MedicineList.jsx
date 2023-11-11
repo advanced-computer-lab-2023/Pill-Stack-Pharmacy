@@ -4,6 +4,8 @@ import { Navbar } from '../UI/navbar';
 import axios from "axios";
 import MedicineItem from '../UI/MedicineItem';
 import { Text,SimpleGrid, Input, Box } from '@chakra-ui/react';
+import '../UI/button.css'
+import { useNavigate } from 'react-router-dom';
 import '../../index.css'
 
 export function MedicineList() {
@@ -11,6 +13,8 @@ export function MedicineList() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedMedicinalUse, setSelectedMedicinalUse] = useState('');
   const [medicinalUses, setMedicinalUses] = useState([]);
+  const navigate = useNavigate();
+  const back =()=>  navigate(-1);
 
   useEffect(() => {
     // Fetch medicines and their medicinal uses from your server's API endpoint
@@ -45,7 +49,9 @@ export function MedicineList() {
 
   return (
     <Box className="med_page" >
+           
       <Navbar />
+      
       <Text fontSize={'3xl'} color={'Black'} >Over-the-counter medicine</Text>
 
       {/* <Heading as="h1" mb={4}>

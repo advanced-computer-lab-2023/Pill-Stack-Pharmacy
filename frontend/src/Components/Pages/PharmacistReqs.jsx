@@ -1,11 +1,14 @@
 import React from 'react'
 import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import '../UI/button.css'
 import {
     Box,
     Text,
     Button,
     Center,
     TableContainer,
+    Container,
     Table,
     Thead,
     Tbody,
@@ -35,12 +38,18 @@ import {
     
 } from "@chakra-ui/react";
 import axios from 'axios';
+import { Buffer } from 'buffer';
+
 
 function PharmacistReqs() {
     const [reqs, setReqs] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
     const [viewReq, setViewReq] = useState({});
-
+    const [available,setAvailable]=useState(false);
+    const [ID,SetID]=useState(false);
+    const [Degree,SetDegree]=useState(false);
+    const [License,SetLicense]=useState(false);
+    const navigate = useNavigate();
     // use effect to fetch data from backend
 
     useEffect(() => {
@@ -51,6 +60,9 @@ function PharmacistReqs() {
             });
             // sort by date
             // data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            setTimeout(() => {
+                        setAvailable(true);
+                     }, 3000);
             setReqs(data);
             } catch (error) {
             console.log(error);
@@ -58,9 +70,14 @@ function PharmacistReqs() {
         };
         getReqs();
     }, [reqs]);
-
+    const back =()=>  navigate(-1);
+    
     const onClose = () => setIsOpen(false);
-
+    const handleClose= ()=> {
+      SetDegree(false);
+      SetLicense(false);
+      SetID(false);
+    }
     const handleAccept = async () => {
       try {
         // router.post('/applications/accept-registeration/:id',acceptRegRequest);
@@ -95,12 +112,29 @@ function PharmacistReqs() {
         console.log(error);
       }
     };
+    const handleView1 =async ()=>{
+      SetID(true);
+      SetDegree(false);
+      SetLicense(false);
+    };
+    const handleView2 =async ()=>{
+      SetID(false);
+      SetDegree(true);
+      SetLicense(false);
+    };
+    const handleView3 =async ()=>{
+      SetID(false);
+      SetDegree(false);
+      SetLicense(true);
+    };
 
   return (
     <>
         <Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
             <Text fontSize={'3xl'} color={'white'} > Doctor Requests </Text>
+        <button className="btn" onClick={back}>back</button>
         </Box>
+        
         <Center>
         <TableContainer w={'90%'}>
             <Table size='lg'> 
@@ -145,11 +179,39 @@ function PharmacistReqs() {
                 </Tbody>
             </Table>
         </TableContainer>
+        
         </Center>
-
+        <Center>
+        <div position='Center'>
+           <Box alignContent='Left' width= '750px' height= '1000px' padding= '10' overflow= 'hidden'>
+             {available &&ID&& <Button float='right' onClick={handleClose}>close</Button>}
+             {available && ID && viewReq.IDDocument.contentType=="application/pdf" &&<iframe width='100%' height='100%'
+              src={`data:${viewReq.IDDocument.contentType};base64, ${Buffer.from(viewReq.IDDocument.data).toString('base64')}`}  />}
+             {available && ID  &&<img width='100%' height='100%'
+              src={`data:${viewReq.IDDocument.contentType};base64, ${Buffer.from(viewReq.IDDocument.data).toString('base64')}`}  />}
+              {available && Degree&& <Button float='right' onClick={handleClose}>close</Button>}
+             {available && Degree && viewReq.pharmacyDegreeDocument.contentType=="application/pdf" &&<iframe width='100%' height='100%'
+              src={`data:${viewReq.pharmacyDegreeDocument.contentType};base64, ${Buffer.from(viewReq.pharmacyDegreeDocument.data).toString('base64')}`}  />}
+             {available && Degree  &&<img width='100%' height='100%'
+              src={`data:${viewReq.pharmacyDegreeDocument.contentType};base64, ${Buffer.from(viewReq.pharmacyDegreeDocument.data).toString('base64')}`}  />}
+              {available && License&& <Button float='right' onClick={handleClose}>close</Button>}
+             {available && License && viewReq.workingLicenseDocument.contentType=="application/pdf" &&<iframe width='100%' height='100%'
+              src={`data:${viewReq.workingLicenseDocument.contentType};base64, ${Buffer.from(viewReq.workingLicenseDocument.data).toString('base64')}`}  />}
+             {available && License  &&<img width='100%' height='100%'
+              src={`data:${viewReq.workingLicenseDocument.contentType};base64, ${Buffer.from(viewReq.workingLicenseDocument.data).toString('base64')}`}  />}
+         
+         </Box>
+         <br></br>
+         
+       </div>
+       <br></br>
+        </Center>
+                    
         <Drawer onClose={onClose} isOpen={isOpen} size={'sm'}>
         <DrawerOverlay />
+        
         <DrawerContent>
+          
             <DrawerCloseButton />
             <DrawerHeader>
             <Flex>
@@ -167,6 +229,7 @@ function PharmacistReqs() {
                 
             </DrawerHeader>
             <DrawerBody>
+              
             {/* Username: {
     type: String,
     required: true,
@@ -199,6 +262,7 @@ function PharmacistReqs() {
         type: String,
         required: true,
     } */}
+            
             <Flex justifyContent={'center'}  alignItems={'center'} >
             <Stack spacing={10}>
             <Box position='relative' >
@@ -229,6 +293,10 @@ function PharmacistReqs() {
             </AbsoluteCenter>
             </Box>
             <Text fontSize='3xl'>  <Center> {viewReq.EducationalBackground} </Center></Text>
+            {<Button onClick={handleView1}>View ID Doc</Button>}
+            <Button onClick={handleView2}>View Degree</Button>
+            <Button onClick={handleView3}>View License</Button>
+            
       </Stack>
             </Flex>
             
@@ -243,6 +311,7 @@ function PharmacistReqs() {
 
         </DrawerContent>
         </Drawer>
+        
     </>
 
   )

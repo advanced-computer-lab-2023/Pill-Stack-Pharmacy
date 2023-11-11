@@ -45,7 +45,6 @@ const PharmacistRegisterPage = () => {
     for (const key in formData) {
       payload.append(key, formData[key]);
     }
-
     try {
         const response = await axios.post('http://localhost:8000/doc_register', payload, {
             headers: {

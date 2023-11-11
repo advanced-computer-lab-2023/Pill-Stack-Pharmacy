@@ -4,8 +4,10 @@ const pharmaReqModel = require('../Models/Pharmacist_Request.js');
 const pharmaModel = require('../Models/Pharmacist.js');
 
 const otpModel = require("../Models/Otp");
+const multer = require('multer');
+const storage = multer.memoryStorage();
+module.exports.upload = multer({ storage: storage });
 
-require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const sendEmail = require("../Utilities/SendEmail");
 
@@ -62,7 +64,7 @@ module.exports.pharmaRegister = async (req, res, next) => {
     const IDDocument = req.files.IDDocument ? req.files.IDDocument[0] : null;
     const pharmacyDegreeDocument = req.files.pharmacyDegreeDocument ? req.files.pharmacyDegreeDocument[0] : null;
     const workingLicenseDocument = req.files.workingLicenseDocument ? req.files.workingLicenseDocument[0] : null;
-
+    console.log(IDDocument);
 
     if (!IDDocument || !pharmacyDegreeDocument || !workingLicenseDocument) {
       return res.status(400).send({ message: 'Please upload all required documents.' });

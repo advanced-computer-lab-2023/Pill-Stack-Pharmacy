@@ -4,8 +4,10 @@ import axios from "axios";
 import { Buffer } from 'buffer';
 import '../../index.css'
 import { useNavigate } from "react-router-dom";
+import '../UI/button.css'
 import {
     Box,
+    Text,
     Table,
     Thead,
     Tbody,
@@ -29,6 +31,7 @@ import {
   } from '@chakra-ui/react'
 export const Cart = () => {
     const navigate = useNavigate();
+    const back =()=>  navigate(-1);
     const [cart, setCart] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -129,117 +132,120 @@ export const Cart = () => {
     }
 
     return (
-        <div className="cart-container">
-             {isSucessPayment && (
-      <Alert status="success">
-        <AlertIcon />
-        <AlertTitle>Confirmation</AlertTitle>
-        <AlertDescription>Order has been placed successfully</AlertDescription>
-      </Alert>
-    )}
-     {errorMessage && (
-      <Alert status="error">
-        <AlertIcon />
-        <AlertTitle>Error</AlertTitle>
-        <AlertDescription>{errorMessage}</AlertDescription>
-      </Alert>
-    )}
-            <h1>Your Cart</h1>
+      <><Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
+        <Text fontSize={'3xl'} color={'white'}>My Cart</Text>
+        <button className="btn" onClick={back}>back</button>
+      </Box><div className="cart-container">
+          {isSucessPayment && (
+            <Alert status="success">
+              <AlertIcon />
+              <AlertTitle>Confirmation</AlertTitle>
+              <AlertDescription>Order has been placed successfully</AlertDescription>
+            </Alert>
+          )}
+          {errorMessage && (
+            <Alert status="error">
+              <AlertIcon />
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>{errorMessage}</AlertDescription>
+            </Alert>
+          )}
+          <h1>Your Cart</h1>
 
-            {cart ? (
-                <ul>
-                    {cart.items.map((item) => (
-                        <li key={item.productId}>
-                            <div className="cart-item">
-                                <img
-                                    className="product-image"
-                                    src={`data:${item.image.contentType};base64, ${Buffer.from(item.image.data).toString('base64')}`}
-                                    alt={item.name}
-                                />
-                                <div className="product-details">
-                                    <p className="product-name">{item.name}</p>
-                                    <p>Quantity: {item.quantity}</p>
-                                    <p>Price: ${item.price}</p>
-                                    <div>
-                                    <button onClick={() => handleQuantityChange(item.productId, item.quantity - 1)}>-</button>
-                                    <span>Quantity: {item.quantity}</span>
-                                    <button onClick={() => handleQuantityChange(item.productId, item.quantity + 1)}>+</button>
-                                </div>
-                                    <button  onClick={()=> handleDelete(item.productId)}className="remove-button">Remove</button>
-                                </div>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-            ) : (
-                <p>Add items to your cart..</p>
-            )}
-            {cart && (
-                <div className="cart-summary">
-                    <p>Total Bill: ${cart.bill}</p>
-                    <button onClick={()=>handleCheckout()}className="checkout-button">Checkout</button>
-                </div>
-            )}
-                  <Modal isOpen={isModalOpen} onClose={() => {setIsModalOpen(false);
-       setSelectedPayment('');
-       setSelectedAddress('');
-       setIsErrorPayment(false);
-      }}>
-  <ModalOverlay />
-  <ModalContent>
-    <ModalHeader>Select Payment Option</ModalHeader>
-    <ModalCloseButton />
-    <ModalBody>
-    {isErrorPayment &&(<Alert status='error'>
-  <AlertIcon />
-  <AlertTitle>Missing information</AlertTitle>
-  <AlertDescription>Please select address and payment method.</AlertDescription>
-</Alert>)}
-    <FormControl>
-        <FormLabel>Select Address</FormLabel>
-        <Select
-    value={selectedAddress}
-    onChange={(e) => {setSelectedAddress(e.target.value);}
-  }
-  >
-    <option value="">Select</option>
+          {cart ? (
+            <ul>
+              {cart.items.map((item) => (
+                <li key={item.productId}>
+                  <div className="cart-item">
+                    <img
+                      className="product-image"
+                      src={`data:${item.image.contentType};base64, ${Buffer.from(item.image.data).toString('base64')}`}
+                      alt={item.name} />
+                    <div className="product-details">
+                      <p className="product-name">{item.name}</p>
+                      <p>Quantity: {item.quantity}</p>
+                      <p>Price: ${item.price}</p>
+                      <div>
+                        <button onClick={() => handleQuantityChange(item.productId, item.quantity - 1)}>-</button>
+                        <span>Quantity: {item.quantity}</span>
+                        <button onClick={() => handleQuantityChange(item.productId, item.quantity + 1)}>+</button>
+                      </div>
+                      <button onClick={() => handleDelete(item.productId)} className="remove-button">Remove</button>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>Add items to your cart..</p>
+          )}
+          {cart && (
+            <div className="cart-summary">
+              <p>Total Bill: ${cart.bill}</p>
+              <button onClick={() => handleCheckout()} className="checkout-button">Checkout</button>
+            </div>
+          )}
+          <Modal isOpen={isModalOpen} onClose={() => {
+            setIsModalOpen(false);
+            setSelectedPayment('');
+            setSelectedAddress('');
+            setIsErrorPayment(false);
+          } }>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>Select Payment Option</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                {isErrorPayment && (<Alert status='error'>
+                  <AlertIcon />
+                  <AlertTitle>Missing information</AlertTitle>
+                  <AlertDescription>Please select address and payment method.</AlertDescription>
+                </Alert>)}
+                <FormControl>
+                  <FormLabel>Select Address</FormLabel>
+                  <Select
+                    value={selectedAddress}
+                    onChange={(e) => { setSelectedAddress(e.target.value); } }
+                  >
+                    <option value="">Select</option>
 
 
-    { (
-      
-      address.map((add) => (
-        <option key={add} value={add}>
-          {add}
-        </option>
-      ))
-    )}
-  </Select>
-      </FormControl>
-      <FormControl>
-        <FormLabel>Select Payment Method</FormLabel>
-        <Select
-          value={selectedPayment}
-          onChange={(e) => {setSelectedPayment(e.target.value);
-           
-            }}
-          
-        >
-          <option value="">Select payment</option>
-          <option value="wallet">Wallet</option>
-          <option value="cash">Cash on delivery</option>
-          <option value="credit">Credit</option>
-          {/* Add more options as needed */}
-        </Select>
-      </FormControl>
-      
-    </ModalBody>
-    <ModalFooter>
-      <Button colorScheme="blue" onClick={()=>handlePay(selectedAddress,selectedPayment)}>
-        Pay
-      </Button>
-    </ModalFooter>
-  </ModalContent>
-</Modal>
-        </div>
+                    {(
+
+                      address.map((add) => (
+                        <option key={add} value={add}>
+                          {add}
+                        </option>
+                      ))
+                    )}
+                  </Select>
+                </FormControl>
+                <FormControl>
+                  <FormLabel>Select Payment Method</FormLabel>
+                  <Select
+                    value={selectedPayment}
+                    onChange={(e) => {
+                      setSelectedPayment(e.target.value);
+
+                    } }
+
+                  >
+                    <option value="">Select payment</option>
+                    <option value="wallet">Wallet</option>
+                    <option value="cash">Cash on delivery</option>
+                    <option value="credit">Credit</option>
+                    {/* Add more options as needed */}
+                  </Select>
+                </FormControl>
+
+              </ModalBody>
+              <ModalFooter>
+                <Button colorScheme="blue" onClick={() => handlePay(selectedAddress, selectedPayment)}>
+                  Pay
+                </Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
+        </div></>
     );
 }

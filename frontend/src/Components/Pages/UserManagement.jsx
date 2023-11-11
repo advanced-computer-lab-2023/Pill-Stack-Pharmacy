@@ -1,5 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from "react";
+import '../UI/button.css'
+import { useNavigate } from 'react-router-dom';
 import {
     Box,
     Button,
@@ -38,6 +40,7 @@ function UserManagement() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [mail, setMail] = useState("");
+    const navigate = useNavigate();
   
     // const [filtered , setFiltered] = useState([users]) 
     // const [filter, setFilter] = useState(['admin', 'doctor' ,'patient']);
@@ -70,7 +73,7 @@ function UserManagement() {
     const firstLetterUpper = (str) => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
-     
+    const back =()=>  navigate(-1);
     const handleRemove = async (id, role) => {
         try {
             const body = {
@@ -140,6 +143,7 @@ function UserManagement() {
     <>
         <Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
             <Text fontSize={'3xl'} color={'white'} >Manage Users</Text>
+            <button className="btn" onClick={back}>back</button>
         </Box>
         <Box  display={'flex'} justifyContent={'center'} alignItems={'center'} flexDirection={'column'} my={5}>
             {/* <HStack m={10}>

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Button, ButtonGroup, Center } from '@chakra-ui/react'
 import { Input } from '@chakra-ui/react'
-import { Text } from '@chakra-ui/react'
+import { Text , Box} from '@chakra-ui/react'
+import '../UI/button.css'
+import { useNavigate } from 'react-router-dom';
 import {
     Alert,
     AlertIcon,
@@ -20,6 +22,7 @@ export const AddMedicine = () => {
   });
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
 
   const handleInputChange = (e) => {
@@ -39,6 +42,7 @@ export const AddMedicine = () => {
       });
     }
   };
+  const back =()=>  navigate(-1);
 
   const handleImageUpload = (e) => {
     const imageFile = e.target.files[0];
@@ -94,56 +98,60 @@ export const AddMedicine = () => {
   };
 
   return (
-    <Center>
-    <div style={{margin:"50px", width:"50%"}}>
-      
-      <Text fontSize='3xl'>Add New Medicine</Text>
-      <form onSubmit={handleSubmit} style={{}}>
-        <div>
-          <label>Name:</label>
-          <Input variant='filled' type="text" name="name" onChange={handleInputChange} />
-        </div>
-        <div>
-          <label>Details:</label>
-          <Input  variant='filled'name="details" onChange={handleInputChange}/>
-        </div>
-        <div>
-          <label>Price:</label>
-          <Input  variant='filled'type="text" name="price" onChange={handleInputChange} />
-        </div>
-        <div>
-          <label>Quantity:</label>
-          <Input  variant='filled'type="text" name="quantity" onChange={handleInputChange} />
-        </div>
-        <div>
-          <label>Medicinal Use (comma-separated):</label>
-          <Input variant='filled' type="text" name="medicinalUse" onChange={handleInputChange} />
-        </div>
-        <div>
-          <label>Image:</label>
-          <Input variant='filled' type="file" name="image" accept="image/*" onChange={handleImageUpload} />
-        </div>
-        
-        <Button colorScheme='blue' type="submit" m={5}>Add Medicine</Button>
-      </form>
-      {successMessage && (
-       <Alert status='success'>
-       <AlertIcon />
-       Data uploaded to the server. Fire on!
-     </Alert>
-      )}
-      
-      {errorMessage && (
-       <Alert status='error'>
-         <AlertIcon />
-         There was an error processing your request
-       </Alert>
-      )}
-      
-      
+    <><Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
+      <Text fontSize={'3xl'} color={'white'}>Add New Medicine</Text>
+      <button className="btn" onClick={back}>back</button>
+    </Box><Center>
 
-    </div>
-    </Center>
+        <div style={{ margin: "50px", width: "50%" }}>
+
+          <Text fontSize='3xl'>Add New Medicine</Text>
+          <form onSubmit={handleSubmit} style={{}}>
+            <div>
+              <label>Name:</label>
+              <Input variant='filled' type="text" name="name" onChange={handleInputChange} />
+            </div>
+            <div>
+              <label>Details:</label>
+              <Input variant='filled' name="details" onChange={handleInputChange} />
+            </div>
+            <div>
+              <label>Price:</label>
+              <Input variant='filled' type="text" name="price" onChange={handleInputChange} />
+            </div>
+            <div>
+              <label>Quantity:</label>
+              <Input variant='filled' type="text" name="quantity" onChange={handleInputChange} />
+            </div>
+            <div>
+              <label>Medicinal Use (comma-separated):</label>
+              <Input variant='filled' type="text" name="medicinalUse" onChange={handleInputChange} />
+            </div>
+            <div>
+              <label>Image:</label>
+              <Input variant='filled' type="file" name="image" accept="image/*" onChange={handleImageUpload} />
+            </div>
+
+            <Button colorScheme='blue' type="submit" m={5}>Add Medicine</Button>
+          </form>
+          {successMessage && (
+            <Alert status='success'>
+              <AlertIcon />
+              Data uploaded to the server. Fire on!
+            </Alert>
+          )}
+
+          {errorMessage && (
+            <Alert status='error'>
+              <AlertIcon />
+              There was an error processing your request
+            </Alert>
+          )}
+
+
+
+        </div>
+      </Center></>
 
   );
 };
