@@ -46,14 +46,16 @@ module.exports.add_cart_item = async (req,res) => {
             {
                 let productItem = cart.items[itemIndex];
              
-                productItem.quantity += parseInt(quantity);
+                productItem.quantity += quan;
                 
 
 
                 cart.items[itemIndex] = productItem;
             }
             else {
-                cart.items.push({ productId, name, quan, price ,image});
+                console.log(quan);
+                cart.items.push({ productId, name, quantity:quan, price ,image});
+                console.log(cart);
             }
             cart.bill += quan*price;
             cart = await cart.save();
@@ -63,7 +65,7 @@ module.exports.add_cart_item = async (req,res) => {
             // no cart exists, create one
             const newCart = await cartModel.create({
                 userId,
-                items: [{ productId, name, quan, price,image }],
+                items: [{ productId, name, quantity:quan, price,image }],
                 bill: quan*price
             });
             return res.status(201).send(newCart);
