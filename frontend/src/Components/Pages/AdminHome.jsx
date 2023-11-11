@@ -1,22 +1,30 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import {  
-    Box, 
-    Stack,
-    Text,
-    Button,
-    Flex,
-    Spacer,
-    Avatar,
-    Badge,
-    Divider,
-    SimpleGrid,
-    Grid,
-
-} from "@chakra-ui/react"
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  FormControl,
+  FormLabel,
+  Input,
+  Box,
+  Flex,
+  Text,
+  Spacer,
+  Avatar,
+  Badge,
+  Button,
+  useDisclosure,
+  Divider,
+  SimpleGrid,
+} from "@chakra-ui/react";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping,
@@ -36,6 +44,10 @@ export const AdminHome = () => {
   const [cookies, removeCookie] = useCookies([]);
   const [username, setUsername] = useState("");
   const [fullUser, setFullUser] = useState("");
+  const { isOpen, onOpen, onClose } = useDisclosure(); 
+  const [isChangePassOpen, setisChangePassOpen] = useState(false);
+  const initialRef = useRef(null);
+  const finalRef = useRef(null);
   useEffect(() => {
     const verifyCookie = async () => {
       if (!cookies.token) {
@@ -57,6 +69,17 @@ export const AdminHome = () => {
     verifyCookie();
   }, [cookies, navigate, removeCookie]);
 
+
+  const openViewFamilyModal = () => {
+    onOpen(); // Use onOpen to open the modal
+    setisChangePassOpen(true);
+  };
+
+  const closeViewFamilyModal = () => {
+    onClose(); // Use onClose to close the modal
+    setisChangePassOpen(false);
+  };
+
   useEffect(() => {
     const fetchFullUser = async () => {
       if (username) {
@@ -67,6 +90,58 @@ export const AdminHome = () => {
     };
     fetchFullUser();
   }, [username]);
+
+  const handleChangePass = async () => {
+    const oldPassword = document.querySelector('#oldPassword').value;
+    const newPassword = document.querySelector('#newPassword').value;
+    const confirmNewPassword = document.querySelector('#confirmNewPassword').value;
+  
+    if (newPassword !== confirmNewPassword) {
+      toast.error('Passwords don\'t match', {
+        position: 'top-right',
+        autoClose: 3000,
+      });
+      return;
+    }
+  
+    const data = {
+      oldPassword: oldPassword,
+      newPassword: newPassword,
+    };
+  
+    try {
+      const response = await axios.post('http://localhost:8000/changePassword', data, {
+        withCredentials: true,
+      });
+  
+      if (response.status === 201) {
+        toast.success(response.data.message, {
+          position: 'top-right',
+          autoClose: 3000,
+        });
+      } else {
+        toast.error(response.data.message, {
+          position: 'top-right',
+          autoClose: 3000,
+        });
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+      // Log the detailed error response for debugging
+      if (error.response) {
+        console.error('Response Data:', error.response.data);
+        toast.error(error.response.data.message, {
+          position: 'top-right',
+          autoClose: 3000,
+        });
+      } else {
+        toast.error('An error occurred while processing your request', {
+          position: 'top-right',
+          autoClose: 3000,
+        });
+      }
+    }
+  };
   
 
   const Logout = () => {
@@ -80,6 +155,7 @@ export const AdminHome = () => {
         <Flex bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
           <Text fontSize={'3xl'} color={'white'} >Admin Home Welcome {username} </Text>
           <Spacer/>
+          <a onClick={openViewFamilyModal} style={{ color: 'white', marginRight: '10px', textDecoration: 'none', cursor: 'pointer', marginBottom: '2px', ':hover': { color: 'black' } }}>ChangePass</a>
           <Button onClick={Logout}>Logout <FontAwesomeIcon icon={faArrowRightFromBracket} style={{marginLeft:"7px"}}/></Button>
         </Flex>
         <Box  m={10}>
@@ -131,6 +207,41 @@ export const AdminHome = () => {
 
           {/* </Grid> */}
         </Box>
+        <Modal
+          initialFocusRef={initialRef}
+          finalFocusRef={finalRef}
+          isOpen={isOpen} 
+          onClose={closeViewFamilyModal} 
+        >
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Change Password</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody pb={6}>
+              <FormControl>
+                <FormLabel>Old Password</FormLabel>
+                <Input id="oldPassword" type="password" ref={initialRef} placeholder="Old Password" />
+              </FormControl>
+
+              <FormControl mt={4}>
+                <FormLabel>New Password</FormLabel>
+                <Input id="newPassword" type="password" placeholder="New Password" />
+              </FormControl>
+
+              <FormControl mt={4}>
+                <FormLabel>Confirm Password</FormLabel>
+                <Input id="confirmNewPassword" type="password" placeholder="Confirm New Password" />
+              </FormControl>
+            </ModalBody>
+
+            <ModalFooter>
+              <Button onClick={handleChangePass} colorScheme="blue" mr={3}>
+                Save
+              </Button>
+              <Button onClick={closeViewFamilyModal}>Cancel</Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
 
 
 
