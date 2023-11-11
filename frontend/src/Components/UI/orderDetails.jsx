@@ -5,11 +5,22 @@ import '../UI/button.css'
 import {
   Box,
   Text} from '@chakra-ui/react';
+  import {
+  Button,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+} from '@chakra-ui/react';
 
 const OrderDetailsPage = () => {
   const [orderDetailsArray, setOrderDetailsArray] = useState([]);
   const navigate = useNavigate();
   const back =()=>  navigate(-1);
+  const [cancelSuccess, setCancelSuccess] = useState(false); // State for success message
+
+
+
   useEffect(() => {
     const fetchOrderDetails = async () => {
       try {
@@ -43,7 +54,36 @@ const OrderDetailsPage = () => {
         return {};
     }
   };
+  const handleCancelOrder = async (orderId) => {
+    try {
+      const response = await axios.post('http://localhost:8000/order/cancel-order', {
+        orderId:orderId,
+      }, { withCredentials: true });
+  
+      if (response.status === 200 && response.data === 'Order cancelled successfully') {
+        // Order cancellation was successful, update the local state
+        setOrderDetailsArray((orders) => {
+          return orders.map((order) => {
+            if (order._id === orderId) {
+              return { ...order, Status: 'Cancelled' };
+            }
+            return order;
+          });
+        });
+        setCancelSuccess(true); // Show success message
 
+      } else if (response.status === 404) {
+        // Order not found, handle as needed
+        console.log('Order not found');
+      } else {
+        // Handle other errors
+        console.log('Order cancellation failed');
+      }
+    } catch (error) {
+      console.error('Error canceling order:', error);
+    }
+  };
+  
   return (
     <><Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
       <Text fontSize={'3xl'} color={'white'}>Order Details</Text>
@@ -79,7 +119,52 @@ const OrderDetailsPage = () => {
         ) : (
           <p>No orders found.</p>
         )}
-      </div></>
+      </div>
+      {cancelSuccess && (
+      <Alert status="success">
+        <AlertIcon />
+        <AlertTitle>Confirmation</AlertTitle>
+        <AlertDescription>Order was successfully Cancelled </AlertDescription>
+      </Alert>
+    )}
+      {orderDetailsArray.length > 0 ? (
+        orderDetailsArray.map((order, index) => (
+          <div key={index} style={{ ...styles.orderContainer, ...getStatusStyle(order.Status) }}>
+            <h2 style={styles.heading}>Order Details</h2>
+            <p>Status: {order.Status}</p>
+            <p>Address: {order.address}</p>
+            <p>Bill: {order.bill}</p>
+            <p>Date Added: {order.dateAdded}</p>
+
+            {order.Items && order.Items.length > 0 ? (
+              <>
+                <h3 style={styles.subHeading}>Items:</h3>
+                <div style={styles.itemsContainer}>
+                  {order.Items.map((item, itemIndex) => (
+                    <div key={itemIndex} style={styles.item}>
+                      <p>Product ID: {item.productId}</p>
+                      <p>Quantity: {item.quantity}</p>
+                    </div>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <p>No items in this order.</p>
+            )}
+            {order.Status === 'Processing' && (
+              <Button
+                onClick={() => handleCancelOrder(order._id)}
+                style={styles.cancelButton}
+              >
+                Cancel Order
+              </Button>
+            )}
+          </div>
+        ))
+      ) : (
+        <p>No orders found.</p>
+      )}
+    </>
   );
 };
 
@@ -116,5 +201,4 @@ const styles = {
 };
 
 export default OrderDetailsPage;
-
 

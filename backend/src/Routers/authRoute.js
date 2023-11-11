@@ -1,4 +1,6 @@
-const {  Login,PatientRegister,upload ,pharmaRegister,addAdmin, currentUser,Logout,ChangePassword,SendOTP,ResetPassword} = require('../Routes/authController')
+
+// const {  Login,PatientRegister,upload ,pharmaRegister,addAdmin, currentUser,Logout,ChangePassword,SendOTP,ResetPassword} = require('../Routes/authController')
+const {  Login,PatientRegister,upload ,pharmaRegister,addAdmin, currentUser,Logout,ChangePassword,SendOTP,ResetPassword,ResetPass,CheckOTP} = require('../Routes/authController')
 const {  userVerification } = require('../Middleware/AuthMiddleware')
 
 
@@ -21,6 +23,8 @@ router.post('/logout',userVerification,Logout);
 router.post('/changePassword',userVerification,ChangePassword);
 router.post('/sendOTP',SendOTP);
 router.post('/resetPassword',ResetPassword);
+router.post('/resetPass',ResetPass);
+router.post('/checkOTP',CheckOTP);
 
 router.route('/doc_register')
   .post(upload.fields([

@@ -163,7 +163,9 @@ module.exports.checkoutWallet = async (req,res) => {
 }
 module.exports.cancelOrder = async (req, res) => {
     try {
+        console.log('here');
         const orderId = req.body.orderId; 
+        console.log(orderId);
         const userId = req.user._id;
         const order = await orderModel.findById(orderId);
 

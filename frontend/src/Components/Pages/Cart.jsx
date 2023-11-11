@@ -5,6 +5,7 @@ import { Buffer } from 'buffer';
 import '../../index.css'
 import { useNavigate } from "react-router-dom";
 import '../UI/button.css'
+import { CircularProgress, CircularProgressLabel } from '@chakra-ui/react'
 import {
     Box,
     Text,
@@ -41,6 +42,7 @@ export const Cart = () => {
     const [isSucessPayment, setIsSucessPayment] = useState(null);
     const [isFailPayment, setIsFailPayment] = useState(null);
     const [isSucessMessage, setIsSucessMessage] = useState('');
+    const [isDeleting, setIsDeleting] = useState(false);
 
 
 
@@ -85,13 +87,17 @@ export const Cart = () => {
         // Send an API request to update the quantity of the item in the cart
         // You will need to implement this API on the server side
     };
-    const handleDelete= async (productId) => {
-       
+    const handleDelete= async (productId,itemPrice,itemQuantity) => {
+      setIsDeleting(true);
         try{
-        const response= axios.delete(`http://localhost:8000/cart/${productId}`, { withCredentials: true });
+      
+        const response= await axios.delete(`http://localhost:8000/cart/${productId}`, { withCredentials: true });
         setCart(response.data);
+        setIsDeleting(false);
         }catch (err) {
             console.log(err);
+            setIsDeleting(false);
+
         }
         // Send an API request to update the quantity of the item in the cart
         // You will need to implement this API on the server side
@@ -247,5 +253,6 @@ export const Cart = () => {
             </ModalContent>
           </Modal>
         </div></>
+
     );
 }
