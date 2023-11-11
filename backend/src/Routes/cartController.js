@@ -21,17 +21,17 @@ module.exports.get_cart_items = async (req,res) => {
 module.exports.add_cart_item = async (req,res) => {
     const userId = req.user._id;
     const { productId, quantity } = req.body;
-
     try{
         let cart = await cartModel.findOne({userId});
         let item = await medModel.findOne({_id: productId});
         if(!item){
             res.status(404).send('Item not found!')
         }
-        if(item.Quantity<quantity){
+        const quan=parseInt(quantity);
+        if(item.Quantity<quan){
             res.status(404).send('Not enough items in stock')
         }
-        item.Quantity=item.Quantity-quantity;
+        item.Quantity=item.Quantity-parseInt(quantity);
         item.save();
         const price = item.Price;
         const name = item.Name;
@@ -45,13 +45,17 @@ module.exports.add_cart_item = async (req,res) => {
             if(itemIndex > -1)
             {
                 let productItem = cart.items[itemIndex];
-                productItem.quantity += quantity;
+             
+                productItem.quantity += parseInt(quantity);
+                
+
+
                 cart.items[itemIndex] = productItem;
             }
             else {
-                cart.items.push({ productId, name, quantity, price ,image});
+                cart.items.push({ productId, name, quan, price ,image});
             }
-            cart.bill += quantity*price;
+            cart.bill += quan*price;
             cart = await cart.save();
             return res.status(201).send(cart);
         }
@@ -59,8 +63,8 @@ module.exports.add_cart_item = async (req,res) => {
             // no cart exists, create one
             const newCart = await cartModel.create({
                 userId,
-                items: [{ productId, name, quantity, price,image }],
-                bill: quantity*price
+                items: [{ productId, name, quan, price,image }],
+                bill: quan*price
             });
             return res.status(201).send(newCart);
         }
@@ -107,7 +111,7 @@ module.exports.update_cart_item = async (req,res) => {
         const price = item.Price;
         const name = item.Name;
         const image=item.Image;
-
+        const quan=parseInt(quantity);
         if(cart){
             // if cart exists for the user
             let itemIndex = cart.items.findIndex(p => p.productId == productId);
@@ -119,31 +123,30 @@ module.exports.update_cart_item = async (req,res) => {
             {
                 let productItem = cart.items[itemIndex];
                 ///edit quantity
-                console.log(quantity);
-                console.log(productItem.quantity)
-                if(quantity===productItem.quantity){
+               
+                if(quan===productItem.quantity){
                     console.log('here');
                     return res.status(201).send(cart);
                 } else{
-                if(quantity>productItem.quantity){ //adding to cart
-                    const addition=quantity-productItem.quantity
+                if(quan>productItem.quantity){ //adding to cart
+                    const addition=parseInt(quantity)-productItem.quantity
                     if(item.Quantity<addition){
                         res.status(404).send('not enough item in stock')
                     }else{
                         item.Quantity=item.Quantity-addition;
                     }
                 }else{
-                    const deduction=productItem.quantity-quantity;
+                    const deduction=productItem.quantity-parseInt(quantity);
                     item.Quantity=item.Quantity+deduction;
                 }
                 item.save();
             }
                 editedPrice=productItem.quantity*productItem.price;
-                productItem.quantity = quantity;
+                productItem.quantity = quan;
                 cart.items[itemIndex] = productItem;
             }
             cart.bill-=editedPrice;
-            cart.bill += quantity*price;
+            cart.bill += quan*price;
             cart = await cart.save();
             return res.status(201).send(cart);
         }
