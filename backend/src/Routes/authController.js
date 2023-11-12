@@ -173,7 +173,6 @@ module.exports.Login = async (req, res, next) => {
       if (!auth) {
         return res.json({message:'Incorrect password or email' }) 
       }
-      console.log(loggedIn);
        const token = createSecretToken(loggedIn._id,role);
        res.cookie("token", token, {
          withCredentials: true,
@@ -189,7 +188,6 @@ module.exports.Login = async (req, res, next) => {
   module.exports.currentUser=(req, res,next) => {
 
     const token = req.cookies.token
-    console.log(token);
     if (!token) {
       return res.json({ status: false })
     }
@@ -251,7 +249,6 @@ console.log(username);
       role='pharmacist';
     }else{
       loggedIn=admin;
-      console.log(loggedIn.Password);
 
       role='admin';
     }

@@ -13,6 +13,8 @@ export function MedicineList() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedMedicinalUse, setSelectedMedicinalUse] = useState('');
   const [medicinalUses, setMedicinalUses] = useState([]);
+  const [addToCartQueue, setAddToCartQueue] = useState([]);
+  const [processingQueue, setProcessingQueue] = useState(false); // Flag to prevent concurrent processing
   const navigate = useNavigate();
   const back =()=>  navigate(-1);
 
@@ -31,11 +33,48 @@ export function MedicineList() {
   }, []);
 
   const addToCart = async (medicine, quantity) => {
-    const response = await axios.post('http://localhost:8000/cart', {
-      productId: medicine._id,
-      quantity,
-    }, { withCredentials: true });
+    try {
+      const response = await axios.post('http://localhost:8000/cart', {
+        productId: medicine._id,
+        quantity,
+      }, { withCredentials: true });
+
+      // Process the response or handle any other logic here
+      setAddToCartQueue((prevQueue) => prevQueue.filter((item, index) => index !== 0));
+
+      // Now that the request is complete, check the queue for more items to process
+    } catch (error) {
+      // Handle errors here
+      // Also, make sure to handle the queue in case of errors
+      setAddToCartQueue((prevQueue) => prevQueue.filter((item, index) => index !== 0));
+
+    }
   };
+
+  // Use useEffect to process the queue when it changes
+  useEffect(() => {
+    const processQueue = async () => {
+      if (!processingQueue && addToCartQueue.length > 0) {
+        const nextCartItem = addToCartQueue[0];
+        const { medicine, quantity } = nextCartItem;
+
+        setProcessingQueue(true);
+
+        await addToCart(medicine, quantity);
+        //setAddToCartQueue((prevQueue) => prevQueue.slice(1)); // Remove the processed item
+        setProcessingQueue(false); // Release the processing flag
+      }
+    };
+
+    processQueue();
+  }, [addToCartQueue, processingQueue]);
+
+  const handleAddToCart = (medicine, quantity) => {
+    // Add the item to the queue
+    setAddToCartQueue((prevQueue) => [...prevQueue, { medicine, quantity }]);
+    // Start processing the queue if it's not already being processed
+  };
+
 
   // Filter the medicines based on the search term and selected medicinal use
   const filteredMedicines = medicines
@@ -74,7 +113,7 @@ export function MedicineList() {
           <MedicineItem
             key={medicine._id}
             medicine={medicine}
-            addToCart={addToCart}
+            addToCart={handleAddToCart}
           />
         ))}
       </SimpleGrid>

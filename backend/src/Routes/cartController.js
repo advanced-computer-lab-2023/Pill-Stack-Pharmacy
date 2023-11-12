@@ -25,14 +25,14 @@ module.exports.add_cart_item = async (req,res) => {
         let cart = await cartModel.findOne({userId});
         let item = await medModel.findOne({_id: productId});
         if(!item){
-            res.status(404).send('Item not found!')
+            return res.status(404).send('Item not found!')
         }
         const quan=parseInt(quantity);
         if(item.Quantity<quan){
-            res.status(404).send('Not enough items in stock')
+            return res.status(404).send('Not enough items in stock')
         }
         item.Quantity=item.Quantity-parseInt(quantity);
-        item.save();
+        await item.save();
         const price = item.Price;
         const name = item.Name;
         const image=item.Image;
@@ -53,9 +53,7 @@ module.exports.add_cart_item = async (req,res) => {
                 cart.items[itemIndex] = productItem;
             }
             else {
-                console.log(quan);
                 cart.items.push({ productId, name, quantity:quan, price ,image});
-                console.log(cart);
             }
             cart.bill += quan*price;
             cart = await cart.save();
@@ -70,6 +68,7 @@ module.exports.add_cart_item = async (req,res) => {
             });
             return res.status(201).send(newCart);
         }
+
       
     }
     catch (err) {
@@ -108,7 +107,7 @@ module.exports.update_cart_item = async (req,res) => {
         let cart = await cartModel.findOne({userId});
         let item = await medModel.findOne({_id: productId});
         if(!item){
-            res.status(404).send('Item not found!')
+           return  res.status(404).send('Item not found!')
         }
         const price = item.Price;
         const name = item.Name;
@@ -133,7 +132,7 @@ module.exports.update_cart_item = async (req,res) => {
                 if(quan>productItem.quantity){ //adding to cart
                     const addition=parseInt(quantity)-productItem.quantity
                     if(item.Quantity<addition){
-                        res.status(404).send('not enough item in stock')
+                       return res.status(404).send('not enough item in stock')
                     }else{
                         item.Quantity=item.Quantity-addition;
                     }
@@ -141,7 +140,7 @@ module.exports.update_cart_item = async (req,res) => {
                     const deduction=productItem.quantity-parseInt(quantity);
                     item.Quantity=item.Quantity+deduction;
                 }
-                item.save();
+                await item.save();
             }
                 editedPrice=productItem.quantity*productItem.price;
                 productItem.quantity = quan;

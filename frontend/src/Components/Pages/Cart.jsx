@@ -92,13 +92,19 @@ export const Cart = () => {
         try{
       
         const response= await axios.delete(`http://localhost:8000/cart/${productId}`, { withCredentials: true });
-        setCart(response.data);
-        setTimeout(() => {
-          setIsDeleting(false);
-        }, 1000);
+        if (response.status === 200) {
+          // Item was successfully deleted
+          setCart(response.data);
+
+        }
+
+      
         }catch (err) {
             console.log(err);
             setIsDeleting(false);
+
+        }finally{
+          setIsDeleting(false);
 
         }
         // Send an API request to update the quantity of the item in the cart
