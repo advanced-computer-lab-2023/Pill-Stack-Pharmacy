@@ -93,7 +93,9 @@ export const Cart = () => {
       
         const response= await axios.delete(`http://localhost:8000/cart/${productId}`, { withCredentials: true });
         setCart(response.data);
-        setIsDeleting(false);
+        setTimeout(() => {
+          setIsDeleting(false);
+        }, 1000);
         }catch (err) {
             console.log(err);
             setIsDeleting(false);
@@ -156,6 +158,9 @@ export const Cart = () => {
               <AlertDescription>{errorMessage}</AlertDescription>
             </Alert>
           )}
+           {isDeleting && (
+       <CircularProgress isIndeterminate value={80} />
+      ) }
           <h1>Your Cart</h1>
 
           {cart ? (
