@@ -31,7 +31,13 @@ import {
     Divider,
     useDisclosure,
     AbsoluteCenter,
-
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
 
 
 
@@ -43,12 +49,13 @@ import { Buffer } from 'buffer';
 
 function PharmacistReqs() {
     const [reqs, setReqs] = useState([]);
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen1, setIsOpen1] = useState(false);
     const [viewReq, setViewReq] = useState({});
     const [available,setAvailable]=useState(false);
     const [ID,SetID]=useState(false);
     const [Degree,SetDegree]=useState(false);
     const [License,SetLicense]=useState(false);
+    const { isOpen, onOpen, onClose } = useDisclosure()
     const navigate = useNavigate();
     // use effect to fetch data from backend
 
@@ -72,7 +79,7 @@ function PharmacistReqs() {
     }, [reqs]);
     const back =()=>  navigate(-1);
     
-    const onClose = () => setIsOpen(false);
+    const onClose1 = () => setIsOpen1(false);
     const handleClose= ()=> {
       SetDegree(false);
       SetLicense(false);
@@ -90,7 +97,7 @@ function PharmacistReqs() {
           }
         );
         setReqs(reqs.filter((req) => req._id !== viewReq._id));
-        onClose();
+        onClose1();
       } catch (error) {
         console.log(error);
       }
@@ -107,22 +114,25 @@ function PharmacistReqs() {
           }
         );
         setReqs(reqs.filter((req) => req._id !== viewReq._id));
-        onClose();
+        onClose1();
       } catch (error) {
         console.log(error);
       }
     };
     const handleView1 =async ()=>{
+      onOpen();
       SetID(true);
       SetDegree(false);
       SetLicense(false);
     };
     const handleView2 =async ()=>{
+      onOpen();
       SetID(false);
       SetDegree(true);
       SetLicense(false);
     };
     const handleView3 =async ()=>{
+      onOpen();
       SetID(false);
       SetDegree(false);
       SetLicense(true);
@@ -165,7 +175,7 @@ function PharmacistReqs() {
                                     <Center>
                                      <Button colorScheme='blue' variant='outline' size='sm'
                                         onClick={() => {
-                                            setIsOpen(true);
+                                            setIsOpen1(true);
                                             setViewReq(req);
                                         }}
                                      >
@@ -182,19 +192,24 @@ function PharmacistReqs() {
         
         </Center>
         <Center>
-        <div position='Center'>
-           <Box alignContent='Left' width= '750px' height= '1000px' padding= '10' overflow= 'hidden'>
-             {available &&ID&& <Button float='right' onClick={handleClose}>close</Button>}
+        <Modal onClose={onClose} size='xl' isOpen={isOpen}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Preview</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+          <Box   height= '700px' overflow= 'hidden'>
+             
              {available && ID && viewReq.IDDocument.contentType=="application/pdf" &&<iframe width='100%' height='100%'
               src={`data:${viewReq.IDDocument.contentType};base64, ${Buffer.from(viewReq.IDDocument.data).toString('base64')}`}  />}
              {available && ID  &&<img width='100%' height='100%'
               src={`data:${viewReq.IDDocument.contentType};base64, ${Buffer.from(viewReq.IDDocument.data).toString('base64')}`}  />}
-              {available && Degree&& <Button float='right' onClick={handleClose}>close</Button>}
+   
              {available && Degree && viewReq.pharmacyDegreeDocument.contentType=="application/pdf" &&<iframe width='100%' height='100%'
               src={`data:${viewReq.pharmacyDegreeDocument.contentType};base64, ${Buffer.from(viewReq.pharmacyDegreeDocument.data).toString('base64')}`}  />}
              {available && Degree  &&<img width='100%' height='100%'
               src={`data:${viewReq.pharmacyDegreeDocument.contentType};base64, ${Buffer.from(viewReq.pharmacyDegreeDocument.data).toString('base64')}`}  />}
-              {available && License&& <Button float='right' onClick={handleClose}>close</Button>}
+         
              {available && License && viewReq.workingLicenseDocument.contentType=="application/pdf" &&<iframe width='100%' height='100%'
               src={`data:${viewReq.workingLicenseDocument.contentType};base64, ${Buffer.from(viewReq.workingLicenseDocument.data).toString('base64')}`}  />}
              {available && License  &&<img width='100%' height='100%'
@@ -203,11 +218,16 @@ function PharmacistReqs() {
          </Box>
          <br></br>
          
-       </div>
+       </ModalBody>
+          <ModalFooter>
+            <Button onClick={onClose}>Close</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
        <br></br>
         </Center>
                     
-        <Drawer onClose={onClose} isOpen={isOpen} size={'sm'}>
+        <Drawer onClose={onClose1} isOpen={isOpen1} size={'sm'}>
         <DrawerOverlay />
         
         <DrawerContent>
