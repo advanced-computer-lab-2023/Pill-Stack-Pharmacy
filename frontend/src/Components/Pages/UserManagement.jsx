@@ -46,6 +46,9 @@ import { faUserDoctor,
     faUserCog
  } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom';
+import '../UI/button.css'
+
 
 
 function UserManagement() {
@@ -57,6 +60,8 @@ function UserManagement() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [selectedUser, setSelectedUser] = useState(null);
     const [update, setUpdate] = useState(false);
+    const navigate = useNavigate();
+    const back =()=>  navigate(-1);
 
     useEffect(() => {
         const getUsers = async () => {
@@ -150,6 +155,7 @@ function UserManagement() {
     <>
         <Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
             <Text fontSize={'3xl'} color={'white'} >Manage Users</Text>
+            <button className="btn" onClick={back}>back</button>
         </Box>
         <Box  display={'flex'} justifyContent={'center'} alignItems={'center'} flexDirection={'column'} my={5}>
             <Flex justifyContent={'end'} alignItems={'center'} m={10}>

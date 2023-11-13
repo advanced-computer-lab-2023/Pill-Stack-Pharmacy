@@ -28,6 +28,7 @@ const PharmacistRegisterPage = () => {
     pharmacyDegreeDocument: null,
     workingLicenseDocument: null
   });
+  const back =()=>  navigate(-1);
 
   const onChange = e => {
     const { name, type, value, files } = e.target;
@@ -90,6 +91,7 @@ const PharmacistRegisterPage = () => {
 
   return (
     <Box p={4}>
+        <Button onClick={back}>back</Button>
       <VStack spacing={4} as="form" onSubmit={onSubmit} width="100%" maxWidth="500px" margin="auto">
         {/* Form Controls */}
         {/* ... other form controls ... */}

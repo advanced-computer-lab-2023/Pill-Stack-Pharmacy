@@ -20,7 +20,7 @@ const PatientRegisterForm = () => {
     EmergencyContact_MobileNumber: '',
     EmergencyContact_Relation: '',
   });
-
+  const back =()=>  navigate(-1);
   const { username, name, email, password, dob, gender, mobile, EmergencyContact_Name, EmergencyContact_MobileNumber, EmergencyContact_Relation } = formData;
 
   const onChange = e => {
@@ -75,6 +75,7 @@ const PatientRegisterForm = () => {
 
   return (
     <Box p={4}>
+      <Button onClick={back}>back</Button>
       <form onSubmit={onSubmit}>
         <FormControl isRequired>
           <FormLabel>Username</FormLabel>
@@ -132,6 +133,8 @@ const PatientRegisterForm = () => {
         </FormControl>
 
         <Button mt={4} colorScheme="teal" type="submit">Register</Button>
+      
+        
       </form>
     </Box>
   );

@@ -114,6 +114,14 @@ const OrderDetailsPage = () => {
               ) : (
                 <p>No items in this order.</p>
               )}
+              {order.Status === 'Processing' && (
+              <Button
+                onClick={() => handleCancelOrder(order._id)}
+                style={styles.cancelButton}
+              >
+                Cancel Order
+              </Button>
+            )}
             </div>
           ))
         ) : (
@@ -127,7 +135,7 @@ const OrderDetailsPage = () => {
         <AlertDescription>Order was successfully Cancelled </AlertDescription>
       </Alert>
     )}
-      {orderDetailsArray.length > 0 ? (
+      {/* {orderDetailsArray.length > 0 ? (
         orderDetailsArray.map((order, index) => (
           <div key={index} style={{ ...styles.orderContainer, ...getStatusStyle(order.Status) }}>
             <h2 style={styles.heading}>Order Details</h2>
@@ -151,19 +159,12 @@ const OrderDetailsPage = () => {
             ) : (
               <p>No items in this order.</p>
             )}
-            {order.Status === 'Processing' && (
-              <Button
-                onClick={() => handleCancelOrder(order._id)}
-                style={styles.cancelButton}
-              >
-                Cancel Order
-              </Button>
-            )}
+            
           </div>
         ))
       ) : (
         <p>No orders found.</p>
-      )}
+      )} */}
     </>
   );
 };

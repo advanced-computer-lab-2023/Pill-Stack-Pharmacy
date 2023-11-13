@@ -293,7 +293,7 @@ function PharmacistReqs() {
             </AbsoluteCenter>
             </Box>
             <Text fontSize='3xl'>  <Center> {viewReq.EducationalBackground} </Center></Text>
-            {<Button onClick={handleView1}>View ID Doc</Button>}
+            <Button onClick={handleView1}>View ID Doc</Button>
             <Button onClick={handleView2}>View Degree</Button>
             <Button onClick={handleView3}>View License</Button>
             
