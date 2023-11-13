@@ -22,6 +22,7 @@ export const AddMedicine = () => {
   });
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
 
@@ -53,13 +54,10 @@ export const AddMedicine = () => {
   };
 
   const handleSubmit = async (e) => {
+    setErrorMessage('');
+    setSuccessMessage('');
     e.preventDefault();
     const formData = new FormData();
-    if (!medicineData.name || !medicineData.price) {
-        setSuccessMessage('');
-        setErrorMessage('Please fill in all required fields.');
-        return; // Exit the function to prevent the fetch request
-      }
     formData.append('name', medicineData.name);
     formData.append('details', medicineData.details);
     formData.append('price', medicineData.price);
@@ -94,6 +92,9 @@ export const AddMedicine = () => {
         setErrorMessage('server error');
 
       console.error('Error adding medicine:', error);
+    }finally {
+      console.log('isSubfalse')
+      setIsSubmitting(false); // Set isSubmitting to false to enable the button after the request is done
     }
   };
 
@@ -132,8 +133,9 @@ export const AddMedicine = () => {
               <Input variant='filled' type="file" name="image" accept="image/*" onChange={handleImageUpload} />
             </div>
 
-            <Button colorScheme='blue' type="submit" m={5}>Add Medicine</Button>
-          </form>
+            <Button colorScheme='blue' type="submit" m={5} disabled={isSubmitting}>
+  {isSubmitting ? 'Submitting...' : 'Add Medicine'}
+</Button>          </form>
           {successMessage && (
             <Alert status='success'>
               <AlertIcon />
@@ -144,7 +146,7 @@ export const AddMedicine = () => {
           {errorMessage && (
             <Alert status='error'>
               <AlertIcon />
-              There was an error processing your request
+              {errorMessage}
             </Alert>
           )}
 
