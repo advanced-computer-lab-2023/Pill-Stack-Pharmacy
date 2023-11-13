@@ -61,7 +61,7 @@ export function MedicineListwithSales() {
 
   return (
     <><Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
-      <Text fontSize={'3xl'} color={'white'}>Available Medicines</Text>
+      <Text fontSize={'3xl'} color={'white'}>Stock Management</Text>
       <button className="btn" onClick={back}>back</button>
     </Box><VStack align="start" spacing={6} p={6} w="100%">
 

@@ -4,7 +4,12 @@ import { useParams } from 'react-router-dom';
 import { loadStripe } from "@stripe/stripe-js";
 import {Elements} from "@stripe/react-stripe-js"
 import CheckoutForm from "../UI/Payment";
-
+import { useNavigate } from "react-router-dom";
+import '../UI/button.css'
+import {
+  Box,
+  Text}
+  from '@chakra-ui/react';
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
 // This is your test publishable API key.
@@ -15,6 +20,8 @@ export default function CreditPayment() {
 
     const[stripePromise,setStripePromise]=useState(null);
     const [clientSecret, setClientSecret] = useState("");
+    const navigate = useNavigate();
+    const back =()=>  navigate(-1);
 
     useEffect(() => {
         // Fetch publishableKey using Axios
@@ -49,6 +56,10 @@ export default function CreditPayment() {
 
       return (
         <>
+        <Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
+        <Text fontSize={'3xl'} color={'white'}>Credit Payment</Text>
+        <button className="btn" onClick={back}>back</button>
+      </Box>
           <h1>React Stripe and the Payment Element</h1>
           {clientSecret && stripePromise && (
             <Elements stripe={stripePromise} options={{ clientSecret }}>

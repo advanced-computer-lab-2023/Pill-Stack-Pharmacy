@@ -1,10 +1,17 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
+import '../UI/button.css'
+import {
+  Box,
+  Text}
+  from '@chakra-ui/react';
 export default function Completion() {
   // Use the useParams hook to access the route parameters
   const { address,intentid } = useParams();
+  const navigate = useNavigate();
+  const back =()=>  navigate("/home");
 
   useEffect(() => {
     // Perform a POST request to the backend here, if needed
@@ -26,7 +33,10 @@ export default function Completion() {
 
   return (
     <div>
-      <h1>Appointment booked successfully</h1>
+      <Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
+        <Text fontSize={'3xl'} color={'white'}>Appointment booked successfully</Text>
+        <button className="btn" onClick={back}>Home</button>
+      </Box>
     </div>
   );
 }
