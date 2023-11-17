@@ -3,6 +3,7 @@ const cartModel = require('../Models/Cart');
 const userModel = require('../Models/patient');
 const medModel = require('../Models/Medicine.js');
 const paymentIntentModel=require('../Models/PaymentIntent');
+const PaymentIntent = require('../Models/PaymentIntent');
 const stripe = require('stripe')(process.env.SECRETKEY);
 
 module.exports.get_orders = async (req,res) => {
@@ -25,8 +26,9 @@ module.exports.checkoutCredit = async (req,res) => {
             const paymentIntent = await stripe.paymentIntents.create({
                 amount: cart.bill*100,
                 currency: "usd",
-                payment_method_types: ['card'],  // Specify the payment method(s) you want to use
-
+                automatic_payment_methods: {
+                    enabled: true,
+                  },
               });
               const intent=await paymentIntentModel.create({ intentId:paymentIntent.id})
 
