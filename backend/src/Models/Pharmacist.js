@@ -51,7 +51,13 @@ const pharmacistSchema = new Schema({
       data: Buffer,
       contentType: String,
     
-    }
+    }, WalletBalance:{
+      type: Number,
+      default: 0,
+    },  Notifications:[{
+      type:String
+    }]
+    
     
     }, { timestamps: true});
     pharmacistSchema.pre('save', function(next) {

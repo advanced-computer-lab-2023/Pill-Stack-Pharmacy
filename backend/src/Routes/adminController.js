@@ -92,7 +92,7 @@ const PharmacistDetailsResults = async (req, res) => {
   async function getAvailableMedicines(req, res) {
     try {
       // Use Mongoose to find medicines with quantity > 0
-      const availableMedicines = await medModel.find({ Quantity: { $gt: 0 } });
+      const availableMedicines = await medModel.find({  });
       res.send( availableMedicines );
     } catch (error) {
       console.error('Error fetching available medicines:', error);

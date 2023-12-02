@@ -126,7 +126,7 @@ export const Home = () => {
         return;
       }
       // Send the address to the backend
-      const newAddress = `${addressName}, ${streetName}, ${buildingNumber}, ${floor}, ${apartment}`;
+      const newAddress = `${addressName},${streetName},${buildingNumber},${floor},${apartment}`.replaceAll(' ', '');
       const response = await axios.post(
         `http://localhost:8000/patient/addDeliveryAddress/${username}`,
         { address:newAddress },

@@ -34,7 +34,7 @@ export default function Completion() {
   return (
     <div>
       <Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
-        <Text fontSize={'3xl'} color={'white'}>Appointment booked successfully</Text>
+        <Text fontSize={'3xl'} color={'white'}>Order placed successfully</Text>
         <button className="btn" onClick={back}>Home</button>
       </Box>
     </div>
