@@ -1,6 +1,6 @@
 const express = require('express');
 let router = express.Router();
-const {filterMedicinesByMedicinalUse, searchMedicinePat,getAddresses,addDeliveryAddress, getFullInfo,orderDetails,generateRoom,joinChatRoomPatient,getDoctorUsername,sendMessage} = require('../Routes/userController');
+const {getDoctors,filterMedicinesByMedicinalUse, searchMedicinePat,getAddresses,addDeliveryAddress, getFullInfo,orderDetails,generateRoom,joinChatRoomPatient,getDoctorUsername,sendMessage} = require('../Routes/userController');
 const {getAvailableMedicines} = require('../Routes/adminController.js');
 const { userVerification } = require('../Middleware/AuthMiddleware');
 

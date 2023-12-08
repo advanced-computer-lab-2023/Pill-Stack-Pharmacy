@@ -79,10 +79,7 @@ const port = process.env.PORT || "8000";
 
 // configurations
 // Mongo DB
-mongoose.connect(MongoURI, {
-useNewUrlParser: true,
-useUnifiedTopology: true,
-dbName: "pharmacy"})
+mongoose.connect(MongoURI)
 .then(()=>{
   console.log("MongoDB is now connected!")
 // Starting server

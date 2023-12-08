@@ -142,14 +142,14 @@ module.exports.checkoutWallet = async (req,res) => {
         let cart = await cartModel.findOne({userId});
         let user = await userModel.findOne({_id: userId});
         let address=req.body.address;
-        const wallet=user.Wallet;
+        const wallet=user.WalletBalance;
         if(cart){
             if(wallet<cart.bill){
                 console.log('heree');
                 res.send("You do not have enough money in wallet");
 
             }else{
-                   user.Wallet-=cart.bill;
+                   user.WalletBalance-=cart.bill;
                    user.save();
                    const pharms=await Pharmacist.find({});
                    console.log(pharms);
@@ -216,7 +216,7 @@ module.exports.cancelOrder = async (req, res) => {
                 case 'wallet':
                     // Refund amount to user's wallet
                     const user = await userModel.findOne({ _id: userId });
-                    user.Wallet += order.bill;
+                    user.WalletBalance += order.bill;
                     await user.save();
                     break;
     

@@ -243,7 +243,7 @@ export const Home = () => {
               <Spacer/>
               <Text >Wallet: </Text>
               <Text m={2} fontSize={'3xl'}> 
-                $ {fullUser.Wallet}
+                $ {fullUser.WalletBalance}
               </Text>
           </Flex>
           <Divider orientation="horizontal" />
