@@ -20,7 +20,11 @@ import PasswordReset from './Components/Pages/PasswordReset.jsx';
 import PharmacistRegisterPage from './Components/Pages/PharmacistRegisterPage';
 import PatientRegisterForm from './Components/Pages/PatientRegisterForm';
 import OrderDetails from './Components/UI/orderDetails';
+import ChatMessages from './Components/Pages/chatMessagesPatient.jsx';
+import ChatMessagesDoctor from './Components/Pages/chatMessagesDoctor.jsx';
 
+import io from 'socket.io-client';
+const socket = io.connect("http://localhost:8000");
 
 function App() {
   
@@ -59,6 +63,8 @@ function App() {
         <Route path="/pharmacist-register" element={<PharmacistRegisterPage />} />
         <Route path="/patient-register" element={<PatientRegisterForm />} />
         <Route path="/orderdetails" element={<OrderDetails/>} />
+        <Route path="/chatwithdoctor/:username" element={<ChatMessages socket={socket} />} />
+        <Route path="/chatwithpatient/:username" element={<ChatMessagesDoctor socket={socket} />} />
 
 
 

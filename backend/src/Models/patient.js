@@ -2,6 +2,23 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require("bcryptjs");
 
+const chatSchema = new mongoose.Schema({
+  room: {
+    type: String,
+    unique: true,
+  },
+  doctorUsername: String,
+  username:String,
+  messages: [
+    {
+      sender: String,
+      recipient: String,
+      message: String,
+      timestamp: { type: String,
+        default: `${new Date(Date.now()).getHours()}:${new Date(Date.now()).getMinutes()}`, },
+    },
+  ],
+});
 
 const patientSchema = new Schema({
 
@@ -49,6 +66,7 @@ const patientSchema = new Schema({
         type:Number,
         default: 0
       },
+      chatRooms: [chatSchema],
       DeliveryAddress:[{
         type:String
       }]    

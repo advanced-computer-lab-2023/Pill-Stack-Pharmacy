@@ -2,6 +2,7 @@ const pharmaReqModel = require('../Models/Pharmacist_Request.js');
 const medModel = require('../Models/Medicine.js');
 const Pharmacist = require('../Models/Pharmacist'); 
 const bcrypt = require('bcryptjs');
+const patientModel = require('../Models/patient.js')
 
 
 const multer = require('multer');
@@ -177,6 +178,128 @@ const getFullInfo = async (req, res) => {
   }
 };
 
+const generateRoom = () => {
+  return Math.random().toString(36).substring(2, 15);
+};
+const join = async (req, res) => {
+  try {
+    const { doctorUsername, username } = req.params;
+
+    const patient = await patientModel.findOne({ Username: username });
+
+    if (!patient) {
+
+      return res.status(404).json({ message: 'doctor not found' });
+    }
+
+    // Check if the patient already has a chat room with this doctor
+    const existingChatRoom = patient.chatRooms.find(
+      (room) => room.doctorUsername === doctorUsername && room.username === username
+    );
+
+    if (existingChatRoom) {
+      // If a chat room already exists, return the existing room and messages
+      const { room, messages } = existingChatRoom;
+      console.log("mariam")
+      console.log(room)
+
+      res.status(200).json({ room, messages });
+    } else {
+      // Otherwise, create a new chat room
+      const room = generateRoom();
+
+      // Initialize an empty array for messages
+      const messages = [];
+
+      // Store the room information and messages for the doctor-patient chat
+      patient.chatRooms.push({
+        room,
+        doctorUsername,
+        username,
+        messages,
+      });
+
+      await patient.save();
+ 
+      res.status(200).json({ room, messages });
+    }
+  } catch (error) {
+    console.error('Error joining chat room for patient:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+
+
+const getPatientUsername = async (req, res) => {
+  try {
+    // Use the find method to get all patient documents and select only the 'Username' field
+    const usernames = await patientModel.find({}, 'Username');
+    console.log("111")
+    // Check if the result is empty
+    if (!usernames || usernames.length === 0) {
+      return res.status(404).json({ message: 'No patients found' });
+    }
+
+    // Extract the usernames from the result and send them in the response
+    const patientUsernames = usernames.map(patient => patient.Username);
+    
+    return res.status(200).json({ patientUsernames });
+  } catch (error) {
+    console.error('Error retrieving patient usernames:', error);
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+const sendMessage = async (req, res, socket) => {
+  console.log("maaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+  try {
+    // Find the chat room based on doctorUsername
+    const patientUsername = req.params.patientUsername;
+    const doctorUsername = req.params.doctorUsername;
+    const message = req.body.message;
+    // Find the user with the specified doctor in their chatRooms
+    const user = await patientModel.findOne({
+     'Username': patientUsername,
+     'chatRooms.doctorUsername': doctorUsername
+   });
+    console.log(user +"ss")
+    if (user) {
+      // Find the specific room within the chatRooms array
+      const specificRoom = user.chatRooms.find(room => room.doctorUsername === doctorUsername);
+
+      if (specificRoom) {
+        // Create the message object
+        const messageData = {
+          sender: doctorUsername,
+          recipient: patientUsername,
+          message: message,
+        };
+
+        // Add the message to the specific room
+        specificRoom.messages.push(messageData);
+        // Save changes to the user's database
+        await user.save();
+
+        // Emit the message to other users in the chat room
+        const room = specificRoom.room;
+        console.log(room)
+        console.log(message)
+
+        return { room, message: messageData };
+      } else {
+        console.error('Chat room not found for the selected doctor');
+        return null;
+      }
+    } else {
+      console.error('User not found for the selected doctor');
+      return null;
+    }
+  } catch (error) {
+    console.error('Error sending message:', error);
+    throw error;
+  }
+};
 
 
 
@@ -189,5 +312,5 @@ module.exports = {
     filterMedicinesByMedicinalUse,
     editMedicineResults,
     getMedSQ,
-    getFullInfo
+    getFullInfo,generateRoom,join,getPatientUsername,sendMessage
 };

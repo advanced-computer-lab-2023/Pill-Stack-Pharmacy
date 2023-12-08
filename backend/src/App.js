@@ -12,6 +12,10 @@ const {addAdmin,viewPatientDet, PatientDetailsResults} = require("./Routes/admin
 const cors = require('cors');
 var cookies = require("cookie-parser");
 
+const http = require("http");
+const{Server} = require("socket.io");
+const fs = require('fs');
+
 //App variables
 const app = express();
 const path = require("path");
@@ -41,7 +45,34 @@ const corsOptions = {
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 };
+const server = http.createServer(app);
+
 app.use(cors(corsOptions));
+
+const io = new Server(server,{
+cors: {
+  origin: "http://localhost:3000",
+  methods: ["GET","POST"],
+},
+});
+io.on("connection", (socket)=>{
+console.log(`user Connected: ${socket.id}`);
+
+socket.on("join_room",(data)=>{
+  socket.join(data);
+  console.log(`user with ID: ${socket.id} joined room: ${data}`)
+
+});
+
+socket.on("send_message",(data=>{
+  socket.to(data.room).emit("receive_message",data);
+}));
+
+
+socket.on("disconnect",()=>{
+  console.log("User disconnected", socket.id);
+  });
+});
 
 const port = process.env.PORT || "8000";
 
@@ -55,7 +86,7 @@ dbName: "pharmacy"})
 .then(()=>{
   console.log("MongoDB is now connected!")
 // Starting server
- app.listen(port, () => {
+ server.listen(port, () => {
     console.log(`Listening to requests on http://localhost:${port}`);
   })
 })
