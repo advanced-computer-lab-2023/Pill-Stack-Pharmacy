@@ -120,6 +120,8 @@ export const Cart = () => {
                 setIsSucessPayment(true);
                 setIsModalOpen(false);
                 setCart(null);
+                navigate('/completion');
+
 
             }else{
                 if(selectedPayment==='wallet'){
@@ -132,6 +134,8 @@ export const Cart = () => {
                         setIsSucessPayment(true);
                         setIsModalOpen(false);
                         setCart(null);
+                        navigate('/completion');
+
                     }
 
                 }else{

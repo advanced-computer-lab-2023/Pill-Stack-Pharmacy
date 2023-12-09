@@ -14,6 +14,8 @@ import{MedicineListwithSales} from "./Components/UI/MedicineListWithSales";
 import {AddMedicine} from "./Components/UI/AddMed";
 import {Cart} from "./Components/Pages/Cart";
 import  Completion from "./Components/Pages/Completion";
+import  Completion2 from "./Components/Pages/Completion2";
+
 import  CreditPayment from "./Components/Pages/CreditPayment";
 import ForgotPassword from './Components/Pages/ForgotPassword.jsx';
 import PasswordReset from './Components/Pages/PasswordReset.jsx';
@@ -58,6 +60,7 @@ function App() {
         <Route path="/cart" element={<Cart/>} />
         <Route path="/home/creditPayment/:address" element={<CreditPayment />} />
         <Route path="/completion/:address/:intentid" element={<Completion />} />
+        <Route path="/completion" element={<Completion2 />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/PasswordReset" element={<PasswordReset/>} />
         <Route path="/pharmacist-register" element={<PharmacistRegisterPage />} />

@@ -15,6 +15,10 @@ const OrderSchema = new Schema({
             required: true,
             min: [1, 'Quantity can not be less then 1.']
         },
+        image: {
+            data: Buffer, // Store the filename as a string
+            contentType: String,
+          },
         price: Number
     }],
     bill: {

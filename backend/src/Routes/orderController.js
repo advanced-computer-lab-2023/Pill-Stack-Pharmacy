@@ -11,6 +11,16 @@ module.exports.get_orders = async (req,res) => {
     const userId = req.user._id;
     orderModel.find({userId}).sort({date:-1}).then(orders => res.json(orders));
 }
+module.exports.get_recent_order = async (req, res) => {
+    const userId = req.user._id;
+    orderModel
+      .findOne({ userId })
+      .sort({ date_added: -1 }) // Sort by date in descending order to get the most recent order first
+      .then((order) => {
+        res.send(order);
+       })
+      .catch((err) => res.status(500).json({ error: err.message }));
+  };
 module.exports.config=(req,res)=>{
     console.log('here')
     res.send({

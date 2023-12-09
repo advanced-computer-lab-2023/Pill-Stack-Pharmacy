@@ -2,7 +2,6 @@ import React, { useEffect,useState } from 'react';
 import "../../comp.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import '../UI/button.css'
 import { Buffer } from 'buffer';
@@ -26,7 +25,6 @@ import {
   from '@chakra-ui/react';
 export default function Completion() {
   // Use the useParams hook to access the route parameters
-  const { address,intentid } = useParams();
   const [order, setOrder] = useState(null);
 
   const navigate = useNavigate();
@@ -37,19 +35,15 @@ export default function Completion() {
     // You can use libraries like Axios or the built-in Fetch API
     // Example with Axios:
     
-    axios.post('http://localhost:8000/order/orderCredit/confirm', {
-      address:address,
-      intentId:intentid,
-    }, { withCredentials: true })
+    axios.get('http://localhost:8000/order/recent', { withCredentials: true })
       .then(response => {
-        console.log(response.data);
         setOrder(response.data);
         // Do additional handling here
       })
       .catch(error => {
         console.error(error);
       });
-  }, [address]);
+  }, []);
 
    
 	return (
