@@ -18,7 +18,7 @@ export function MedicineListControl() {
 
   useEffect(() => {
     // Fetch medicines and their medicinal uses from your server's API endpoint
-    fetch('http://localhost:8000/admin/availableMedicines')
+    fetch('http://localhost:8000/admin/availableMedicinesPH')
       .then((response) => response.json())
       .then((data) => setMedicines(data))
       .catch((error) => console.error('Error fetching medicine data:', error));
@@ -70,15 +70,14 @@ export function MedicineListControl() {
 
   // Filter the medicines based on the search term and selected medicinal use
   const filteredMedicines = medicines
-    .filter((medicine) =>
-      medicine.Name.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    .filter(
-      (medicine) =>
-        selectedMedicinalUse === '' ||
-        medicine.MedicinalUse.includes(selectedMedicinalUse)
-    );
-
+  .filter((medicine) =>
+    medicine.Name.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+  .filter(
+    (medicine) =>
+      selectedMedicinalUse === '' ||
+      medicine.MedicinalUse.includes(selectedMedicinalUse)
+  );
   return (
     <>
       <Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
@@ -105,7 +104,7 @@ export function MedicineListControl() {
           mb={4}
         />
         <SimpleGrid columns={3} spacing={10}>
-          {filteredMedicines.map((medicine) => (
+          {medicines.map((medicine) => (
             <Box
               key={medicine._id}
               p={4}
@@ -118,25 +117,25 @@ export function MedicineListControl() {
               {/* Toggle Icon based on medicine status */}
               {medicine.status === 'Available' ? (
                 <UnlockIcon
-                  size="xs" // Set the size of the icon to extra small
-                  color="gray.500" // Set the initial color to gray
-                  _hover={{ color: 'cyan.500' }} // Set the hover color to cyan
+                  size="xs"
+                  color="gray.500"
+                  _hover={{ color: 'cyan.500' }}
                   position="absolute"
                   top={2}
                   right={2}
-                  style={{ width: '20px', cursor: 'pointer' }} // Set cursor to pointer on hover
+                  style={{ width: '20px', cursor: 'pointer' }}
                   zIndex={1}
                   onClick={() => changeMedicineStatus(medicine._id)}
                 />
               ) : (
                 <LockIcon
-                  size="xs" // Set the size of the icon to extra small
-                  color="gray.500" // Set the initial color to gray
-                  _hover={{ color: 'cyan.500' }} // Set the hover color to cyan
+                  size="xs"
+                  color="gray.500"
+                  _hover={{ color: 'cyan.500' }}
                   position="absolute"
                   top={2}
                   right={2}
-                  style={{ width: '20px', cursor: 'pointer' }} // Set cursor to pointer on hover
+                  style={{ width: '20px', cursor: 'pointer' }}
                   zIndex={1}
                   onClick={() => changeMedicineStatus(medicine._id)}
                 />
@@ -161,6 +160,5 @@ export function MedicineListControl() {
       </Box>
     </>
   );
-}
-
+}  
 export default MedicineListControl;

@@ -92,6 +92,18 @@ const PharmacistDetailsResults = async (req, res) => {
   async function getAvailableMedicines(req, res) {
     try {
       // Use Mongoose to find medicines with quantity > 0
+         const availableMedicines = await medModel.find({ status: 'Available' });
+
+      res.send( availableMedicines );
+    } catch (error) {
+      console.error('Error fetching available medicines:', error);
+      throw error;
+    }
+  }
+
+  async function getAvailableMedicinesPH(req, res) {
+    try {
+      // Use Mongoose to find medicines with quantity > 0
       const availableMedicines = await medModel.find({  });
       res.send( availableMedicines );
     } catch (error) {
@@ -266,7 +278,7 @@ const getFullInfo = async (req, res) => {
 
 module.exports = {
     viewAllApp,viewPharmacistApp,getAvailableMedicines,viewPatientDet
-    ,PatientDetailsResults,removeUser,searchMedicineA,filterMedicinesByMedicinalUse,
+    ,PatientDetailsResults,removeUser,searchMedicineA,filterMedicinesByMedicinalUse,getAvailableMedicinesPH,
     PharmacistDetailsResults, viewPharmacistDet, getAllUsers,
     getMedicinalUse, acceptRegRequest, rejectRegRequest, getFullInfo 
 };

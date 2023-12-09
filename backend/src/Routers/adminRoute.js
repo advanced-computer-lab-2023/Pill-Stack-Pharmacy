@@ -1,7 +1,7 @@
 const express = require('express');
 let router = express.Router();
 const{ getMedSQ}=require('../Routes/pharmacistController.js');
-const {viewPharmacistApp,getAvailableMedicines,
+const {viewPharmacistApp,getAvailableMedicines,getAvailableMedicinesPH,
    searchMedicineA,viewAllApp,viewPatientDet, 
    PatientDetailsResults,viewPharmacistDet,
    PharmacistDetailsResults,removeUser, 
@@ -29,6 +29,7 @@ router.route('/removeUser')
 
 router.get('/availableMedicines.ejs',getAvailableMedicines);
 router.get('/availableMedicines',getAvailableMedicines);
+router.get('/availableMedicinesPH',getAvailableMedicinesPH);
 
 router.get('/MedicinalUse',getMedicinalUse);
 
