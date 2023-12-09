@@ -242,9 +242,9 @@ export const Home = () => {
               </Box>
               <Spacer/>
               <Text >Wallet: </Text>
-              <Text m={2} fontSize={'3xl'}> 
-                $ {fullUser.WalletBalance}
-              </Text>
+              {fullUser.WalletBalance && (<Text m={2} fontSize={'3xl'}> 
+                $ {fullUser.WalletBalance.toFixed(2)}
+              </Text>)}
           </Flex>
           <Divider orientation="horizontal" />
           <Grid templateColumns='repeat(2, 1fr)'>

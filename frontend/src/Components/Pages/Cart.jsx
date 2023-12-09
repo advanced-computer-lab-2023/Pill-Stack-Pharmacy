@@ -198,7 +198,19 @@ export const Cart = () => {
           )}
           {cart && (
             <div className="cart-summary">
-              <p>Total Bill: ${cart.bill}</p>
+              
+              {cart.discount > 0 ? (
+                  <div>
+                    <p>Subtotal: ${cart.bill}</p>
+                    <p>Discount: ${(cart.discount * cart.bill).toFixed(2)}</p>
+                    <p>Total: ${cart.bill - cart.discount*cart.bill}</p>
+                  </div>
+                ) : (
+                  // JSX content when discount <= 0
+                  <div>
+                    <p>Total: ${cart.bill}</p>
+                  </div>
+    )}
               <button onClick={() => handleCheckout()} className="checkout-button">Checkout</button>
             </div>
           )}

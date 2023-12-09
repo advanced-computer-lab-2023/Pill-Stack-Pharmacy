@@ -1,5 +1,6 @@
 const cartModel = require('../Models/Cart.js');
 const medModel = require('../Models/Medicine.js');
+const userModel = require('../Models/patient.js');
 module.exports.get_cart_items = async (req,res) => {
     const userId = req.user._id;
     try{
@@ -60,11 +61,38 @@ module.exports.add_cart_item = async (req,res) => {
             return res.status(201).send(cart);
         }
         else{
+            //find if user has discount 
+
+            const user=await userModel.findById(userId).select('healthPackage');
+            const healthPackage=user.healthPackage;
+            let discount;
+            if(healthPackage){
+                for (const pack of healthPackage) {
+                    if (pack.Status === 'Subscribed') {
+                      const pharmdiscount = pack.Pharmacy_Discount / 100;
+                      const date = new Date();
+              
+                      if (pack.Renewl_Date >= date) {
+                        if (pack.Owner) {
+                            console.log('here1')
+
+                          discount=pharmdiscount;
+                        } 
+                      }
+                    }
+                  }
+            }
+            if(!discount){
+                console.log('here')
+                discount=0;
+            }
+
             // no cart exists, create one
             const newCart = await cartModel.create({
                 userId,
                 items: [{ productId, name, quantity:quan, price,image }],
-                bill: quan*price
+                bill: quan*price,
+                discount:discount
             });
             return res.status(201).send(newCart);
         }

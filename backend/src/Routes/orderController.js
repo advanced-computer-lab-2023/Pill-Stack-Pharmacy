@@ -25,7 +25,7 @@ module.exports.checkoutCredit = async (req,res) => {
         let user = await userModel.findOne({_id: userId});
         if(cart){
             const paymentIntent = await stripe.paymentIntents.create({
-                amount: cart.bill*100,
+                amount: cart.bill*100*(1-cart.discount),
                 currency: "usd",
                 automatic_payment_methods: {
                     enabled: true,
@@ -75,7 +75,7 @@ module.exports.creditConfirm=async(req,res)=>{
     const order = await orderModel.create({
         userId,
         items: cart.items,
-        bill: cart.bill,
+        bill:cart.bill*(1-cart.discount),
         status:'Processing',
         address:address,
         payment_method:'credit',
@@ -116,7 +116,7 @@ module.exports.checkoutCash = async (req,res) => {
                 const order = await orderModel.create({
                     userId,
                     items: cart.items,
-                    bill: cart.bill,
+                    bill:cart.bill*(1-cart.discount),
                     status:'Processing',
                     address:address,
                     payment_method:'cash',
@@ -144,12 +144,12 @@ module.exports.checkoutWallet = async (req,res) => {
         let address=req.body.address;
         const wallet=user.WalletBalance;
         if(cart){
-            if(wallet<cart.bill){
+            if(wallet<cart.bill*(1-cart.discount)){
                 console.log('heree');
                 res.send("You do not have enough money in wallet");
 
             }else{
-                   user.WalletBalance-=cart.bill;
+                   user.WalletBalance-=cart.bill*(1-cart.discount);
                    user.save();
                    const pharms=await Pharmacist.find({});
                    console.log(pharms);
@@ -176,7 +176,7 @@ module.exports.checkoutWallet = async (req,res) => {
                     const order = await orderModel.create({
                         userId,
                         items: cart.items,
-                        bill: cart.bill,
+                        bill:cart.bill*(1-cart.discount),
                         status:'Processing',
                         address:address,
                         payment_method:'wallet'

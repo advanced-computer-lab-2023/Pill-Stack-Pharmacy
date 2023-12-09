@@ -96,7 +96,7 @@ const OrderDetailsPage = () => {
               <h2 style={styles.heading}>Order Details</h2>
               <p>Status: {order.Status}</p>
               <p>Address: {order.address}</p>
-              <p>Bill: {order.bill}</p>
+              <p>Bill: {order.bill.toFixed(2)}</p>
               <p>Date Added: {order.dateAdded}</p>
 
               {order.Items && order.Items.length > 0 ? (
