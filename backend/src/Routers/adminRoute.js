@@ -29,6 +29,7 @@ router.route('/removeUser')
 
 router.get('/availableMedicines.ejs',getAvailableMedicines);
 router.get('/availableMedicines',getAvailableMedicines);
+
 router.get('/MedicinalUse',getMedicinalUse);
 
 router.get('/PatientDetails',viewPatientDet);

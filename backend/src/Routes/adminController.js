@@ -99,6 +99,9 @@ const PharmacistDetailsResults = async (req, res) => {
       throw error;
     }
   }
+
+ 
+
   async function getMedicinalUse (req,res) {
 
     const result=await  medModel.aggregate([

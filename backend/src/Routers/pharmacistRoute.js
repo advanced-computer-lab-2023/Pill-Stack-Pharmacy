@@ -1,13 +1,14 @@
 const express = require('express');
 let router = express.Router();
 const {createMedicine,searchMedicinePh,
-    editMedicineResults,upload, getMedSQ, 
+    editMedicineResults,changeMedicineStatus,upload, getMedSQ, 
     filterMedicinesByMedicinalUse, getFullInfo,generateRoom,join,getPatientUsername,sendMessage  } = require('../Routes/pharmacistController.js');
 const {getAvailableMedicines} = require('../Routes/adminController.js');
 
 router.get("/", (req,res) => {res.render('pharmacist_home')});
 router.get('/availableMedicines.ejs',getAvailableMedicines);
 router.put('/editmedResults',editMedicineResults);
+router.put('/changeMedicineStatus/:id', changeMedicineStatus);
 router.get('/avMed.ejs',getMedSQ);
 
 router.route('/createMedicine')

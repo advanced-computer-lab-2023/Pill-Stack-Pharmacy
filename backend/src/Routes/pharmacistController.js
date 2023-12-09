@@ -122,9 +122,31 @@ async function getMedSQ(req, res) {
       res.status(500).send('Error updating medicine information');
     }
   }
+
+  const changeMedicineStatus = async (req, res) => {
+    const medicineId = req.params.id;
+    
+    try {
+      // Find the medicine by ID
+      const medicine = await medModel.findById(medicineId);
   
-
-
+      // Check the current status and toggle it
+      if (medicine.status === 'Available') {
+        medicine.status = 'Archived';
+      } else if (medicine.status === 'Archived') {
+        medicine.status = 'Available';
+      }
+  
+      // Save the updated medicine
+      const updatedMedicine = await medicine.save();
+  
+      // Send back the updated medicine data
+      res.json(updatedMedicine);
+    } catch (error) {
+      console.error('Error changing medicine status:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  };
 
 
 
@@ -311,6 +333,7 @@ module.exports = {
     upload,
     filterMedicinesByMedicinalUse,
     editMedicineResults,
+    changeMedicineStatus,
     getMedSQ,
     getFullInfo,generateRoom,join,getPatientUsername,sendMessage
 };
