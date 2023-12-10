@@ -343,9 +343,7 @@ export const Cart = () => {
                             <MDBTypography tag="h6" className="text-muted">
                               {item.name}
                             </MDBTypography>
-                            <MDBTypography tag="h6" className="text-black mb-0">
-                              Cotton T-shirt
-                            </MDBTypography>
+                         
                           </MDBCol>
                           <MDBCol md="3" lg="3" xl="3" className="d-flex align-items-center">
                             <MDBBtn color="link" className="px-2" onClick={() => handleQuantityChange(item.productId, item.quantity - 1)}>
@@ -361,7 +359,7 @@ export const Cart = () => {
                           </MDBCol>
                           <MDBCol md="3" lg="2" xl="2" className="text-end">
                             <MDBTypography tag="h6" className="mb-0">
-                              {item.price*item.quantity}
+                              $ {item.price*item.quantity}
                             </MDBTypography>
                           </MDBCol>
                          
