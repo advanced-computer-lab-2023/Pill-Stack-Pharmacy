@@ -7,6 +7,7 @@ import { Text,SimpleGrid, Input, Box } from '@chakra-ui/react';
 import '../UI/button.css'
 import { useNavigate } from 'react-router-dom';
 import '../../index.css'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export function MedicineList() {
   const [medicines, setMedicines] = useState([]);
@@ -86,38 +87,113 @@ export function MedicineList() {
       medicine.MedicinalUse.includes(selectedMedicinalUse)
     );
 
-  return (
-    <Box className="med_page" >
+  // return (
+  //   <Box className="med_page" >
            
-      <Navbar />
+  //     <Navbar />
       
-      <Text fontSize={'3xl'} color={'Black'} >Over-the-counter medicine</Text>
+  //     <Text fontSize={'3xl'} color={'Black'} >Over-the-counter medicine</Text>
 
-      {/* <Heading as="h1" mb={4}>
-        Available Medicines
-      </Heading> */}
-      <MedicinalUseFilter
+  //     {/* <Heading as="h1" mb={4}>
+  //       Available Medicines
+  //     </Heading> */}
+  //     <MedicinalUseFilter
+  //       selectedMedicinalUse={selectedMedicinalUse}
+  //       onMedicinalUseChange={setSelectedMedicinalUse}
+  //       medicinalUses={medicinalUses}
+  //     />
+  //     <Input htmlSize={15} width='auto'
+  //       type="text"
+  //       placeholder="Search medicines..."
+  //       value={searchTerm}
+  //       onChange={(e) => setSearchTerm(e.target.value)}
+  //       mb={4}
+  //     />
+  //           <div
+  //             className={
+  //               "row row-cols-1 row-cols-md-2 row-cols-lg-2 g-3 mb-4 flex-shrink-0  row-cols-xl-3"
+  //             }
+  //           >        {filteredMedicines.map((medicine) => (
+  //         <MedicineItem
+  //           key={medicine._id}
+  //           medicine={medicine}
+  //           addToCart={handleAddToCart}
+  //         />
+  //       ))}
+  //     </div>
+  //   </Box>
+  // );
+  return (
+    <>
+    <Navbar />
+
+         <div className="container mt-5 py-4 px-xl-5">
+      <div className="row mb-3 d-block d-lg-none">
+        <div className="col-12">
+          <div id="accordionFilter" className="accordion shadow-sm">
+            <div className="accordion-item">
+              <h2 className="accordion-header" id="headingOne">
+                <button
+                  className="accordion-button fw-bold collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseFilter"
+                  aria-expanded="false"
+                  aria-controls="collapseFilter"
+                >
+                  Filter Products
+                </button>
+              </h2>
+            </div>
+          
+          </div>
+        </div>
+      </div>
+      <Text fontSize={'3xl'} color={'Black'} >Over-the-counter medicine</Text>
+      <div className="col-lg-12">
+
+      <div className="d-flex flex-column h-100">
+            <div className="row mb-3">
+      <div className="col-lg-3 d-none d-lg-block">
+           <MedicinalUseFilter
         selectedMedicinalUse={selectedMedicinalUse}
         onMedicinalUseChange={setSelectedMedicinalUse}
         medicinalUses={medicinalUses}
       />
-      <Input htmlSize={15} width='auto'
-        type="text"
-        placeholder="Search medicines..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        mb={4}
-      />
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8}>
-        {filteredMedicines.map((medicine) => (
+              </div>
+              <div className="col-lg-9 col-xl-5 offset-xl-4 d-flex flex-row">
+                <div className="input-group">
+                  <input
+                    className="form-control"
+                    type="text"
+                    placeholder="Search products..."
+                    aria-label="search input"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                
+                </div>
+                </div>
+                </div>
+            </div>
+
+   
+            <div
+              className={
+                "row row-cols-1 row-cols-md-2 row-cols-lg-2 g-3 mb-4 flex-shrink-0  row-cols-xl-3"
+              }
+            >        {filteredMedicines.map((medicine) => (
           <MedicineItem
             key={medicine._id}
             medicine={medicine}
             addToCart={handleAddToCart}
           />
         ))}
-      </SimpleGrid>
-    </Box>
+      </div>
+      </div>
+      </div>
+      </>
+
   );
 }
 
