@@ -152,7 +152,17 @@ const iconPath =
               <dd className="col-sm-8 mb-3">{medicine._id}</dd>
 
               <dt className="col-sm-4">Medicinal use</dt>
-              <dd className="col-sm-8 mb-3">{medicine.MedicinalUse}</dd>
+              
+              
+              <dd className="col-sm-8 mb-3">
+              {medicine.MedicinalUse.map((use, index) => (
+                <span key={index}>
+                  {use}
+                  {index < medicine.MedicinalUse.length - 1 && ','} 
+                </span>
+              ))}
+            </dd>
+                      
 
               <dt className="col-sm-4">Manufacturer</dt>
               <dd className="col-sm-8 mb-3">{medicine.Name}</dd>

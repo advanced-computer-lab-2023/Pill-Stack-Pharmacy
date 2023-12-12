@@ -100,7 +100,7 @@ export const Cart = () => {
         // Send an API request to update the quantity of the item in the cart
         // You will need to implement this API on the server side
     };
-    const handleDelete= async (productId,itemPrice,itemQuantity) => {
+    const handleDelete= async (productId) => {
       setIsDeleting(true);
         try{
       
@@ -364,7 +364,7 @@ export const Cart = () => {
                           </MDBCol>
                          
                           <MDBCol md="1" lg="1" xl="1" className="text-end">
-                              <a href="#!" className="text-muted">
+                              <a href="/cart" className="text-muted">
                               <MDBIcon fas icon="trash-alt" onClick={() => handleDelete(item.productId)} /> </a>
                           </MDBCol>
                         </MDBRow>
@@ -517,8 +517,8 @@ export const Cart = () => {
               <div className="pt-5">
                           <MDBTypography tag="h6" className="mb-0">
                             <MDBCardText tag="a" href="/medicine" className="text-body">
-                              <MDBIcon fas icon="long-arrow-alt-left me-2" /> Back
-                              to shop
+                              <MDBIcon fas icon="long-arrow-alt-left me-2" /> 
+                              {cart && cart.items.length > 0 ? "Back to shop": "Start Shopping"}
                             </MDBCardText>
                           </MDBTypography>
                         </div>
