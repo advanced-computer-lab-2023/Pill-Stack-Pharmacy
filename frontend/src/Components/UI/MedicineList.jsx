@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import MedicinalUseFilter from '../UI/MedicinalUseFilter';
 import { Navbar } from '../UI/navbar';
 import axios from "axios";
@@ -16,6 +17,9 @@ export function MedicineList() {
   const [medicinalUses, setMedicinalUses] = useState([]);
   const [addToCartQueue, setAddToCartQueue] = useState([]);
   const [processingQueue, setProcessingQueue] = useState(false); // Flag to prevent concurrent processing
+  const [openDetails, setOpenDetails] = useState(false); // Flag to prevent concurrent processing
+  const [selectedMedicineId, setSelectedMedicineId] = useState(null);
+
   const navigate = useNavigate();
   const back =()=>  navigate(-1);
 
@@ -86,6 +90,16 @@ export function MedicineList() {
       selectedMedicinalUse === '' ||
       medicine.MedicinalUse.includes(selectedMedicinalUse)
     );
+    const getRelatedMeds=(currentMedicine)=>{
+      const relatedMeds = medicines
+      .filter((medicine) =>
+        medicine.Details.toLowerCase().includes(currentMedicine.Details)
+      )
+      return relatedMeds;
+    }
+    const  handleOpenDetails=(medicineId)=>{
+      setSelectedMedicineId(medicineId);
+    }
 
   // return (
   //   <Box className="med_page" >
@@ -183,12 +197,16 @@ export function MedicineList() {
                 "row row-cols-1 row-cols-md-2 row-cols-lg-2 g-3 mb-4 flex-shrink-0  row-cols-xl-3"
               }
             >        {filteredMedicines.map((medicine) => (
+
+   
           <MedicineItem
             key={medicine._id}
             medicine={medicine}
             addToCart={handleAddToCart}
           />
+
         ))}
+
       </div>
       </div>
       </div>

@@ -45,7 +45,7 @@ import {
   } from '@chakra-ui/react'
 export const Cart = () => {
     const navigate = useNavigate();
-    const back =()=>  navigate(-1);
+    //const back =()=>  navigate(-1);
     const [cart, setCart] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);

@@ -12,7 +12,7 @@ export const Navbar=()=>{
     
     const [openedDrawer, setOpenedDrawer] = useState(false)
     const navigate = useNavigate();
-    const back =()=>  navigate(-1);
+    const back = () => window.history.back();
     useEffect(() => {
         const getCart = async () => {
             try {

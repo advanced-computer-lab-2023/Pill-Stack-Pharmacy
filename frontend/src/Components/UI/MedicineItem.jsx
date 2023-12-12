@@ -54,7 +54,7 @@ const MedicineItem = ({ medicine, addToCart }) => {
 return (
   <div className="col">
     <div className="card shadow-sm">
-      <Link to="/products/1" href="!#" replace>
+      <Link to={`/medicine/details/${medicine._id}`} href="!#" replace>
         <img
           className="card-img-top bg-dark cover"
           height="100"

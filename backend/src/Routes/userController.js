@@ -245,5 +245,22 @@ const sendMessage = async (req, res, socket) => {
     throw error;
   }
 };
+const getMedAndRelatedProducts=async(req,res)=>{
+  console.log('getting');
+  const medId=req.body.medicineID;
+  console.log(medId);
+  try{
+   const med=await medModel.findById(medId);
+      //get related meds and send them here as an array 
 
-module.exports = {searchMedicinePat, filterMedicinesByMedicinalUse,getAddresses,addDeliveryAddress, orderDetails,getFullInfo,generateRoom,joinChatRoomPatient,getDoctorUsername,sendMessage};
+   let relatedMed=[];
+   relatedMed.push(await medModel.findOne({Name:'comtrex'}));
+
+   return res.send({currentMed:med,relatedMed:relatedMed});
+  }catch (error){
+    return res.status(401);
+  }
+}
+
+module.exports = {searchMedicinePat, filterMedicinesByMedicinalUse,getAddresses,addDeliveryAddress, orderDetails,getFullInfo,
+  generateRoom,joinChatRoomPatient,getDoctorUsername,sendMessage,getMedAndRelatedProducts};

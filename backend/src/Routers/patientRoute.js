@@ -1,6 +1,8 @@
 const express = require('express');
 let router = express.Router();
-const {getDoctors,filterMedicinesByMedicinalUse, searchMedicinePat,getAddresses,addDeliveryAddress, getFullInfo,orderDetails,generateRoom,joinChatRoomPatient,getDoctorUsername,sendMessage} = require('../Routes/userController');
+const {getDoctors,filterMedicinesByMedicinalUse, searchMedicinePat,
+    getAddresses,addDeliveryAddress, getFullInfo,orderDetails,generateRoom,
+    joinChatRoomPatient,getDoctorUsername,sendMessage,getMedAndRelatedProducts} = require('../Routes/userController');
 const {getAvailableMedicines} = require('../Routes/adminController.js');
 const { userVerification } = require('../Middleware/AuthMiddleware');
 
@@ -19,5 +21,7 @@ router.post('/addDeliveryAddress/:username',addDeliveryAddress)
 router.get('/getDoctorUsername/:username',getDoctorUsername);
 router.post('/Chat/:username/:doctorUsername',joinChatRoomPatient)
 router.post('/sendMessage/:patientUsername/:selectedDoctor',sendMessage)
+router.post('/medicine/details',getMedAndRelatedProducts)
+
 
 module.exports = router;
