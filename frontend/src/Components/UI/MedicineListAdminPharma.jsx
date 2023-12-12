@@ -142,8 +142,7 @@ export function MedicineListControl() {
               )}
               {/* Medicine Content */}
               <img
-                width="150"
-                height="150"
+                style={{ objectFit: 'cover',minHeight:'400px', maxHeight: '400px' }} 
                 src={`data:${medicine.Image.contentType};base64, ${Buffer.from(
                   medicine.Image.data
                 ).toString('base64')}`}

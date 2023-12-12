@@ -59,7 +59,7 @@ return (
           className="card-img-top bg-dark cover"
           height="100"
           Width="50"
-          style={{ objectFit: 'cover', maxHeight: '400px' }} 
+          style={{ objectFit: 'cover',minHeight:'400px', maxHeight: '400px' }} 
           src={`data:${medicine.Image.contentType};base64, ${Buffer.from(
                  medicine.Image.data
                ).toString('base64')}`}
