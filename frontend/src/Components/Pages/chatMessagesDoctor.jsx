@@ -31,7 +31,9 @@ function ChatMessages({ socket }) {
 
   const handleDoctorClick = async (patientUsername) => {
     try {
+
       const response = await axios.post(`http://localhost:8000/pharmacist/ChatDoctor/${username}/${patientUsername}`);
+      console.log("mmmmmmm");
       const { room: chatRoom } = response.data;
       const { messages: messageList } = response.data;
       socket.emit("join_room", chatRoom);
@@ -39,7 +41,7 @@ function ChatMessages({ socket }) {
       setSelectedPatient(patientUsername);
       setRoom(chatRoom);
       setMessageList(messageList);
-      console.log(messageList)
+      console.log(messageList);
       setChatOpen(true);
     } catch (error) {
       console.error('Error joining chat room for patient:', error);

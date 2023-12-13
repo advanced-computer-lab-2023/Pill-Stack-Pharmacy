@@ -213,6 +213,7 @@ const join = async (req, res) => {
 
       return res.status(404).json({ message: 'doctor not found' });
     }
+    console.log("aaaaaaa");
 
     // Check if the patient already has a chat room with this doctor
     const existingChatRoom = patient.chatRooms.find(
@@ -224,6 +225,7 @@ const join = async (req, res) => {
       const { room, messages } = existingChatRoom;
       console.log("mariam")
       console.log(room)
+      console.log(messages);
 
       res.status(200).json({ room, messages });
     } else {
@@ -240,8 +242,11 @@ const join = async (req, res) => {
         username,
         messages,
       });
+      console.log("marioumaa");
 
       await patient.save();
+      console.log(messages);
+      console.log("marioumaa");
  
       res.status(200).json({ room, messages });
     }
