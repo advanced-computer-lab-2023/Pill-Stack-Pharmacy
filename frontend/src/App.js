@@ -16,7 +16,6 @@ import {AddMedicine} from "./Components/UI/AddMed";
 import {Cart} from "./Components/Pages/Cart";
 import  Completion from "./Components/Pages/Completion";
 import  Completion2 from "./Components/Pages/Completion2";
-
 import  CreditPayment from "./Components/Pages/CreditPayment";
 import ForgotPassword from './Components/Pages/ForgotPassword.jsx';
 import PasswordReset from './Components/Pages/PasswordReset.jsx';
@@ -25,7 +24,7 @@ import PatientRegisterForm from './Components/Pages/PatientRegisterForm';
 import OrderDetails from './Components/UI/orderDetails';
 import ChatMessages from './Components/Pages/chatMessagesPatient.jsx';
 import ChatMessagesDoctor from './Components/Pages/chatMessagesDoctor.jsx';
-
+import SalesReport  from './Components/Pages/SalesReport.jsx';
 import io from 'socket.io-client';
 const socket = io.connect("http://localhost:8000");
 
@@ -70,6 +69,7 @@ function App() {
         <Route path="/orderdetails" element={<OrderDetails/>} />
         <Route path="/chatwithdoctor/:username" element={<ChatMessages socket={socket} />} />
         <Route path="/chatwithpatient/:username" element={<ChatMessagesDoctor socket={socket} />} />
+        <Route path="/salesReport" element={<SalesReport/>}/>
 
 
 

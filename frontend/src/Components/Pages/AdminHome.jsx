@@ -199,10 +199,10 @@ export const AdminHome = () => {
                 link={'/medicineControl'} 
                 icon={<FontAwesomeIcon icon={faCapsules} fontSize={'35px'}/>} 
                 text={'Pharmacy'}/>
-              {/* <Shortcut
-                link={'/medicine/sales'}
+             <Shortcut
+                link={'/salesReport'}
                 icon={<FontAwesomeIcon icon={faFile}  fontSize={'35px'}/>}
-                text={'Sales Report'}/> */}
+                text={'Sales Report'}/> 
             </SimpleGrid>
             </Box>  
 

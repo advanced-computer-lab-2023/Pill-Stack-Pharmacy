@@ -6,7 +6,7 @@ const {viewPharmacistApp,getAvailableMedicines,getAvailableMedicinesPH,
    PatientDetailsResults,viewPharmacistDet,
    PharmacistDetailsResults,removeUser, 
    filterMedicinesByMedicinalUse, getAllUsers,getMedicinalUse,acceptRegRequest,rejectRegRequest,
-   getFullInfo
+   getFullInfo,getMedNames
  } = require('../Routes/adminController.js');
 
 router.get("/", async(req,res) => {res.render('admin_home')});
@@ -21,6 +21,7 @@ router.get('/myInfo/:username' , getFullInfo )
 
 router.post('/applications/accept-registeration/:id',acceptRegRequest);
 router.post('/applications/reject-registeration/:id',rejectRegRequest);
+router.get('/MedNames',getMedNames);
 
 
 router.route('/removeUser')

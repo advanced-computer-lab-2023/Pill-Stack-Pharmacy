@@ -15,6 +15,16 @@ router.post('/orderCash',userVerification,orderController.checkoutCash);
 router.post('/orderWallet',userVerification,orderController.checkoutWallet);
 router.post('/cancel-order',userVerification, orderController.cancelOrder);
 router.post('/sales',orderController.generateMedicineSalesReport);
+router.post('/salesStats',orderController.TotalStats);
+router.post('/salesDaily',orderController.DailyRevenue);
+router.post('/salesOrder',orderController.getAllorders);
+router.post('/salesExtraStats',orderController.ExtraStats);
+router.post('/salesChanges', orderController.MonthlyChanges);
+
+
+
+
+
 
 
 

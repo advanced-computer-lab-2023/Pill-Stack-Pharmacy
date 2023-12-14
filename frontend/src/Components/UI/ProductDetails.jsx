@@ -24,12 +24,9 @@ const iconPath =
         // Define a function to fetch medicine details
         const fetchMedicineDetails = async () => {
           try {
-            // Make an API call to fetch medicine details based on medicineID
             const response=await axios.post('http://localhost:8000/patient/medicine/details',{medicineID:medicineID},{ withCredentials: true });
     
-            // Assuming your API returns the medicine details as response.data
             setMedicine(response.data.currentMed);
-           // console.log(response.data.relatedMe);
             setRelatedMed(response.data.relatedMed);
 
         } catch (error) {
@@ -38,9 +35,8 @@ const iconPath =
           }
         };
     
-        // Call the function to fetch data when the component mounts
         fetchMedicineDetails();
-      }, [medicineID]); // Trigger the effect when medicineID changes
+      }, [medicineID]); 
       const addToCart = async (medicine, quantity) => {
         try {
           const response = await axios.post('http://localhost:8000/cart', {

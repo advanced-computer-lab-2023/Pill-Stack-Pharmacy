@@ -275,10 +275,17 @@ const getFullInfo = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
-
+const getMedNames = async (req, res) => {
+  try {
+   const meds=await medModel.find({},{_id:0,Name:1});
+   return res.send(meds);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
 module.exports = {
     viewAllApp,viewPharmacistApp,getAvailableMedicines,viewPatientDet
     ,PatientDetailsResults,removeUser,searchMedicineA,filterMedicinesByMedicinalUse,getAvailableMedicinesPH,
     PharmacistDetailsResults, viewPharmacistDet, getAllUsers,
-    getMedicinalUse, acceptRegRequest, rejectRegRequest, getFullInfo 
+    getMedicinalUse, acceptRegRequest, rejectRegRequest, getFullInfo ,getMedNames
 };
