@@ -56,7 +56,8 @@ export const Cart = () => {
     const [isFailPayment, setIsFailPayment] = useState(null);
     const [isSucessMessage, setIsSucessMessage] = useState('');
     const [isDeleting, setIsDeleting] = useState(false);
-
+    const [discountCode, setDiscountCode] = useState('');
+    const [isValid, setIsValid] = useState(true);
 
 
 
@@ -161,6 +162,18 @@ export const Cart = () => {
 
 
     }
+    const handleDiscountCodeChange = (e) => {
+      const code = e.target.value;
+      setDiscountCode(code);
+  
+      // Your validation logic goes here
+      // For example, checking if the code is valid
+      if (code === '') {
+        setIsValid(true);
+      } else {
+        setIsValid(false);
+      }
+    };
 
     // return (
     //   <><Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
@@ -410,11 +423,15 @@ export const Cart = () => {
                         </div>
       
                         <MDBTypography tag="h5" className="text-uppercase mb-3">
-                          Give code
+                          Discount code
                         </MDBTypography>
       
                         <div className="mb-5">
-                          <MDBInput size="lg" label="Enter your code" />
+                          <MDBInput size="lg" label="Enter your code"  onChange={handleDiscountCodeChange}
+                           value={discountCode}/>
+                          {!isValid && (
+                           <p style={{ color: 'red' }}>Invalid discount code. Please enter a valid code.</p>
+                             )}
                         </div>
       
                         <hr className="my-4" />

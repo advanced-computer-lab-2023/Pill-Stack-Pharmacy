@@ -70,7 +70,7 @@ return (
         <h5 className="card-title text-center text-dark text-truncate">
           {medicine.Name}
         </h5>
-        <p className="card-text text-center text-muted mb-0">{medicine.Price}</p>
+        <p className="card-text text-center text-muted mb-0">$ {medicine.Price}</p>
         <div className="d-grid d-block">
         {medicine.Quantity > 0 ? (
           <button className="btn btn-outline-dark mt-3" onClick={() => addToCart(medicine, 1)}>
