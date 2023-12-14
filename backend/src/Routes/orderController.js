@@ -256,3 +256,44 @@ module.exports.cancelOrder = async (req, res) => {
         res.status(500).send("Something went wrong");
     }
 }
+module.exports.generateMedicineSalesReport = async (req, res)=> {
+    const chosenMonth=new Date(req.body.month);
+    try {
+      const pipeline = [
+        {
+          $match: {
+            date_added: {
+              $gte: new Date(chosenMonth), // Start of chosen month
+              $lt: new Date(new Date(chosenMonth).setMonth(chosenMonth.getMonth() + 1)), // End of chosen month
+            },
+            status: { $in: ['Processing', 'Delivered'] }, // Considering 'Processing' and 'Delivered' orders for sales
+        },
+        },
+        {
+          $unwind: '$items',
+        },
+        {
+          $group: {
+            _id: '$items.name',
+            totalSales: { $sum: '$items.quantity' }, // Calculate total quantity sold for each medicine
+          },
+        },
+      ];
+  
+      const salesReport = await orderModel.aggregate(pipeline);
+  
+      if (salesReport.length > 0) {
+        salesReport.forEach((medicine) => {
+          console.log(`Medicine: ${medicine._id}, Total Quantity Sold: ${medicine.totalSales}`);
+        });
+        return res.send(salesReport);
+      } else {
+        console.log('No sales found for the chosen month or status.');
+        return res.send("no sales found for this month");
+      }
+    } catch (err) {
+      console.error('Error generating sales report:', err);
+      throw err;
+    }
+  }
+  
