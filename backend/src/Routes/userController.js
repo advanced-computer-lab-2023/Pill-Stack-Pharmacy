@@ -252,10 +252,7 @@ const getMedAndRelatedProducts=async(req,res)=>{
   try{
    const med=await medModel.findById(medId);
       //get related meds and send them here as an array 
-
-   let relatedMed=[];
-   relatedMed.push(await medModel.findOne({Name:'Panadol'}));
-
+   const relatedMed=await medModel.find({Details:med.Details, Name:{$ne:med.Name}});
    return res.send({currentMed:med,relatedMed:relatedMed});
   }catch (error){
     return res.status(401);
