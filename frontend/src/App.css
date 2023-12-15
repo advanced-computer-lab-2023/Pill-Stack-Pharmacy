@@ -4,7 +4,7 @@
   background: #fff;
   color: #212121;
   font-family: "Open Sans", sans-serif;
-  display: grid;
+  display: flex;
   place-items: center;
 }
 body,html {
@@ -220,6 +220,7 @@ body,html {
   .doctor-list {
     list-style: none;
     padding: 0;
+    
   }
   
   .doctor-list li {
@@ -257,6 +258,8 @@ body,html {
   height: 100%; /* Set height to 100% to fill the parent container */
   display: flex;
   flex-direction: column;
+  height: 100%;
+
   }
   .chat-body {
     flex: 1; /* Make the chat body flex to fill the available space */

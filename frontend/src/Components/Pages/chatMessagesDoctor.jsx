@@ -138,8 +138,6 @@ function ChatMessages({ socket }) {
             </li>
           ))}
         </ul>
-      </div>
-      <div className="doctor-list-container">
         <h2>Doctors</h2>
         <ul className="doctor-list">
           {doctorList.map((doctorUsername) => (
@@ -153,8 +151,9 @@ function ChatMessages({ socket }) {
             </li>
           ))}
         </ul>
+        
       </div>
-
+    
       {activeChatType === 'patient' &&chatOpen && (
         <div className="chat-window">
           <div className="chat-header">
