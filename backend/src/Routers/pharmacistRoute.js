@@ -2,7 +2,7 @@ const express = require('express');
 let router = express.Router();
 const {createMedicine,searchMedicinePh,
     editMedicineResults,changeMedicineStatus,upload, getMedSQ, 
-    filterMedicinesByMedicinalUse, getFullInfo,generateRoom,join,getPatientUsername,sendMessage  } = require('../Routes/pharmacistController.js');
+    filterMedicinesByMedicinalUse, getFullInfo,generateRoom,join,getPatientUsername,sendMessage ,sendMessage2,joinDoctorClin,getDoctorUsername  } = require('../Routes/pharmacistController.js');
 const {getAvailableMedicines} = require('../Routes/adminController.js');
 
 router.get("/", (req,res) => {res.render('pharmacist_home')});
@@ -26,7 +26,9 @@ router.get('/myInfo/:username' , getFullInfo )
 router.get('/getPatientUsername/:username',getPatientUsername);
 router.post('/ChatDoctor/:doctorUsername/:username',join);
 router.post('/sendMessage/:patientUsername/:doctorUsername',sendMessage);
-
+router.get('/getDoctorUsername/:username',getDoctorUsername);
+router.post('/ChatDoctor2/:doctorUsername/:docClinUsername',joinDoctorClin);
+router.post('/sendMessage2/:docClinUsername/:doctorUsername',sendMessage2);
 
 
 module.exports = router;
