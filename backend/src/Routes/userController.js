@@ -138,30 +138,6 @@ const getFullInfo = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
-const orders = async (req, res) => {
-  const userId = req.user._id;
-  
-  console.log("DAREEN")
-  try {
-      // Get past orders (status: Delivered or Cancelled)
-      const pastOrders = await orderModel.find({ userId, status: { $in: ['Delivered', 'Cancelled'] } })
-      //sorts the date in descending order
-          .sort({ date_added: -1 })
-          .exec();
-
-      // Get current orders (status: Processing)
-      const currentOrders = await orderModel.find({ userId, status: 'Processing' })
-      //sorts the date in descending order
-          .sort({ date_added: -1 })
-          .exec();
-
-      res.json({ pastOrders, currentOrders });
-  } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Internal Server Error' });
-  }
-};
-
 
 const generateRoom = () => {
   return Math.random().toString(36).substring(2, 15);
@@ -299,4 +275,4 @@ const getMedAndRelatedProducts=async(req,res)=>{
 }
 
 module.exports = {searchMedicinePat, filterMedicinesByMedicinalUse,getAddresses,addDeliveryAddress, orderDetails,getFullInfo,
-  generateRoom,joinChatRoomPatient,getDoctorUsername,sendMessage,getMedAndRelatedProducts,orders};
+  generateRoom,joinChatRoomPatient,getDoctorUsername,sendMessage,getMedAndRelatedProducts};

@@ -26,7 +26,7 @@ import ChatMessages from './Components/Pages/chatMessagesPatient.jsx';
 import ChatMessagesDoctor from './Components/Pages/chatMessagesDoctor.jsx';
 import SalesReport  from './Components/Pages/SalesReport.jsx';
 import io from 'socket.io-client';
-import PastCurrentOrders from './Components/UI/PastCurrentOrders .jsx';
+
 
 const socket = io.connect("http://localhost:8001");
 
@@ -72,7 +72,6 @@ function App() {
         <Route path="/chatwithdoctor/:username" element={<ChatMessages socket={socket} />} />
         <Route path="/chatwithpatient/:username" element={<ChatMessagesDoctor socket={socket} />} />
         <Route path="/salesReport" element={<SalesReport/>}/>
-        <Route path="home/orders" element={<PastCurrentOrders/>}/>
 
       
      

@@ -22,7 +22,6 @@ router.get('/getDoctorUsername/:username',getDoctorUsername);
 router.post('/Chat/:username/:doctorUsername',joinChatRoomPatient)
 router.post('/sendMessage/:patientUsername/:selectedDoctor',sendMessage)
 router.post('/medicine/details',getMedAndRelatedProducts)
-router.get('/orders',userVerification,orders);
 
 
 module.exports = router;

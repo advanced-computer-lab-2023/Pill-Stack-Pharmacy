@@ -30,6 +30,7 @@ import { Buffer } from 'buffer';
 
 const OrderDetailsPage = () => {
   const [orderDetailsArray, setOrderDetailsArray] = useState([]);
+  const [filterArray,setFilter]=useState([]);
   const navigate = useNavigate();
   const back =()=>  navigate(-1);
   const [cancelSuccess, setCancelSuccess] = useState(false); // State for success message
@@ -42,14 +43,26 @@ const OrderDetailsPage = () => {
         const response = await axios.get('http://localhost:8001/patient/orderDetails', {
           withCredentials: true,
         }); // Replace with your actual endpoint
+        //setOrderDetailsArray(response.data);
+        const allOrders =response.data;
+        const pastOrders = allOrders.filter(order => order.Status === 'Delivered' || order.Status === 'Cancelled');
+        const currentOrders = allOrders.filter(order => order.Status === 'Processing');
+        if(filterArray=='past'){
+        setOrderDetailsArray(pastOrders);
+      }
+      else if(filterArray=='current'){
+        setOrderDetailsArray(currentOrders);
+      }
+      else{
         setOrderDetailsArray(response.data);
+      }
       } catch (error) {
         console.error('Error fetching order details:', error);
       }
     };
 
     fetchOrderDetails();
-  }, []); // Run the effect only once when the component mounts
+  }, [filterArray]); // Run the effect only once when the component mounts
 
   const getStatusStyle = (status) => {
     switch (status) {
@@ -112,10 +125,30 @@ const OrderDetailsPage = () => {
   };
   
   return (
-    <><Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
-      <Text fontSize={'3xl'} color={'white'}>Order Details</Text>
-      <button className="btn" onClick={back}>back</button>
-    </Box>
+    <>
+    <nav bg={'#4bbbf3'} class="navbar navbar-expand-lg navbar-blue bg-4bbbf3" height=" 100px" >
+    <div class="container-fluid">
+    <button className="btn" onClick={back}>back</button>
+      <a class="navbar-brand" href="#"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              FILTER ORDERS
+            </a>
+            <ul class="dropdown-menu dropdown-menu-blue" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><a class="dropdown-item" onClick={() => setFilter('past')}>Past Orders</a></li>
+          <li><a class="dropdown-item" onClick={() => setFilter('current')}>Current Orders</a></li>
+  <li><a class="dropdown-item" onClick={() => setFilter('all')}>All Orders</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
         {orderDetailsArray.length > 0 ? (
           orderDetailsArray.map((order) => (
             <section
@@ -217,7 +250,7 @@ const OrderDetailsPage = () => {
                       <div className="d-flex justify-content-between pt-2">
                         <p className="fw-bold mb-0">Order Details</p>
                         <p className="text-muted mb-0">
-                          <span className="fw-bold me-4">Total</span> {order.bill}
+                          <span className="fw-bold me-4">Total</span> {(order.bill).toFixed(2)}
                         </p>
                       </div>
     
@@ -243,7 +276,7 @@ const OrderDetailsPage = () => {
                         </p>
                         <p className="text-muted mb-0">
                           <span className="fw-bold me-4">Total paid:</span>{" "}
-                          {order.bill}
+                          {(order.bill).toFixed(2)}
                         </p>
                       </div>
 
@@ -329,4 +362,3 @@ const styles = {
 };
 
 export default OrderDetailsPage;
-
