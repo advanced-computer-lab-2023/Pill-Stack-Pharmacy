@@ -19,18 +19,34 @@ const orderDetails = async (req, res) => {
       // Handle the case where no orders are found
       return res.status(404).send({ message: "Orders not found" });
     }
+    const currentTime = new Date();
 
     // Map through each order and extract details
-    const orderDetailsArray = orders.map((order) => ({
-      _id:order._id,
-      Status: order.status,
-      Items: order.items,
-      address: order.address,
-      bill: order.bill,
-      dateAdded: order.date_added,
-    }));
+    const orderDetailsArray = orders.map((order) => {
+      // Check if the order time has surpassed 1 hour
+      const orderTime = order.date_added;
+      const timeDifference = currentTime - orderTime;
+      const hoursDifference = timeDifference / (1000 * 60 * 60); // Convert milliseconds to hours
+
+      if (hoursDifference >= 1 && order.status !== 'Delivered' && order.status !== 'Cancelled' ) {
+        // If the order time has surpassed 1 hour and status is not delivered, update the status
+        orderModel.findByIdAndUpdate(order._id, { status: 'Delivered' }).exec(); // Update status to delivered
+        order.status = 'Delivered'; // Update status in the current order object
+      }
+      
+      return {
+        _id: order._id,
+        Status: order.status,
+        Items: order.items,
+        address: order.address,
+        bill: order.bill,
+        dateAdded: order.date_added,
+      };
+    });
 
     res.send(orderDetailsArray);
+
+   
   } catch (error) {
     console.error('Error fetching order details:', error);
     res.status(500).send({ message: 'Internal Server Error' });
