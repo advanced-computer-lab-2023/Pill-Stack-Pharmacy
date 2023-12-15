@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MedicinalUseFilter from '../UI/MedicinalUseFilter';
 import { Buffer } from 'buffer';
-import { SimpleGrid, Box, Heading, Input, Text, IconButton } from '@chakra-ui/react';
+import { SimpleGrid, Box, Heading, Input, Text, IconButton,Flex } from '@chakra-ui/react';
 import { LockIcon, UnlockIcon } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@chakra-ui/react';
@@ -88,7 +88,7 @@ export function MedicineListControl() {
           back
         </button>
       </Box>
-      <Box className="med_page">
+      <Flex  Flex align="center" mb={4}>
         <MedicinalUseFilter
           selectedMedicinalUse={selectedMedicinalUse}
           onMedicinalUseChange={setSelectedMedicinalUse}
@@ -103,8 +103,11 @@ export function MedicineListControl() {
           onChange={(e) => setSearchTerm(e.target.value)}
           mb={4}
         />
+        </Flex>
+      <Box className="med_page">
+      
         <SimpleGrid columns={3} spacing={10}>
-          {medicines.map((medicine) => (
+          {filteredMedicines.map((medicine) => (
             <Box
               key={medicine._id}
               p={4}
