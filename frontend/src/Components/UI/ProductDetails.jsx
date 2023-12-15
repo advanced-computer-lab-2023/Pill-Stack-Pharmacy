@@ -24,7 +24,7 @@ const iconPath =
         // Define a function to fetch medicine details
         const fetchMedicineDetails = async () => {
           try {
-            const response=await axios.post('http://localhost:8000/patient/medicine/details',{medicineID:medicineID},{ withCredentials: true });
+            const response=await axios.post('http://localhost:8001/patient/medicine/details',{medicineID:medicineID},{ withCredentials: true });
     
             setMedicine(response.data.currentMed);
             setRelatedMed(response.data.relatedMed);
@@ -39,7 +39,7 @@ const iconPath =
       }, [medicineID]); 
       const addToCart = async (medicine, quantity) => {
         try {
-          const response = await axios.post('http://localhost:8000/cart', {
+          const response = await axios.post('http://localhost:8001/cart', {
             productId: medicine._id,
             quantity,
           }, { withCredentials: true });

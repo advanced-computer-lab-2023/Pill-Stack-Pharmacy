@@ -54,7 +54,7 @@ export const AdminHome = () => {
         navigate("/login");
       }
       const { data } = await axios.post(
-        "http://localhost:8000",
+        "http://localhost:8001",
         {},
         { withCredentials: true }
       );
@@ -83,7 +83,7 @@ export const AdminHome = () => {
   useEffect(() => {
     const fetchFullUser = async () => {
       if (username) {
-        const { data } = await axios.get(`http://localhost:8000/admin/myInfo/${username}`);
+        const { data } = await axios.get(`http://localhost:8001/admin/myInfo/${username}`);
         setFullUser(data);
         console.log(fullUser);
       }
@@ -99,7 +99,7 @@ export const AdminHome = () => {
     if (newPassword !== confirmNewPassword) {
       toast.error('Passwords don\'t match', {
         position: 'top-right',
-        autoClose: 3000,
+        autoClose: 3001,
       });
       return;
     }
@@ -110,19 +110,19 @@ export const AdminHome = () => {
     };
   
     try {
-      const response = await axios.post('http://localhost:8000/changePassword', data, {
+      const response = await axios.post('http://localhost:8001/changePassword', data, {
         withCredentials: true,
       });
   
       if (response.status === 201) {
         toast.success(response.data.message, {
           position: 'top-right',
-          autoClose: 3000,
+          autoClose: 3001,
         });
       } else {
         toast.error(response.data.message, {
           position: 'top-right',
-          autoClose: 3000,
+          autoClose: 3001,
         });
       }
     } catch (error) {
@@ -132,12 +132,12 @@ export const AdminHome = () => {
         console.error('Response Data:', error.response.data);
         toast.error(error.response.data.message, {
           position: 'top-right',
-          autoClose: 3000,
+          autoClose: 3001,
         });
       } else {
         toast.error('An error occurred while processing your request', {
           position: 'top-right',
-          autoClose: 3000,
+          autoClose: 3001,
         });
       }
     }

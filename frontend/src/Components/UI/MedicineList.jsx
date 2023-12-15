@@ -25,13 +25,13 @@ export function MedicineList() {
 
   useEffect(() => {
     // Fetch medicines and their medicinal uses from your server's API endpoint
-    fetch('http://localhost:8000/admin/availableMedicines')
+    fetch('http://localhost:8001/admin/availableMedicines')
       .then((response) => response.json())
       .then((data) => setMedicines(data))
       .catch((error) => console.error('Error fetching medicine data:', error));
 
     // Fetch the list of unique medicinal uses
-    fetch('http://localhost:8000/admin/MedicinalUse')
+    fetch('http://localhost:8001/admin/MedicinalUse')
       .then((response) => response.json())
       .then((data) => setMedicinalUses(data))
       .catch((error) => console.error('Error fetching medicinal uses:', error));
@@ -39,7 +39,7 @@ export function MedicineList() {
 
   const addToCart = async (medicine, quantity) => {
     try {
-      const response = await axios.post('http://localhost:8000/cart', {
+      const response = await axios.post('http://localhost:8001/cart', {
         productId: medicine._id,
         quantity,
       }, { withCredentials: true });

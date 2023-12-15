@@ -67,7 +67,7 @@ export const Cart = () => {
         setErrorMessage('');
         setIsModalOpen(true);
         const response = await axios.get(
-            'http://localhost:8000/patient/Address',
+            'http://localhost:8001/patient/Address',
             { withCredentials: true }
           );
         setAddress(response.data);
@@ -77,7 +77,7 @@ export const Cart = () => {
     useEffect(() => {
         const getCart = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/cart', { withCredentials: true });
+                const response = await axios.get('http://localhost:8001/cart', { withCredentials: true });
                 setCart(response.data);
             } catch (err) {
                 console.log(err);
@@ -93,7 +93,7 @@ export const Cart = () => {
         }
         try{
         setErrorMessage('');
-        const response= await axios.post('http://localhost:8000/cart/update',{productId:productId,quantity:newQuantity },  { withCredentials: true });
+        const response= await axios.post('http://localhost:8001/cart/update',{productId:productId,quantity:newQuantity },  { withCredentials: true });
         setCart(response.data);
         }catch (err) {
             console.log(err);
@@ -105,7 +105,7 @@ export const Cart = () => {
       setIsDeleting(true);
         try{
       
-        const response= await axios.delete(`http://localhost:8000/cart/${productId}`, { withCredentials: true });
+        const response= await axios.delete(`http://localhost:8001/cart/${productId}`, { withCredentials: true });
         if (response.status === 200) {
           // Item was successfully deleted
           setCart(response.data);
@@ -130,7 +130,7 @@ export const Cart = () => {
           return;
         }else{
             if(selectedPayment==='cash'){
-                const response= await axios.post('http://localhost:8000/order/orderCash',{address:selectedAddress},  { withCredentials: true });
+                const response= await axios.post('http://localhost:8001/order/orderCash',{address:selectedAddress},  { withCredentials: true });
                 setIsSucessPayment(true);
                 setIsModalOpen(false);
                 setCart(null);
@@ -139,7 +139,7 @@ export const Cart = () => {
 
             }else{
                 if(selectedPayment==='wallet'){
-                    const response= await axios.post('http://localhost:8000/order/orderWallet',{address:selectedAddress},  { withCredentials: true });
+                    const response= await axios.post('http://localhost:8001/order/orderWallet',{address:selectedAddress},  { withCredentials: true });
                     if(response.data==='You do not have enough money in wallet'){
                         setErrorMessage('Not enough balance in Wallet.Please top up your wallet or pick a different payment method.')
                         setIsModalOpen(false);

@@ -26,7 +26,7 @@ import ChatMessages from './Components/Pages/chatMessagesPatient.jsx';
 import ChatMessagesDoctor from './Components/Pages/chatMessagesDoctor.jsx';
 import SalesReport  from './Components/Pages/SalesReport.jsx';
 import io from 'socket.io-client';
-const socket = io.connect("http://localhost:8000");
+const socket = io.connect("http://localhost:8001");
 
 function App() {
   

@@ -66,7 +66,7 @@ function UserManagement() {
     useEffect(() => {
         const getUsers = async () => {
             try {
-            const { data } = await axios.get("http://localhost:8000/admin/allUsers", {
+            const { data } = await axios.get("http://localhost:8001/admin/allUsers", {
                 withCredentials: true,
             });
             // setFiltered( 
@@ -91,7 +91,7 @@ function UserManagement() {
                 id: id, 
                 role: role
             }
-          const { data } = await axios.post("http://localhost:8000/admin/removeUser", body ,
+          const { data } = await axios.post("http://localhost:8001/admin/removeUser", body ,
             {
               withCredentials: true,
             }
@@ -127,7 +127,7 @@ function UserManagement() {
             email: mail,
           };
           const { data } = await axios.post(
-            "http://localhost:8000/administration",
+            "http://localhost:8001/administration",
             body,
             {
               withCredentials: true,

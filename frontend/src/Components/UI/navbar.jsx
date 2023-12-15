@@ -16,7 +16,7 @@ export const Navbar=()=>{
     useEffect(() => {
         const getCart = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/cart', { withCredentials: true });
+                const response = await axios.get('http://localhost:8001/cart', { withCredentials: true });
                 setCart(response.data);
             } catch (err) {
                 console.log(err);

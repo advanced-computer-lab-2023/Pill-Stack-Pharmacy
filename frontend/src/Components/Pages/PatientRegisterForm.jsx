@@ -30,7 +30,7 @@ const PatientRegisterForm = () => {
   const onSubmit = async e => {
     e.preventDefault();
     try {
-      const response = await Axios.post('http://localhost:8000/Patientregister', formData);
+      const response = await Axios.post('http://localhost:8001/Patientregister', formData);
       if(response.data.message==='User signed in successfully'){
       toast({
         title: 'Registration Successful',

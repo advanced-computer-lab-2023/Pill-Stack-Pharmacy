@@ -35,7 +35,7 @@ export const Login = () => {
       const pass = document.getElementById('password').value;
       try {
         const { data } = await axios.post(
-          "http://localhost:8000/login",
+          "http://localhost:8001/login",
           {
             username: user,
             password: pass,

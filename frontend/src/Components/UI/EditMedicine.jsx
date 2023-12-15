@@ -16,7 +16,7 @@ export function EditMedicine({ medicine, onUpdate }) {
          price=editedPrice;
         details=editedDetails;
         // Make an HTTP PUT request to update the medicine information on the server
-        await axios.put(`http://localhost:8000/pharmacist/editmedResults?medicineName=${medicine.Name}&newPrice=${price}&newDetails=${details}`);
+        await axios.put(`http://localhost:8001/pharmacist/editmedResults?medicineName=${medicine.Name}&newPrice=${price}&newDetails=${details}`);
   
         // Update the medicine's details and price in your local state
         medicine.Details = editedDetails;

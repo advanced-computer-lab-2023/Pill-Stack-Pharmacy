@@ -16,7 +16,7 @@ function OTP() {
 
   const checkOTP = async () => {
     try {
-      const response = await axios.post("http://localhost:8000/checkOTP", { otp, email });
+      const response = await axios.post("http://localhost:8001/checkOTP", { otp, email });
       console.log(response.data);
       if (response.data.success) {
         setMessage('');
@@ -32,7 +32,7 @@ function OTP() {
 
   const resetPass = async () => {
     try {
-      const response = await axios.post("http://localhost:8000/resetPass", { newPassword, email });
+      const response = await axios.post("http://localhost:8001/resetPass", { newPassword, email });
       console.log(response.data);
       if (response.data.success) {
         setMessage('Password changed successfully.');

@@ -66,7 +66,7 @@ export const AddMedicine = () => {
     formData.append('image', medicineData.image);
 
     try {
-      const response = await fetch('http://localhost:8000/pharmacist/createMedicine', {
+      const response = await fetch('http://localhost:8001/pharmacist/createMedicine', {
         method: 'POST',
         body: formData,
       });

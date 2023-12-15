@@ -55,7 +55,7 @@ export const Home = () => {
         navigate("/login");
       }
       const { data } = await axios.post(
-        "http://localhost:8000",
+        "http://localhost:8001",
         {},
         { withCredentials: true }
       );
@@ -65,7 +65,7 @@ export const Home = () => {
         toast(`Hello ${user}`, {
           position: "top-right",
         });
-        const fullUserData = await axios.get(`http://localhost:8000/patient/myInfo/${user}`);
+        const fullUserData = await axios.get(`http://localhost:8001/patient/myInfo/${user}`);
         setFullUser(fullUserData.data);
         console.log(fullUserData.data);
       } else {
@@ -96,7 +96,7 @@ export const Home = () => {
   //     console.log("in1");
   //     if (username) {
   //       console.log("in2");
-  //       const { data } = await axios.get(`http://localhost:8000/patient/myInfo/${username}`);
+  //       const { data } = await axios.get(`http://localhost:8001/patient/myInfo/${username}`);
   //       setFullUser(data);
   //       console.log(fullUser);  
   //     }
@@ -130,7 +130,7 @@ export const Home = () => {
       // Send the address to the backend
       const newAddress = `${addressName},${streetName},${buildingNumber},${floor},${apartment}`.replaceAll(' ', '');
       const response = await axios.post(
-        `http://localhost:8000/patient/addDeliveryAddress/${username}`,
+        `http://localhost:8001/patient/addDeliveryAddress/${username}`,
         { address:newAddress },
         { withCredentials: true }
       );
@@ -174,7 +174,7 @@ export const Home = () => {
     if (newPassword !== confirmNewPassword) {
       toast.error('Passwords don\'t match', {
         position: 'top-right',
-        autoClose: 3000,
+        autoClose: 3001,
       });
       return;
     }
@@ -185,19 +185,19 @@ export const Home = () => {
     };
   
     try {
-      const response = await axios.post('http://localhost:8000/changePassword', data, {
+      const response = await axios.post('http://localhost:8001/changePassword', data, {
         withCredentials: true,
       });
   
       if (response.status === 201) {
         toast.success(response.data.message, {
           position: 'top-right',
-          autoClose: 3000,
+          autoClose: 3001,
         });
       } else {
         toast.error(response.data.message, {
           position: 'top-right',
-          autoClose: 3000,
+          autoClose: 3001,
         });
       }
     } catch (error) {
@@ -207,12 +207,12 @@ export const Home = () => {
         console.error('Response Data:', error.response.data);
         toast.error(error.response.data.message, {
           position: 'top-right',
-          autoClose: 3000,
+          autoClose: 3001,
         });
       } else {
         toast.error('An error occurred while processing your request', {
           position: 'top-right',
-          autoClose: 3000,
+          autoClose: 3001,
         });
       }
     }

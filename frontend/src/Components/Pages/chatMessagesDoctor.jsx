@@ -5,7 +5,7 @@ import "../../App.css";
 import { useParams } from "react-router-dom";
 import io from 'socket.io-client';
 
-const socket = io.connect("http://localhost:8000");
+const socket = io.connect("http://localhost:8001");
 
 function ChatMessages({ socket }) {
   const [currentMessage, setCurrentMessage] = useState("");
@@ -24,7 +24,7 @@ function ChatMessages({ socket }) {
   useEffect(() => {
     const fetchPatientList = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/pharmacist/getPatientUsername/${username}`);
+        const response = await axios.get(`http://localhost:8001/pharmacist/getPatientUsername/${username}`);
         setPatientList(response.data.patientUsernames);
       } catch (error) {
         console.error('Error fetching doctor list:', error);
@@ -32,7 +32,7 @@ function ChatMessages({ socket }) {
     };
     const fetchDoctorList = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/pharmacist/getDoctorUsername/${username}`);
+        const response = await axios.get(`http://localhost:8001/pharmacist/getDoctorUsername/${username}`);
         setDoctorList(response.data.doctortUsernames);
         console.log(doctorList);
       } catch (error) {
@@ -46,7 +46,7 @@ function ChatMessages({ socket }) {
   const handleDoctorClick = async (patientUsername) => {
     try {
 
-      const response = await axios.post(`http://localhost:8000/pharmacist/ChatDoctor/${username}/${patientUsername}`);
+      const response = await axios.post(`http://localhost:8001/pharmacist/ChatDoctor/${username}/${patientUsername}`);
       console.log("mmmmmmm");
       const { room: chatRoom } = response.data;
       const { messages: messageList } = response.data;
@@ -64,7 +64,7 @@ function ChatMessages({ socket }) {
   };
   const handlePharmacistClick = async (doctorUsername) => {
     try {
-      const response = await axios.post(`http://localhost:8000/pharmacist/ChatDoctor2/${username}/${doctorUsername}`);
+      const response = await axios.post(`http://localhost:8001/pharmacist/ChatDoctor2/${username}/${doctorUsername}`);
       const { room: chatRoom, messages: messageList } = response.data;
       socket.emit('join_room', chatRoom);
 
@@ -92,7 +92,7 @@ function ChatMessages({ socket }) {
       setMessageList((list) => [...list, messageData]);
       setCurrentMessage("");
 
-      const response = await axios.post(`http://localhost:8000/pharmacist/sendMessage/${selectedPatient}/${username}`, {
+      const response = await axios.post(`http://localhost:8001/pharmacist/sendMessage/${selectedPatient}/${username}`, {
         message: currentMessage
       });
     }
@@ -110,7 +110,7 @@ function ChatMessages({ socket }) {
       setMessageList((list) => [...list, messageData]);
       setCurrentMessage('');
 
-      const response = await axios.post(`http://localhost:8000/pharmacist/sendMessage2/${selectedDoctor}/${username}`, {
+      const response = await axios.post(`http://localhost:8001/pharmacist/sendMessage2/${selectedDoctor}/${username}`, {
         message: currentMessage,
       });
     }

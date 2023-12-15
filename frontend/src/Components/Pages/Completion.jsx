@@ -37,7 +37,7 @@ export default function Completion() {
     // You can use libraries like Axios or the built-in Fetch API
     // Example with Axios:
     
-    axios.post('http://localhost:8000/order/orderCredit/confirm', {
+    axios.post('http://localhost:8001/order/orderCredit/confirm', {
       address:address,
       intentId:intentid,
     }, { withCredentials: true })

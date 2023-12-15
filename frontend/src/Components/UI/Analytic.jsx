@@ -10,14 +10,14 @@ function Analytic({currentMonth}) {
   const [medicineSales, setMedicineSales] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8000/admin/MedNames')
+    fetch('http://localhost:8001/admin/MedNames')
       .then((response) => response.json())
       .then((data) => setMedicine(data))
       .catch((error) => console.error('Error fetching medicinal uses:', error));
       const fetchMedSales = async () => {
             
         try {
-            const response = await axios.post('http://localhost:8000/order/sales', { month:currentMonth,med:selectedMedicine }, { withCredentials: true });
+            const response = await axios.post('http://localhost:8001/order/sales', { month:currentMonth,med:selectedMedicine }, { withCredentials: true });
             console.log(response.data);
             setMedicineSales(response.data);
         } catch (error) {

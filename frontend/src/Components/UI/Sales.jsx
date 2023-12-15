@@ -11,7 +11,7 @@ function Sales({currentMonth}) {
         const fetchMonthlyRevenue = async () => {
             
             try {
-                const response = await axios.post('http://localhost:8000/order/salesDaily', { month:currentMonth }, { withCredentials: true });
+                const response = await axios.post('http://localhost:8001/order/salesDaily', { month:currentMonth }, { withCredentials: true });
                 setMonthlyRevenueData(response.data);
             } catch (error) {
                 console.error('Error fetching monthly revenue:', error);

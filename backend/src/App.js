@@ -41,7 +41,7 @@ app.use(express.json())
 app.use(cookies());
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'http://localhost:3001',
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 };
@@ -51,7 +51,7 @@ app.use(cors(corsOptions));
 
 const io = new Server(server,{
 cors: {
-  origin: "http://localhost:3000",
+  origin: "http://localhost:3001",
   methods: ["GET","POST"],
 },
 });
@@ -74,7 +74,7 @@ socket.on("disconnect",()=>{
   });
 });
 
-const port = process.env.PORT || "8000";
+const port = process.env.PORT || "8001";
 
 
 // configurations

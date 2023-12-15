@@ -62,14 +62,14 @@ function PharmacistReqs() {
     useEffect(() => {
         const getReqs = async () => {
             try {
-            const { data } = await axios.get("http://localhost:8000/admin/applications", {
+            const { data } = await axios.get("http://localhost:8001/admin/applications", {
                 withCredentials: true,
             });
             // sort by date
             // data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             setTimeout(() => {
                         setAvailable(true);
-                     }, 3000);
+                     }, 3001);
             setReqs(data);
             } catch (error) {
             console.log(error);
@@ -90,7 +90,7 @@ function PharmacistReqs() {
         // router.post('/applications/accept-registeration/:id',acceptRegRequest);
         
         await axios.post(
-          `http://localhost:8000/admin/applications/accept-registeration/${viewReq._id}`,
+          `http://localhost:8001/admin/applications/accept-registeration/${viewReq._id}`,
           {},
           {
             withCredentials: true,
@@ -107,7 +107,7 @@ function PharmacistReqs() {
       try {  
         console.log(viewReq._id);      
         await axios.post(
-          `http://localhost:8000/admin/applications/reject-registeration/${viewReq._id}`,
+          `http://localhost:8001/admin/applications/reject-registeration/${viewReq._id}`,
           {},
           {
             withCredentials: true,

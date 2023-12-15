@@ -15,7 +15,7 @@ const Statistic=({currentMonth})=>{
         // fetch total number of orders 
         const fetchOrderStats = async () => {
           try {
-            const response=await axios.post('http://localhost:8000/order/salesStats',{month:currentMonth},{ withCredentials: true });
+            const response=await axios.post('http://localhost:8001/order/salesStats',{month:currentMonth},{ withCredentials: true });
            // console.log(response.data);
             if(response.data!=='no sales found for this month') {
                 setOrderStats(response.data);
@@ -48,8 +48,8 @@ const Statistic=({currentMonth})=>{
     
                 }
     
-                const responseCurrentMonth = await axios.post('http://localhost:8000/order/salesStats', { month: currentMonth }, { withCredentials: true });
-                const responsePreviousMonth = await axios.post('http://localhost:8000/order/salesStats', { month: previousMonth }, { withCredentials: true });
+                const responseCurrentMonth = await axios.post('http://localhost:8001/order/salesStats', { month: currentMonth }, { withCredentials: true });
+                const responsePreviousMonth = await axios.post('http://localhost:8001/order/salesStats', { month: previousMonth }, { withCredentials: true });
                 console.log( responseCurrentMonth.data);
                 console.log( responsePreviousMonth.data);
 

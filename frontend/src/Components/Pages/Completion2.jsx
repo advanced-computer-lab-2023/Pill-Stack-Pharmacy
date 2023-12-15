@@ -35,7 +35,7 @@ export default function Completion() {
     // You can use libraries like Axios or the built-in Fetch API
     // Example with Axios:
     
-    axios.get('http://localhost:8000/order/recent', { withCredentials: true })
+    axios.get('http://localhost:8001/order/recent', { withCredentials: true })
       .then(response => {
         setOrder(response.data);
         // Do additional handling here

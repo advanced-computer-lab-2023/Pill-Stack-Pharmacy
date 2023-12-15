@@ -18,13 +18,13 @@ export function MedicineListControl() {
 
   useEffect(() => {
     // Fetch medicines and their medicinal uses from your server's API endpoint
-    fetch('http://localhost:8000/admin/availableMedicinesPH')
+    fetch('http://localhost:8001/admin/availableMedicinesPH')
       .then((response) => response.json())
       .then((data) => setMedicines(data))
       .catch((error) => console.error('Error fetching medicine data:', error));
 
     // Fetch the list of unique medicinal uses
-    fetch('http://localhost:8000/admin/MedicinalUse')
+    fetch('http://localhost:8001/admin/MedicinalUse')
       .then((response) => response.json())
       .then((data) => setMedicinalUses(data))
       .catch((error) => console.error('Error fetching medicinal uses:', error));
@@ -33,7 +33,7 @@ export function MedicineListControl() {
   // Function to change medicine status
   const changeMedicineStatus = (medicineId) => {
     // Update the medicine status in the backend
-    fetch(`http://localhost:8000/pharmacist/changeMedicineStatus/${medicineId}`, {
+    fetch(`http://localhost:8001/pharmacist/changeMedicineStatus/${medicineId}`, {
       method: 'PUT',
     })
       .then((response) => response.json())
@@ -43,7 +43,7 @@ export function MedicineListControl() {
           title: 'Success',
           description: `Medicine status changed to ${data.status}`,
           status: 'success',
-          duration: 3000,
+          duration: 3001,
           isClosable: true,
         });
 
@@ -62,7 +62,7 @@ export function MedicineListControl() {
           title: 'Error',
           description: 'Failed to change medicine status',
           status: 'error',
-          duration: 3000,
+          duration: 3001,
           isClosable: true,
         });
       });

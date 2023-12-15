@@ -4,7 +4,7 @@ import ScrollToButtom from 'react-scroll-to-bottom';
 import "../../App.css";
 import { useParams } from "react-router-dom";
 import io from 'socket.io-client';
-const socket = io.connect("http://localhost:8000");
+const socket = io.connect("http://localhost:8001");
 
 
 function ChatMessages({ socket}) {
@@ -20,7 +20,7 @@ function ChatMessages({ socket}) {
   useEffect(() => {
     const fetchDoctorList = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/patient/getDoctorUsername/${username}`);
+        const response = await axios.get(`http://localhost:8001/patient/getDoctorUsername/${username}`);
         console.log(response.data)
         setDoctorList(response.data.pharmacistUsernames); // Correct property name
     } catch (error) {
@@ -33,7 +33,7 @@ function ChatMessages({ socket}) {
 
   const handleDoctorClick = async (doctorUsername) => {
     try {
-      const response = await axios.post(`http://localhost:8000/patient/Chat/${username}/${doctorUsername}`);
+      const response = await axios.post(`http://localhost:8001/patient/Chat/${username}/${doctorUsername}`);
       console.log(response.data)
 
       const { room: chatRoom } = response.data;
@@ -71,7 +71,7 @@ function ChatMessages({ socket}) {
       console.log(currentMessage);
       console.log("mariomaaa")
 
-      const response = await axios.post(`http://localhost:8000/patient/sendMessage/${username}/${selectedDoctor}`, {
+      const response = await axios.post(`http://localhost:8001/patient/sendMessage/${username}/${selectedDoctor}`, {
         message: currentMessage
       });
       console.log("mariomaaa")

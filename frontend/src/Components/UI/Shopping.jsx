@@ -13,7 +13,7 @@ function Shopping({currentMonth}) {
     // fetch total number of orders 
     const fetchOrderStats = async () => {
       try {
-        const response=await axios.post('http://localhost:8000/order/salesExtraStats',{month:currentMonth},{ withCredentials: true });
+        const response=await axios.post('http://localhost:8001/order/salesExtraStats',{month:currentMonth},{ withCredentials: true });
         console.log(response.data);
         if(response.data!=='no sales found for this month') {
             setOrderStats(response.data);
