@@ -4,6 +4,7 @@ import { Input } from '@chakra-ui/react'
 import { Text , Box} from '@chakra-ui/react'
 import '../UI/button.css'
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 import {
     Alert,
     AlertIcon,
@@ -66,32 +67,39 @@ export const AddMedicine = () => {
     formData.append('image', medicineData.image);
 
     try {
-      const response = await fetch('http://localhost:8001/pharmacist/createMedicine', {
-        method: 'POST',
-        body: formData,
+     
+      const response = await axios.post('http://localhost:8001/pharmacist/createMedicine', formData, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
+  
+     
+      console.log(response);
 
-      if (response.status === 200) {
+      if (response.data === 'Medicine added successfully.') {
+        setMedicineData({
+          name: '',
+          details: '',
+          price: '',
+          quantity: '',
+          medicinalUse: [],
+          image: null,
+        });
         console.log('Medicine added successfully.');
         setErrorMessage('');
 
         setSuccessMessage('Medicine added successfully.');
-        setMedicineData({
-            name: '',
-            details: '',
-            price: '',
-            quantity: '',
-            medicinalUse: [],
-            image: null,
-          });
+      
       } else {
-        setErrorMessage(response.message);
+        setErrorMessage(response.data);
         console.error('Error adding medicine.');
       }
     } catch (error) {
         setErrorMessage('server error');
 
-      console.error('Error adding medicine:', error);
+      console.error('Error adding medicine12:', error);
     }finally {
       console.log('isSubfalse')
       setIsSubmitting(false); // Set isSubmitting to false to enable the button after the request is done
@@ -110,23 +118,23 @@ export const AddMedicine = () => {
           <form onSubmit={handleSubmit} style={{}}>
             <div>
               <label>Name:</label>
-              <Input variant='filled' type="text" name="name" onChange={handleInputChange} />
+              <Input variant='filled' type="text" name="name" value={medicineData.name} onChange={handleInputChange} />
             </div>
             <div>
               <label>Details:</label>
-              <Input variant='filled' name="details" onChange={handleInputChange} />
+              <Input variant='filled' name="details" value={medicineData.details} onChange={handleInputChange} />
             </div>
             <div>
               <label>Price:</label>
-              <Input variant='filled' type="text" name="price" onChange={handleInputChange} />
+              <Input variant='filled' type="text" name="price" value={medicineData.price}onChange={handleInputChange} />
             </div>
             <div>
               <label>Quantity:</label>
-              <Input variant='filled' type="text" name="quantity" onChange={handleInputChange} />
+              <Input variant='filled' type="text" name="quantity" value={medicineData.quantity} onChange={handleInputChange} />
             </div>
             <div>
               <label>Medicinal Use (comma-separated):</label>
-              <Input variant='filled' type="text" name="medicinalUse" onChange={handleInputChange} />
+              <Input variant='filled' type="text" name="medicinalUse" value={medicineData.medicinalUse} onChange={handleInputChange} />
             </div>
             <div>
               <label>Image:</label>

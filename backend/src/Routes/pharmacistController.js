@@ -20,25 +20,29 @@ const { default: mongoose } = require('mongoose');
 const createMedicine = async (req, res) => {
   try {
     const image = req.file;
-
-    if (!image) {
-      return res.status(400).send({message:'Please upload an image.'});
-    }
     if (!req.body.name) {
-      return res.status(400).send({message:'Please enter medicine name'});
+
+      return res.send('Please enter medicine name');
     }
     if (!req.body.details) {
-      return res.status(400).send({message:'Please enter medicine details '});
+
+      return res.send('Please enter medicine details ');
     }
     if (!req.body.quantity) {
-      return res.status(400).send({message:'Please enter medicine quantity'});
+      return res.send('Please enter medicine quantity');
     }
     if (!req.body.price) {
-      return res.status(400).send({message:'Please enter medicine price'});
+      return res.send('Please enter medicine price');
     }
     if (!req.body.medicinalUse) {
-      return res.status(400).send({message:'Please enter medicine medicinal use'});
+      return res.send('Please enter medicine medicinal use');
     }
+
+    if (!image) {
+      return res.send("Please upload an image.");
+    }
+
+   
 
     const medicine = new medModel({
       Name: req.body.name,
@@ -64,13 +68,11 @@ const createMedicine = async (req, res) => {
     }else{
       await medicine.save();
       console.log('Medicine saved successfully:', medicine);
-
-
     }
 
-    // Save the medicine using await
-    res.status(200).send("Medicine added successfully.");
+    return res.status(200).send("Medicine added successfully.");
   } catch (error) {
+
     console.error('Error saving medicine:', error);
     res.status(400).send({message:"An error occurred in the server"});
   }
