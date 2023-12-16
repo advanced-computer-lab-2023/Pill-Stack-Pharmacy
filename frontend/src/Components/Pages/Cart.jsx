@@ -21,7 +21,7 @@ import {
     FormControl,
     FormLabel,
     Flex,
-    HStack,
+    HStack
   } from '@chakra-ui/react';
   import { FaPlus } from 'react-icons/fa'; // Import the icon component you want to use
   import {
@@ -524,9 +524,13 @@ export const Cart = () => {
                           </MDBTypography>
                         </div>
       
-                        <MDBBtn color="dark" block size="lg" onClick={() => handleCheckout()}>
+                        <Button  colorScheme="teal"
+                          size="lg"
+                          width="100%"
+                        onClick={() => handleCheckout()}
+                        >
                           Checkout
-                        </MDBBtn>
+                        </Button>
                       </div>
                     </MDBCol>)}
                     <Modal isOpen={isModalOpen} onClose={() => {
@@ -591,7 +595,7 @@ export const Cart = () => {
 
               </ModalBody>
               <ModalFooter>
-                <Button colorScheme="blue" onClick={() => handlePay(selectedAddress, selectedPayment)}>
+                <Button colorScheme="teal" onClick={() => handlePay(selectedAddress, selectedPayment)}>
                   Pay
                 </Button>
               </ModalFooter>
