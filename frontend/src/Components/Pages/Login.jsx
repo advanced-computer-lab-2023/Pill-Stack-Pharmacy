@@ -121,7 +121,7 @@ export const Login = () => {
       <Stack direction="column" spacing={7} alignItems="center" w="100%" h="100%" justify="center">
         <Image src={Logo} alt="Logo" w="70%" mb={10} />
         <Box alignSelf="flex-start" mx={3} textAlign='start'>
-          <Text fontSize="6xl" mb={2} as='abbr' color={'#4fbbf3'} fontWeight={'bold'}> Your Health, <br /> One Click Away</Text>
+          <Text fontSize="6xl" mb={2} as='abbr' color={'#005660'} fontWeight={'bold'}> Your Health, <br /> One Click Away</Text>
         </Box>
         <Box alignSelf="flex-start" mx={3} textAlign='start'>
           <Text fontSize="2xl" as='cite'> "Join our platform for access to top-tier doctors and hassle-free appointments. Your wellness journey starts here." </Text>
@@ -139,7 +139,7 @@ export const Login = () => {
       </Stack>
 
       </GridItem>
-      <GridItem colSpan={{ base: 'auto', sm: 3 }} h={'100%'} bg={'#4fbbf3'} borderLeftRadius={{ base: 'none', sm: 'xl' }} >
+      <GridItem colSpan={{ base: 'auto', sm: 3 }} h={'100%'} bg={'#005660'} borderLeftRadius={{ base: 'none', sm: 'xl' }} >
         <Flex w={'100%'} h={'100%'} justifyContent={'center'} alignItems={'center'} >
         <Box
         p={10}
