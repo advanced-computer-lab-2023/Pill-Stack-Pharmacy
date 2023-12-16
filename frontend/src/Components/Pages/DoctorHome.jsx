@@ -273,14 +273,14 @@ function DoctorHome() {
   {fullUser.Notifications && fullUser.Notifications[0] !== undefined ? (
     <div className="line" style={{ marginTop: '0px' }}>
       <BellIcon color='#005660' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
-      <div className="info1" style={{ margin: '0px 0px 0px 33px', padding: 0, display: "inline-block", transform: 'translateY(-75px)' }}>
+      <div className="info1" style={{ margin: '0px 0px 0px 33px', padding: 0, display: "inline-block", transform: 'translateY(-80px)' }}>
         {fullUser.Notifications[0]}
       </div>
     </div>
   ) : (
     <div className="line" style={{ marginTop: '0px' }}>
     <BellIcon color='#005660' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
-    <div className="info1" style={{ margin: '0px 0px 0px 33px', padding: 0, display: "inline-block", transform: 'translateY(-75px)' }}>
+    <div className="info1" style={{ margin: '0px 0px 0px 33px', padding: 0, display: "inline-block", transform: 'translateY(-80px)' }}>
       No New Notifications
     </div>
   </div>
@@ -289,14 +289,14 @@ function DoctorHome() {
   {fullUser.Notifications && fullUser.Notifications[1] !== undefined ? (
     <div className="line" style={{ marginTop: '-50px' }}>
       <BellIcon color='#005660' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
-      <div className="info1" style={{ margin: '0px 0px 0px 33px', padding: 0, display: "inline-block", transform: 'translateY(-75px)' }}>
+      <div className="info1" style={{ margin: '0px 0px 0px 33px', padding: 0, display: "inline-block", transform: 'translateY(-80px)' }}>
         {fullUser.Notifications[1]}
       </div>
     </div>
   ) : (
     <div className="line" style={{ marginTop: '-50px' }}>
     <BellIcon color='#005660' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
-    <div className="info1" style={{ margin: '0px 0px 0px 33px', padding: 0, display: "inline-block", transform: 'translateY(-75px)' }}>
+    <div className="info1" style={{ margin: '0px 0px 0px 33px', padding: 0, display: "inline-block", transform: 'translateY(-80px)' }}>
     No New Notifications
     </div>
   </div>
