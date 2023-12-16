@@ -6,6 +6,9 @@ import { LockIcon, UnlockIcon } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@chakra-ui/react';
 import '../UI/button.css';
+import Navigation from "../UI/Navigation";
+import '../UI/innerPages.css';
+import SidebarDR from '../Pages/sideDR';
 
 export function MedicineListControl() {
   const [medicines, setMedicines] = useState([]);
@@ -80,14 +83,19 @@ export function MedicineListControl() {
   );
   return (
     <>
-      <Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
+     <Navigation
+      pagetitle={"Available Medicines"}/>
+       <SidebarDR
+      />
+      <div className="content" mr={13}>
+      {/* <Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
         <Text fontSize={'3xl'} color={'white'}>
           Available Medicines
         </Text>
         <button className="btn" onClick={back}>
           back
         </button>
-      </Box>
+      </Box> */}
       <Flex  Flex align="center" mb={4}>
         <MedicinalUseFilter
           selectedMedicinalUse={selectedMedicinalUse}
@@ -160,6 +168,7 @@ export function MedicineListControl() {
           ))}
         </SimpleGrid>
       </Box>
+      </div>
     </>
   );
 }  

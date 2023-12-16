@@ -5,6 +5,9 @@ import { Button, Input, VStack, HStack, Heading, Text, Box } from '@chakra-ui/re
 import '../UI/button.css'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Navigation from "../UI/Navigation";
+import '../UI/innerPages.css';
+import SidebarDR from '../Pages/sideDR';
 
 export function MedicineListwithSales() {
   const [medicines, setMedicines] = useState([]);
@@ -60,12 +63,14 @@ export function MedicineListwithSales() {
     .filter((medicine) => selectedMedicinalUse === '' || medicine.MedicinalUse.includes(selectedMedicinalUse));
 
   return (
-    <><Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
-      <Text fontSize={'3xl'} color={'white'}>Stock Management</Text>
-      <button className="btn" onClick={back}>back</button>
-    </Box><VStack align="start" spacing={6} p={6} w="100%">
-
-        <Heading as="h1" color='teal' mb={4}>Available Medicines</Heading>
+    <>
+    <Navigation
+      pagetitle={"Stock Management"}/>
+       <SidebarDR
+       mb={3}
+      />
+  <div className="content" mt={3}>     
+   
         <MedicinalUseFilter
           selectedMedicinalUse={selectedMedicinalUse}
           onMedicinalUseChange={setSelectedMedicinalUse}
@@ -75,6 +80,7 @@ export function MedicineListwithSales() {
           type="text"
           placeholder="Search medicines..."
           value={searchTerm}
+          mb={3}
           onChange={(e) => setSearchTerm(e.target.value)} />
         <VStack align="start" w="100%">
           {filteredMedicines.map((medicine, index) => (
@@ -89,16 +95,25 @@ export function MedicineListwithSales() {
               {index !== filteredMedicines.length - 1 && (
                 <Box h="1px" bg="gray.200" w="100%" my={4}></Box>
               )}
+              
             </Box>
+            
           ))}
+          
         </VStack>
+
+     
         {isModalOpen && (
           <Box className="modal" p={4} borderWidth="1px" borderRadius="md">
             <EditMedicine medicine={editMedicine} onUpdate={updateMedicine} />
             <Button mt={4} size='sm' colorScheme='teal' onClick={closeEditModal}>Close</Button>
           </Box>
         )}
-      </VStack></>
+        
+        </div>   
+      
+      </>
+      
   );
 }
 

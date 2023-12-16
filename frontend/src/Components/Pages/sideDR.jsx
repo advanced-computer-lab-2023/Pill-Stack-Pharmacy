@@ -45,10 +45,11 @@ function SidebarDR(props) {
 
   return (
     <div className="sidebar" style={sidebarStyle}>
+    <Link to="/doctor-home">
       <Box textAlign="center" p={5} mb={1} mr={1}>
         <img src={pillstackLogo} alt="Logo" width="220" />
       </Box>
-
+    </Link>
      <br />
       <Accordion defaultIndex={[0]} allowToggle={true} allowMultiple={false} theme={customAccordionTheme}>
         <AccordionItem  >

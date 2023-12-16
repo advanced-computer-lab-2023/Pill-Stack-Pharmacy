@@ -1,0 +1,33 @@
+
+@font-face {
+    font-family: 'poppinsregular';
+    src: url('../UI/fonts/Poppins otf/Poppins-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Franklin Gothic Book Regular';
+    src: url('../UI/fonts/Franklin/Franklin Gothic Book Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'poppinsmedium';
+    src: url('../UI/fonts/Poppins otf/Poppins-Medium.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Futura Maxi CG Bold';
+    src: url('../UI/fonts/Futura/Futura Maxi CG Bold Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.pageTitle{ 
+    color: #005660;
+    font-family: 'Futura Maxi CG Bold';
+    font-size: 35px;
+    margin: 2px 0px -15px 16%;
+    padding-bottom: 7px;
+}
