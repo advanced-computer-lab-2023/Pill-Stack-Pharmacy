@@ -30,6 +30,7 @@ import {
   Avatar,
   Badge,
   Button,
+  Center,
   useDisclosure,
   Divider,
   SimpleGrid,
@@ -242,6 +243,7 @@ export const Home = () => {
          name={fullUser.Name}
          openChangePasswordModal={openChangePasswordModal}
           onLogout={Logout}
+          notifications={fullUser.Notifications}
         />
         </div>
         {/* <Flex bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
@@ -311,15 +313,15 @@ export const Home = () => {
             <Box className="box1" >
               <div className="boxT">Information</div>
             <div className="line">
-              <EmailIcon color='#2CAED8' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
+              <EmailIcon color='#005660' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
               <div className="info1" style={{ margin: '0px 0px 0px 19px', padding: 0, display: "inline-block", transform: 'translateY(-5px)' }}>{`Email:  ${fullUser.Email}`}</div>
             </div>
             <div className="line">
-              <PhoneIcon color='#2CAED8' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
+              <PhoneIcon color='#005660' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
               <div className="info1" style={{ margin: '0px 0px 0px 19px', padding: 0, display: "inline-block", transform: 'translateY(-5px)' }}>{`Mobile:  ${fullUser.MobileNumber}`}</div>
             </div>
             <div className="line">
-              <PhoneIcon color='#2CAED8' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
+              <PhoneIcon color='#005660' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
               <div className="info1" style={{ margin: '0px 0px 0px 18px', padding: 0, display: "inline-block", transform: 'translateY(-5px)' }}>{`Emergency Mobile:  ${fullUser.EmergencyContact_MobileNumber}`}</div>
             </div>
             </Box>
@@ -327,14 +329,14 @@ export const Home = () => {
             <Box className="box1" >
             <div className="boxT">Recent</div>
             <div className="line" style={{ marginTop: '0px' }}>
-          <BellIcon color='#2CAED8' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
+          <BellIcon color='#005660' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
           <div className="info1" style={{ margin: '0px 0px 0px 33px', padding: 0, display: "inline-block", transform: 'translateY(-45px)' }}>
             {fullUser.Notifications && fullUser.Notifications.length > 0 ? `${fullUser.Notifications[0]}` : "None"}
           </div>
         </div>
 
         <div className="line" style={{ marginTop: '-50px'}}>
-          <BellIcon color='#2CAED8' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
+          <BellIcon color='#005660' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
           <div className="info1" style={{ margin: '0px 0px 0px 33px', padding: 0, display: "inline-block", transform: 'translateY(-45px)' }}>
             {fullUser.Notifications && fullUser.Notifications.length > 1 ? `${fullUser.Notifications[1]}` : "None"}
           </div>
@@ -439,9 +441,9 @@ export const Home = () => {
             
           </div>
           <div className="Container3">
-          <Link to="/medicine" className="box2" >Shop</Link>
-            <Link to="/cart" className="box21" style={{ color: '#4C4C4C', textDecoration: 'none' }}>Cart</Link>
-            <Link to="/orderDetails" className="box22" >Orders</Link>
+          <Link to="/medicine" className="box2" style={{ color: '#005660', textDecoration: 'none' }} >Shop</Link>
+            <Link to="/cart" className="box21" style={{ color: '#005660', textDecoration: 'none' }}>Cart</Link>
+            <Link to="/orderDetails" className="box22" style={{ color: '#005660', textDecoration: 'none' }} >Orders</Link>
 
           </div>
         </div>
@@ -559,14 +561,15 @@ export const Home = () => {
             position: "fixed",
             bottom: "20px",
             right: "20px",
-            background: "#28a745",
-            padding: "10px 20px",
-            borderRadius: "5px",
+            background: "#005660",
+            borderRadius: "100px",
             cursor: "pointer",
           }}
         >
-          <Link to={`/chatwithdoctor/${username}`} style={{ textDecoration: "none", color: "white" }}>
-            Chat with your doctor
+          <Link to={`/chatwithdoctor/${username}`}>
+          <Center>
+          <Icon as={ChatIcon} boxSize={6} m={5} style={{ color: 'white' }} />  
+          </Center>          
           </Link>
         </motion.div>
 

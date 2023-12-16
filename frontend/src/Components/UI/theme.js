@@ -12,11 +12,11 @@ const baseStyle = definePartsStyle({
   },
   button: {
     bg: 'rgba(0, 0, 255, 0)',
-    color: 'cyan.500',
+    color: '#005660',
     height: '60px',
     margin: '0px',
     width: '100%',
-    _hover: {bg: 'linear-gradient(45deg, #1E9AFE, #60DFCD)',color: 'white',},
+    _hover: {bg: 'linear-gradient(45deg, #005660, #005660)',color: 'white',},
   },
 });
 

@@ -119,7 +119,7 @@
     cursor: pointer;
   }
   .box2{
-    background-image: url('./Images/Packages.png');
+    background-image: url('./Images/Packages-01.png');
     background-position: center 60% !important;
     background-size: cover;
     background-repeat: no-repeat;
@@ -132,13 +132,13 @@
     padding-top: 65%;
     font-size: 25px;
     top: 40%;
-    color: #4C4C4C;
+    color: #005660;
     border-radius: 40px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the shadow values as needed */
   }
 
   .box21 {
-    background-image: url('./Images/Appointments.png');
+    background-image: url('./Images/Appointments-01.png');
     background-position: center 60% !important;
     background-size: cover;
     background-repeat: no-repeat;
@@ -151,13 +151,13 @@
     padding-top: 63%;
     font-size: 25px;
     top: 38%;
-    color: #4C4C4C;
+    color: #005660;
     border-radius: 40px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the shadow values as needed */
   }
 
   .box22 {
-    background-image: url('./Images/Family.png');
+    background-image: url('./Images/Family-01.png');
     background-position: center 60% !important;
     background-size: cover;
     background-repeat: no-repeat;
@@ -170,7 +170,7 @@
     padding-top: 63%;
     font-size: 25px;
     top: 38%;
-    color: #4C4C4C;
+    color: #005660;
     border-radius: 40px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the shadow values as needed */
   }
@@ -264,7 +264,7 @@
 
   .boxT{
     
-    color: #2CAED8;
+    color: #005660;
     font-family: 'Futura Maxi CG Bold';
     font-size: 35px;
     margin: 25px 0px -5px 33px;
@@ -351,7 +351,7 @@
   }
 
   .Male {
-    background: linear-gradient(45deg, #1E9AFE, #60DFCD);
+    background: linear-gradient(45deg, #005660, #005660);
     position: relative;
     color: white;
     top: 0%;
@@ -368,7 +368,7 @@
   }
 
   .Female {
-    background: linear-gradient(45deg, #1E9AFE, #60DFCD);
+    background: linear-gradient(45deg, #005660, #005660);
     margin-left: auto;
     color: white; 
     top: 0%;

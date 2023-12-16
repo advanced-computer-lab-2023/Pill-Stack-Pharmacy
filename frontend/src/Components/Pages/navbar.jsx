@@ -33,6 +33,8 @@ import {
   MenuDivider,
   Image
 } from '@chakra-ui/react'
+import Notifications from './notifications'; 
+
 
 
 
@@ -80,7 +82,7 @@ const WithSubnavigation = ({ username, openChangePasswordModal, onLogout,notific
             <DesktopNav />
           </Flex>
         </Flex>
-        {/* <Notifications  notifications={notifications}/> */}
+        <Notifications  notifications={notifications}/>
 
         <Stack
           flex={{ base: 1, md: 0 }}
