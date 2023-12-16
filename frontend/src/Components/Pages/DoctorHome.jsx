@@ -309,13 +309,6 @@ function DoctorHome() {
             
           </div>
 
-
-          
-         
-
-      
-
-
     
             {/* </Box>
           </div> */}
