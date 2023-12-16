@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import Sidebar from './side';
+import SidebarDR from './sideDR';
 import '../UI/home.css';
 import WithSubnavigation from './navbar';
 import { ChatIcon, Icon, EmailIcon,PhoneIcon,BellIcon } from "@chakra-ui/icons";
@@ -226,7 +226,7 @@ function DoctorHome() {
           </Grid>
         </Box> */}
 
-        <Sidebar/>
+        <SidebarDR/>
         <div style={{ position: 'fixed', top: '0', left: '0', right: '0', zIndex: '1000'}}>
         <WithSubnavigation
          username={username}

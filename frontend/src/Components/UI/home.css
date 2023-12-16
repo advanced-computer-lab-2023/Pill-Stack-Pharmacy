@@ -252,7 +252,7 @@
     transition: transform 0.2s ease-in-out;
   }
 
-  .pp:hover{
+  .pp:hover,.ppM:hover{
     transform: translateY(-5px);
   }
 
