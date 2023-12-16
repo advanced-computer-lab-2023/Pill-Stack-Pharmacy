@@ -223,7 +223,7 @@ export default function Completion() {
                   <div className="d-flex justify-content-between pt-2">
                     <p className="fw-bold mb-0">Order Details</p>
                     <p className="text-muted mb-0">
-                      <span className="fw-bold me-4">Total</span> {order.bill}
+                      <span className="fw-bold me-4">Total $</span> {order.bill}
                     </p>
                   </div>
 
@@ -262,7 +262,7 @@ export default function Completion() {
                     tag="h5"
                     className="d-flex align-items-center justify-content-end text-white text-uppercase mb-0"
                   >
-                    Total paid: <span className="h2 mb-0 ms-2">{order.bill}</span>
+                    Total paid: $ <span className="h2 mb-0 ms-2">{order.bill}</span>
                   </MDBTypography>
                 </MDBCardFooter>
               </MDBCard>
@@ -270,7 +270,7 @@ export default function Completion() {
           </MDBRow>
         </MDBContainer>
       </section>):((
-            <p>No orders yet</p>
+            <p>Loading...</p>
           ))}
     </>
     );
