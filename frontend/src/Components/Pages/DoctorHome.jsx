@@ -263,35 +263,62 @@ function DoctorHome() {
             </div>
             </Box>
 
-            <Box className="box1" >
-            <div className="boxT">Recent</div>
-            <div className="line">
-              <BellIcon color='#005660' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
-              <div className="info1" style={{ margin: '0px 0px 0px 19px', padding: 0, display: "inline-block", transform: 'translateY(-5px)' }}>{`${fullUser.Notifications && fullUser.Notifications.length > 0 ? `${fullUser.Notifications[0]}` : "None"}`}</div>
-            </div>
-            <div className="line">
-              <BellIcon color='#005660' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
-              <div className="info1" style={{ margin: '0px 0px 0px 19px', padding: 0, display: "inline-block", transform: 'translateY(-5px)' }}>{`${fullUser.Notifications && fullUser.Notifications.length > 1 ? `${fullUser.Notifications[1]}` : "None"}`}</div>
-            </div>
-          
-            {/* <div className="line" style={{ marginTop: '0px' }}>
-          <BellIcon color='#005660' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
-          <div className="info1" style={{ margin: '0px 0px 0px 33px', padding: 0, display: "inline-block", transform: 'translateY(-45px)' }}>
-            {fullUser.Notifications && fullUser.Notifications.length > 0 ? `${fullUser.Notifications[0]}` : "None"}
-          </div>
-        </div>
+            
 
-        <div className="line" style={{ marginTop: '-50px'}}>
-          <BellIcon color='#005660' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
-          <div className="info1" style={{ margin: '0px 0px 0px 33px', padding: 0, display: "inline-block", transform: 'translateY(-45px)' }}>
-            {fullUser.Notifications && fullUser.Notifications.length > 1 ? `${fullUser.Notifications[1]}` : "None"}
+            <Box className="boxL1" >
+            {/* <div className="boxT">Recent</div> */}
+            <Box className="smallNot" style={{ color: '#4C4C4C', textDecoration: 'none' }}>
+  <div className="boxT">Recent</div>
+
+  {fullUser.Notifications && fullUser.Notifications[0] !== undefined ? (
+    <div className="line" style={{ marginTop: '0px' }}>
+      <BellIcon color='#005660' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
+      <div className="info1" style={{ margin: '0px 0px 0px 33px', padding: 0, display: "inline-block", transform: 'translateY(-75px)' }}>
+        {fullUser.Notifications[0]}
+      </div>
+    </div>
+  ) : (
+    <div className="line" style={{ marginTop: '0px' }}>
+    <BellIcon color='#005660' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
+    <div className="info1" style={{ margin: '0px 0px 0px 33px', padding: 0, display: "inline-block", transform: 'translateY(-75px)' }}>
+      No New Notifications
+    </div>
+  </div>
+  )}
+
+  {fullUser.Notifications && fullUser.Notifications[1] !== undefined ? (
+    <div className="line" style={{ marginTop: '-50px' }}>
+      <BellIcon color='#005660' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
+      <div className="info1" style={{ margin: '0px 0px 0px 33px', padding: 0, display: "inline-block", transform: 'translateY(-75px)' }}>
+        {fullUser.Notifications[1]}
+      </div>
+    </div>
+  ) : (
+    <div className="line" style={{ marginTop: '-50px' }}>
+    <BellIcon color='#005660' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
+    <div className="info1" style={{ margin: '0px 0px 0px 33px', padding: 0, display: "inline-block", transform: 'translateY(-75px)' }}>
+    No New Notifications
+    </div>
+  </div>
+  )}
+</Box>
+
+              <Link to="/salesReport" className="box23" style={{ color: '#4C4C4C', textDecoration: 'none' }}>Sales Report</Link>
+            
+            </Box>
+            
           </div>
-        </div> */}
+
+
+          
+         
+
+      
 
 
     
-            </Box>
-          </div>
+            {/* </Box>
+          </div> */}
 
           
           <div className="Container2">
