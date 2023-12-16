@@ -161,6 +161,53 @@ Your default browser should automatically open on the web application's address.
 
 
 # API Refrences
+Our APIs is divided into 6 APIs:
+### Authentication Router
+#### Route : (/)
+#### Authenticate a user
+- #### Route: /login
+- #### Request type: post
+- #### Request Body: {username: 'Mariam', password: 'Ma12345'}
+### Handles secure registration of patients 
+- #### Route: /Patientregister
+- #### Request type: post
+- #### Request Body: {username:'Rawan', name:'RawanM',email:'Rou@gmail.com',password:'mdmd123',dob: '1990-01-01',gender: 'female',mobile:'0122354554',EmergencyContact_Name:'rouu',EmergencyContact_MobileNumber:'01233334455',EmergencyContact_Relation:'Mother'}
+### Create a new admin user
+- #### Route: /administration
+- #### Request type: post
+- #### Request Body: {Username: 'Rou', password:'Mssaie1234', email:'rou@gmail.com'}
+### Change user password
+- #### Route: /changePassword
+- #### Request type: post
+- #### Middleware: userVerification
+- #### Request Body: {oldPassword:'Mskaoe12', newPassword:'Maadjei1289', Username:'Rou'}
+### send OTP for user verification
+- #### Route: /sendOTP
+- #### Request type: post
+- #### Request Body: {email:'Rou@gmail.com'}
+### Reset user password with OTP verification
+- #### Route: /resetPassword
+- #### Request type: post
+- #### Request Body: {otp: '78548',email:'rou@gmail.com',newPassword:'Mass1254'}
+### Reset user password without OTP verification
+- #### Route: /resetPass
+- #### Request type: post
+- #### Request Body: {email:'rou@gmail.com',newPassword:'Mass1254'}
+### Verify the validity of the OTP
+- #### Route: /checkOTP
+- #### Request type: post
+- #### Request Body: {email:'rou@gmail.com', otp:'12458'}
+### Register a pharmaceutical professional
+- #### Route: /doc_register
+- #### Request type: post
+- #### Request Body: {username:'Rawan', name:'RawanM',email:'Rou@gmail.com',password:'mdmd123',dob: '1990-01-01',hourly_rate: 50, affiliation:'Pharmacy Affiliation',educational_background: "Pharmacy Education Background",IDDocument:'file content here',pharmacyDegreeDocument: 'file content here',workingLicenseDocument: 'file content here'}     
+
+### Admin Router
+### Cart Router 
+### Order Router
+### Patient Router
+### Pharmacist Router
+
 
 
 # Postman Testing
