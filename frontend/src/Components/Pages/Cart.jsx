@@ -21,6 +21,7 @@ import {
     FormControl,
     FormLabel,
     Flex,
+    Stack,
     HStack
   } from '@chakra-ui/react';
   import { FaPlus } from 'react-icons/fa'; // Import the icon component you want to use
@@ -601,65 +602,42 @@ export const Cart = () => {
               </ModalFooter>
             </ModalContent>
           </Modal>
-          <Modal isOpen={addModal} onClose={closeModal}>
-        <ModalOverlay />
+          <Modal isOpen={addModal} onClose={closeModal}>        
+          <ModalOverlay />
         <ModalContent>
           <ModalHeader>Add Address</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-              <div style={{ marginBottom: "10px" }}>
-                <label htmlFor="addressName">Address Name:</label>
-                <input
-                  type="text"
-                  id="addressName"
-                  placeholder="Enter Address Name"
-                  value={addressName}
-                  onChange={(e) => setAddressName(e.target.value)}
-                />
-              </div>
-              <div style={{ marginBottom: "10px" }}>
-                <label htmlFor="streetName">Street Name:</label>
-                <input
-                  type="text"
-                  id="streetName"
-                  placeholder="Enter Street Name"
-                  value={streetName}
-                  onChange={(e) => setStreetName(e.target.value)}
-                />
-              </div>
-              <div style={{ marginBottom: "10px" }}>
-                <label htmlFor="buildingNumber">Building Number:</label>
-                <input
-                  type="text"
-                  id="buildingNumber"
-                  placeholder="Enter Building Number"
-                  value={buildingNumber}
-                  onChange={(e) => setBuildingNumber(e.target.value)}
-                />
-              </div>
-              <div style={{ marginBottom: "10px" }}>
-                <label htmlFor="floor">Floor:</label>
-                <input
-                  type="text"
-                  id="floor"
-                  placeholder="Enter Floor"
-                  value={floor}
-                  onChange={(e) => setFloor(e.target.value)}
-                />
-              </div>
-              <div>
-                <label htmlFor="appartment">Appartment:</label>
-                <input
-                  type="text"
-                  id="appartment"
-                  placeholder="Enter Appartment"
-                  value={appartment}
-                  onChange={(e) => setAppartment(e.target.value)}
-                />
-              </div>
+              <Stack spacing={4} mb={4}>
+                <FormControl isRequired>
+                  <FormLabel>Address Name</FormLabel>
+                  <Input placeholder='Address Name' value={addressName} onChange={(e) => setAddressName(e.target.value)}
+                  />
+                </FormControl>
+                <FormControl isRequired>
+                  <FormLabel>Street Name</FormLabel>
+                  <Input placeholder='Street Name' value={streetName} onChange={(e) => setStreetName(e.target.value)}
+                  />
+                </FormControl>
+                <FormControl isRequired>
+                  <FormLabel>Building Number</FormLabel>
+                  <Input placeholder='Building Number' value={buildingNumber} onChange={(e) => setBuildingNumber(e.target.value)}
+                  />
+                </FormControl>
+                <FormControl isRequired>
+                  <FormLabel>Floor</FormLabel>
+                  <Input placeholder='Floor' value={floor} onChange={(e) => setFloor(e.target.value)}
+                  />
+                </FormControl>
+                <FormControl isRequired>
+                  <FormLabel>Apartment</FormLabel>
+                  <Input placeholder='Apartment' value={appartment} onChange={(e) => setAppartment(e.target.value)}
+                  />
+                </FormControl>
+              </Stack>
             </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={closeModal}>
+          <Button colorScheme="blue" mr={3} onClick={closeModal}>
               Close
             </Button>
             <Button colorScheme="green" onClick={addAddress}>
@@ -668,6 +646,7 @@ export const Cart = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
+          
                   </MDBRow>
                 </MDBCardBody>
                 
