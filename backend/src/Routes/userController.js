@@ -125,6 +125,30 @@ const filterMedicinesByMedicinalUse = async (req, res) => {
     res.status(500).send('Internal server error');
   }
 };
+const addDeliveryAddress2 = async (req, res) => {
+  const userId= req.user._id;
+  const newAddress = req.body.address; // Assuming the new address is sent in the request body
+  try {
+    // Find the user by their username
+    const user = await userModel.findById(userId);
+    console.log(user)
+
+    if (user) {
+      // Add the new address to the DeliveryAddress array
+      user.DeliveryAddress.push(newAddress);
+
+      // Save the updated user document
+      await user.save();
+
+      res.send('Delivery address added successfully');
+    } else {
+      res.send('Could not find the user');
+    }
+  } catch (error) {
+    console.error('Error adding delivery address:', error);
+    res.status(500).send('Internal server error');
+  }
+};
 
 const getFullInfo = async (req, res) => {
   try {
@@ -274,5 +298,5 @@ const getMedAndRelatedProducts=async(req,res)=>{
   }
 }
 
-module.exports = {searchMedicinePat, filterMedicinesByMedicinalUse,getAddresses,addDeliveryAddress, orderDetails,getFullInfo,
+module.exports = {searchMedicinePat, filterMedicinesByMedicinalUse,getAddresses,addDeliveryAddress,addDeliveryAddress2, orderDetails,getFullInfo,
   generateRoom,joinChatRoomPatient,getDoctorUsername,sendMessage,getMedAndRelatedProducts};

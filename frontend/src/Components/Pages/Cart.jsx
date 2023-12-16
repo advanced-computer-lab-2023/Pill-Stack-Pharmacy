@@ -23,6 +23,7 @@ import {
     Flex,
     HStack,
   } from '@chakra-ui/react';
+  import { FaPlus } from 'react-icons/fa'; // Import the icon component you want to use
   import {
     MDBBtn,
     MDBCard,
@@ -36,6 +37,8 @@ import {
     MDBRow,
     MDBTypography,
     } from "mdb-react-ui-kit";
+    import { ToastContainer, toast } from "react-toastify";
+
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton } from '@chakra-ui/react';
 import {
     Alert,
@@ -58,7 +61,12 @@ export const Cart = () => {
     const [isDeleting, setIsDeleting] = useState(false);
     const [discountCode, setDiscountCode] = useState('');
     const [isValid, setIsValid] = useState(true);
-
+    const [addModal, setaddModalIsOpen] = useState(false);
+    const [addressName, setAddressName] = useState("");
+    const [streetName, setStreetName] = useState("");
+    const [buildingNumber, setBuildingNumber] = useState("");
+    const [floor, setFloor] = useState("");
+    const [appartment, setAppartment] = useState("");
 
 
     const [address, setAddress] = useState([]);
@@ -174,6 +182,62 @@ export const Cart = () => {
         setIsValid(false);
       }
     };
+    const addAddress = async () => {
+      try {
+        if (!addressName.trim() || !streetName.trim() || !buildingNumber.trim() || !floor.trim() || !appartment.trim()) {
+          toast("Please fill in all fields", {
+            position: "top-right",
+          });
+          return;
+        }
+        // Send the address to the backend
+        const newAddress = `${addressName},${streetName},${buildingNumber},${floor},${appartment}`.replaceAll(' ', '');
+        const response = await axios.post(
+          'http://localhost:8001/patient/addDeliveryAddress',
+          { address:newAddress },
+          { withCredentials: true }
+        );
+          console.log(response.data)
+          
+        if (response.data === "Delivery address added successfully") {
+          toast("Delivery address added successfully", {
+            position: "top-right",
+          });
+  
+          setAddressName("");
+          setStreetName("");
+          setBuildingNumber("");
+          setFloor("");
+          setAppartment("");
+          setAddress(prevAddresses => [...prevAddresses, newAddress]);
+
+  
+          closeModal();
+        } else {
+          toast("Could not add the delivery address", {
+            position: "top-right",
+          });
+        }
+      } catch (error) {
+        console.error("Error adding the delivery address:", error);
+        toast("Internal server error", {
+          position: "top-right",
+        });
+      }
+    };
+    const openModal = () => {
+      setaddModalIsOpen(true);
+    };
+  
+    const closeModal = () => {
+      setAddressName('');
+      setAppartment('');
+      setStreetName('');
+      setBuildingNumber('');
+      setFloor('');
+      setaddModalIsOpen(false);
+    };
+    
 
     // return (
     //   <><Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
@@ -481,8 +545,14 @@ export const Cart = () => {
                   <AlertTitle>Missing information</AlertTitle>
                   <AlertDescription>Please select address and payment method.</AlertDescription>
                 </Alert>)}
-                <FormControl>
+                <FormControl >
+                <div style={{ display: 'flex', alignItems: 'center', marginRight: '10px' }}>
                   <FormLabel>Select Address</FormLabel>
+                  
+                  <span style={{ marginBottom:'5px' ,color: 'grey', cursor: 'pointer' }} onClick={openModal}>
+                    <FaPlus />
+                  </span>
+                  </div>
                   <Select
                     value={selectedAddress}
                     onChange={(e) => { setSelectedAddress(e.target.value); } }
@@ -499,6 +569,7 @@ export const Cart = () => {
                       ))
                     )}
                   </Select>
+                 
                 </FormControl>
                 <FormControl>
                   <FormLabel>Select Payment Method</FormLabel>
@@ -526,6 +597,73 @@ export const Cart = () => {
               </ModalFooter>
             </ModalContent>
           </Modal>
+          <Modal isOpen={addModal} onClose={closeModal}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Add Address</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+              <div style={{ marginBottom: "10px" }}>
+                <label htmlFor="addressName">Address Name:</label>
+                <input
+                  type="text"
+                  id="addressName"
+                  placeholder="Enter Address Name"
+                  value={addressName}
+                  onChange={(e) => setAddressName(e.target.value)}
+                />
+              </div>
+              <div style={{ marginBottom: "10px" }}>
+                <label htmlFor="streetName">Street Name:</label>
+                <input
+                  type="text"
+                  id="streetName"
+                  placeholder="Enter Street Name"
+                  value={streetName}
+                  onChange={(e) => setStreetName(e.target.value)}
+                />
+              </div>
+              <div style={{ marginBottom: "10px" }}>
+                <label htmlFor="buildingNumber">Building Number:</label>
+                <input
+                  type="text"
+                  id="buildingNumber"
+                  placeholder="Enter Building Number"
+                  value={buildingNumber}
+                  onChange={(e) => setBuildingNumber(e.target.value)}
+                />
+              </div>
+              <div style={{ marginBottom: "10px" }}>
+                <label htmlFor="floor">Floor:</label>
+                <input
+                  type="text"
+                  id="floor"
+                  placeholder="Enter Floor"
+                  value={floor}
+                  onChange={(e) => setFloor(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="appartment">Appartment:</label>
+                <input
+                  type="text"
+                  id="appartment"
+                  placeholder="Enter Appartment"
+                  value={appartment}
+                  onChange={(e) => setAppartment(e.target.value)}
+                />
+              </div>
+            </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={closeModal}>
+              Close
+            </Button>
+            <Button colorScheme="green" onClick={addAddress}>
+              Save
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
                   </MDBRow>
                 </MDBCardBody>
                 

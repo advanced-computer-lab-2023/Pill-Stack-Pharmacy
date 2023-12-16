@@ -1,7 +1,7 @@
 const express = require('express');
 let router = express.Router();
 const {getDoctors,filterMedicinesByMedicinalUse, searchMedicinePat,
-    getAddresses,addDeliveryAddress, getFullInfo,orderDetails,generateRoom,
+    getAddresses,addDeliveryAddress,addDeliveryAddress2, getFullInfo,orderDetails,generateRoom,
     joinChatRoomPatient,getDoctorUsername,sendMessage,getMedAndRelatedProducts,orders} = require('../Routes/userController');
 const {getAvailableMedicines} = require('../Routes/adminController.js');
 const { userVerification } = require('../Middleware/AuthMiddleware');
@@ -18,6 +18,8 @@ router.get('/filter-medicines',filterMedicinesByMedicinalUse);
 
 router.route('/searchMedicine').post(searchMedicinePat);
 router.post('/addDeliveryAddress/:username',addDeliveryAddress)
+router.post('/addDeliveryAddress',userVerification,addDeliveryAddress2)
+
 router.get('/getDoctorUsername/:username',getDoctorUsername);
 router.post('/Chat/:username/:doctorUsername',joinChatRoomPatient)
 router.post('/sendMessage/:patientUsername/:selectedDoctor',sendMessage)
