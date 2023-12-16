@@ -81,7 +81,6 @@ export const Home = () => {
         });
         const fullUserData = await axios.get(`http://localhost:8001/patient/myInfo/${user}`);
         setFullUser(fullUserData.data);
-        console.log(fullUserData.data);
       } else {
         removeCookie("token");
         navigate("/"); 
