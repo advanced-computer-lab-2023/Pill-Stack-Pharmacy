@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import Sidebar from './side';
+import WithSubnavigation from './navbar';
 import {
   Modal,
   ModalOverlay,
@@ -35,7 +38,8 @@ import { faCartShopping,
   faArrowRightFromBracket
  } from "@fortawesome/free-solid-svg-icons";
 import Shortcut from "../UI/Shortcut";
-
+import { ChatIcon, Icon, EmailIcon,PhoneIcon,BellIcon } from "@chakra-ui/icons";
+import RR from './RR'
 
 
 
@@ -48,6 +52,14 @@ export const AdminHome = () => {
   const [isChangePassOpen, setisChangePassOpen] = useState(false);
   const initialRef = useRef(null);
   const finalRef = useRef(null);
+  const [selectedTab, setSelectedTab] = useState("one");
+
+  const handleRatingTabClick = (tabNumber) => {
+    setSelectedTab(tabNumber);
+  };
+
+
+
   useEffect(() => {
     const verifyCookie = async () => {
       if (!cookies.token) {
@@ -78,6 +90,11 @@ export const AdminHome = () => {
   const closeViewFamilyModal = () => {
     onClose(); // Use onClose to close the modal
     setisChangePassOpen(false);
+  };
+
+  const openChangePasswordModal = () => {
+    onOpen(); // Use onOpen to open the modal
+    setisChangePassOpen(true);
   };
 
   useEffect(() => {
@@ -152,20 +169,20 @@ export const AdminHome = () => {
 
   return (
     <>
-        <Flex bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
+        {/* <Flex bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
           <Text fontSize={'3xl'} color={'white'} >Admin Home Welcome {username} </Text>
           <Spacer/>
           <Button onClick={openViewFamilyModal} style={{ color: 'Black', marginRight: '10px', textDecoration: 'none', cursor: 'pointer', marginBottom: '2px', ':hover': { color: 'black' } }}>ChangePass</Button>
 
           <Button onClick={Logout}>Logout <FontAwesomeIcon icon={faArrowRightFromBracket} style={{marginLeft:"7px"}}/></Button>
-        </Flex>
-        <Box  m={10}>
-          {/* {fullUser && */}
+        </Flex> */}
+        {/* <Box  m={10}>
           <Flex m={5}>
               <Avatar src='https://bit.ly/sage-adebayo' />
               <Box ml='3'>
                   <Text fontWeight='bold'>
                   {fullUser.Username} 
+                  
                   <Badge ml='1' colorScheme='green'> 
                       Active
                   </Badge>
@@ -173,17 +190,10 @@ export const AdminHome = () => {
                   <Text fontSize='sm'> {fullUser.Email}</Text>
               </Box>
               <Spacer/>
-              {/* <Text >Wallet: </Text> */}
-              {/* <Text m={2} fontSize={'3xl'}> 1000 EGP </Text> */}
+        
           </Flex>
-           {/* } */}
           <Divider orientation="horizontal" />
-          {/* <Grid templateColumns='repeat(2, 1fr)'>
-            <Flex m={5} flexDirection={'column'} borderRight='1px solid gray'>
-              <Text fontSize={'3xl'}> Delivery Addresses </Text>
-              <Spacer/>
-              <Button onClick={openModal} w={'50%'} >Add address</Button>
-            </Flex> */}
+
             <Box m={10} p={5} bg={'#666964'} rounded={10}>
               <Text fontSize={'3xl'} > Shortcuts </Text>
             <SimpleGrid minChildWidth='150px' spacing='1px' m={5} > 
@@ -206,8 +216,161 @@ export const AdminHome = () => {
             </SimpleGrid>
             </Box>  
 
-          {/* </Grid> */}
-        </Box>
+       
+        </Box> */}
+        <Sidebar/>
+         <div style={{ position: 'fixed', top: '0', left: '0', right: '0', zIndex: '1000'}}>
+        <WithSubnavigation
+         username={username}
+         name={fullUser.Name}
+         openChangePasswordModal={openChangePasswordModal}
+          onLogout={Logout}
+          notifications={fullUser.Notifications}
+        />
+        </div>
+
+
+<div className="home_page">
+            <div className="home_page_content" >
+            <div className="BigContainer">
+          <div className="Container1">
+            <Box className="boxW" >
+               <div className="boxT">Wallet</div>
+               <div className="square">$</div>
+                <div className="balance">{`Private Account`}</div>
+                <div className="square2">Total Balance</div>
+            </Box>
+            <Box className="box1" >
+              <div className="boxT">Information</div>
+            <div className="line">
+              <EmailIcon color='#005660' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
+              <div className="info1" style={{ margin: '0px 0px 0px 19px', padding: 0, display: "inline-block", transform: 'translateY(-5px)' }}>{`Email:  ${fullUser.Email}`}</div>
+            </div>
+            <div className="line">
+              <PhoneIcon color='#005660' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
+              <div className="info1" style={{ margin: '0px 0px 0px 19px', padding: 0, display: "inline-block", transform: 'translateY(-5px)' }}>{`Mobile: Private Number`}</div>
+            </div>
+            <div className="line">
+              <PhoneIcon color='#005660' boxSize={6} style={{ margin: 0, padding: 0, display: "inline-block" }} />
+              <div className="info1" style={{ margin: '0px 0px 0px 18px', padding: 0, display: "inline-block", transform: 'translateY(-5px)' }}>{`Emergency Mobile: Private Number`}</div>
+            </div>
+            </Box>
+
+            <Box className="boxL1" >
+            {/* <div className="boxT">Recent</div> */}
+            <Link to="/salesReport" className="box23" style={{ color: '#4C4C4C', textDecoration: 'none' }}>Sales Report</Link>
+            <Box onClick={openChangePasswordModal} className="box24"style={{ color: '#4C4C4C', textDecoration: 'none' }} >Control Account</Box>
+            
+            </Box>
+          </div>
+
+          
+          <div className="Container2">
+            <Box className="box3" ></Box>
+            {/* {fullUser.Gender && (fullUser.Gender.toLowerCase() === 'male' ? (
+              <Box className="ppM" ></Box>
+            ) : fullUser.Gender.toLowerCase() === 'female' ? (
+              <Box className="ppF" ></Box>
+            ) : (
+              <Box className="ppM"></Box>
+            ))} */}
+            <Box className="ppM" ></Box>
+            <Box className="Details" style={{ overflow: 'hidden' }}>
+            <Box style={{ textAlign: 'center' }}>{fullUser.Username}</Box>
+              <Box className="GenderB">
+              {/* {fullUser.Gender && (fullUser.Gender.toLowerCase() === 'male' ? (
+                <Box className="Male">
+                  Male
+                </Box>
+              ) : fullUser.Gender.toLowerCase() === 'female' ? (
+                <Box className="Female">
+                  Female
+                </Box>
+              ) : (
+                <Box className="Male"> 
+                  Male
+                </Box>
+              ))} */}
+              <Box className="Male"> 
+                  Male
+                </Box>
+            </Box>
+            <Box className='infoI' style={{ transform: 'translate(-30%, 395%)' }}>
+              Username
+            </Box>
+            <Box className="RoundBox" style={{ marginTop: '5px' }}>
+            {fullUser.Username}
+            </Box>
+            {selectedTab === 'one' && (
+        <div>
+          <Box className='infoI' style={{ transform: 'translate(-35%, 750%)' , textAlign: 'center' }}>
+            Email
+          </Box>
+          <Box className="RoundBox" style={{ marginTop: '5px', transform: 'translate(0%, 195%)' }}>
+            {fullUser.Email}
+          </Box>
+        </div>
+      )}
+            {selectedTab === 'two' && (
+        <div>
+          <Box className='infoI' style={{ transform: 'translate(-28%, 750%)' }}>
+            Date Of Birth
+          </Box>
+          <Box className="RoundBox" style={{ marginTop: '5px', transform: 'translate(0%, 195%)' }}>
+            {fullUser.DateOfBirth}
+          </Box>
+        </div>
+      )}
+
+      {selectedTab === 'three' && (
+        <div>
+          <Box className='infoI' style={{ transform: 'translate(-16%, 750%)' }}>
+            Emergency Contact Name
+          </Box>
+          <Box className="RoundBox" style={{ marginTop: '5px', transform: 'translate(0%, 195%)' }}>
+            {fullUser.EmergencyContact_Name}
+          </Box>
+        </div>
+      )}
+
+      {selectedTab === 'four' && (
+        <div>
+          <Box className='infoI' style={{ transform: 'translate(-25%, 750%)' }}>
+            Delivery Address
+          </Box>
+          <Box className="RoundBox" style={{ marginTop: '5px', transform: 'translate(0%, 195%)' }}>
+            {fullUser.DeliveryAddress}
+          </Box>
+        </div>
+      )}
+      {selectedTab === 'five' && (
+        <div>
+          <Box className='infoI' style={{ transform: 'translate(-34%, 750%)' }}>
+            Mobile
+          </Box>
+          <Box className="RoundBox" style={{ marginTop: '5px', transform: 'translate(0%, 195%)' }}>
+            {fullUser.MobileNumber}
+          </Box>
+        </div>
+      )}
+      <Box style={{ position: 'fixed', bottom: '10px', left: '50%', transform: 'translateX(-50%)', zIndex: 1000, textAlign: 'center' }}>More</Box>
+
+<RR onRatingTabClick={handleRatingTabClick} setSelectedTab={setSelectedTab} style={{ marginTop: '-10px',transform: 'translate(-35%, 345%)' }}></RR>
+
+            </Box>
+            
+          </div>
+          <div className="Container3">
+          <Link to="/admin-users" className="box2" style={{ color: '#005660', textDecoration: 'none' }} >Manage Users</Link>
+            <Link to="/admin-requests" className="box21" style={{ color: '#005660', textDecoration: 'none' }}>Doctor Requests</Link>
+            <Link to="/medicineControl" className="box22" style={{ color: '#005660', textDecoration: 'none' }} >Medicine Control</Link>
+
+          </div>
+        </div>
+      </div>
+   
+
+            </div>
         <Modal
           initialFocusRef={initialRef}
           finalFocusRef={finalRef}
