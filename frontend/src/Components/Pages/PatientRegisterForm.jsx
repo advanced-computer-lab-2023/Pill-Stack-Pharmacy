@@ -61,33 +61,7 @@ const PatientRegisterForm = () => {
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   
-    // Check if all fields are filled
-    // const {
-    //   username,
-    //   name,
-    //   email,
-    //   password,
-    //   dob,
-    //   gender,
-    //   mobile,
-    //   EmergencyContact_Name,
-    //   EmergencyContact_MobileNumber,
-    //   EmergencyContact_Relation
-    // } = formData;
-    console.log(formData);
-    const allFieldsFilled =
-      formData.username !== '' &&
-      formData.name !== '' &&
-      formData.email !== '' &&
-      formData.password !== '' &&
-      formData.dob !== '' &&
-      formData.gender !== '' &&
-      formData.mobile !== '' &&
-      formData.EmergencyContact_Name !== '' &&
-      formData.EmergencyContact_MobileNumber !== '' &&
-      formData.EmergencyContact_Relation !== '';
-    console.log(allFieldsFilled);
-    //setAllEntered(allFieldsFilled);
+
   };
   
   const back =()=>  navigate(-1);
@@ -95,15 +69,26 @@ const PatientRegisterForm = () => {
     e.preventDefault();
     try {
       const response = await Axios.post('http://localhost:8001/Patientregister', formData);
-    
-      toast({
-        title: 'Registration Successful',
-        description: response.data.message,
-        status: 'success',
-        duration: 5000,
-        isClosable: true,
-      });
-      navigate('/');
+      if(response.data.message!=='User already exists'){
+        toast({
+          title: 'Registration Successful',
+          description: response.data.message,
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        });
+        navigate('/');
+      }
+        else{
+          toast({
+            title: 'Registration Failed',
+            description: "Username already exists",
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          });
+  
+        }
     } catch (error) {
       let errorMessage = "Registration failed due to an unexpected error."; // Default error message
       toast({
