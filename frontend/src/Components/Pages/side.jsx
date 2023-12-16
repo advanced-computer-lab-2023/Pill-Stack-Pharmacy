@@ -44,9 +44,11 @@ function Sidebar(props) {
 
   return (
     <div className="sidebar" style={sidebarStyle}>
+      <Link to="/home">
       <Box textAlign="center" p={5} mb={1} mr={1}>
         <img src={pillstackLogo} alt="Logo" width="220" />
       </Box>
+    </Link>
 
      <br />
       <Accordion defaultIndex={[0]} allowToggle={true} allowMultiple={false} theme={customAccordionTheme}>
@@ -55,29 +57,22 @@ function Sidebar(props) {
             <AccordionButton>
               <HamburgerIcon w={7} h={7} mr={3}></HamburgerIcon>
               <Box as="span" flex='1' textAlign='left'>
-                Personal
+                Shop
               </Box>
               <AccordionIcon />
             </AccordionButton>
           </h2>
           <AccordionPanel p={0}>
-          <Link to="prescriptions" style={{ textDecoration: 'none', color: 'inherit' }}> 
+          <Link to="/medicine" style={{ textDecoration: 'none', color: 'inherit' }}> 
             <AccordionButton>
               <Box as="span" flex='1' textAlign='left' ml={10}>
               
-                My Prescriptions 
+                Buy Medicine
                 
               </Box>
             </AccordionButton>
             </Link>
-            <Link to={`/my-health-records/${username}/${name}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <AccordionButton>
-              
-              <Box as="span" flex='1' textAlign='left' ml={10}>
-                My Health Records 
-              </Box>
-            </AccordionButton>
-            </Link>
+           
           </AccordionPanel>
         </AccordionItem>
 
@@ -86,156 +81,31 @@ function Sidebar(props) {
             <AccordionButton>
               <HamburgerIcon w={7} h={7} mr={3}></HamburgerIcon>
               <Box as="span" flex='1' textAlign='left'>
-                Packages
+                My
               </Box>
               <AccordionIcon />
             </AccordionButton>
           </h2>
 
           <AccordionPanel p={0}>
-          <Link to={`/home/viewPackages/${username}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Link to={"/cart"} style={{ textDecoration: 'none', color: 'inherit' }}>
             <AccordionButton>
               <Box as="span" flex='1' textAlign='left' ml={10}>
-                Subscribe
+                Shopping Cart
               </Box>
             </AccordionButton>
             </Link>
+            <Link to={"/orderDetails"} style={{ textDecoration: 'none', color: 'inherit' }}>
             <AccordionButton>
               <Box as="span" flex='1' textAlign='left' ml={10} onClick={openSecondModal}>
-                My Packages
+                Orders
               </Box> 
             </AccordionButton>
+            </Link>
           </AccordionPanel>
         </AccordionItem>
 
-        
-<AccordionItem>
-  <h2>
-    <AccordionButton>
-      <HamburgerIcon w={7} h={7} mr={3}></HamburgerIcon>
-      <Box as="span" flex='1' textAlign='left'>
-        Appointments
-      </Box>
-      <AccordionIcon />
-    </AccordionButton>
-  </h2>
-  <AccordionPanel p={0}>
-  <Link to="viewDoctors">
-    <AccordionButton>
-      <Box as="span" flex='1' textAlign='left' ml={10}>
-        Book
-      </Box>
-    </AccordionButton>
-    </Link>
-    <Link to="apptsP">
-    <AccordionButton>
-      <Box as="span" flex='1' textAlign='left' ml={10}>
-        My Appointments
-      </Box>
-    </AccordionButton>
-    </Link>
-
-    
-    <Link to="familyAppointments">
-    <AccordionButton>
-      <Box as="span" flex='1' textAlign='left' ml={10}>
-        Family Appointments
-      </Box>
-    </AccordionButton>
-    </Link>
-  </AccordionPanel>
-</AccordionItem>
-
-<AccordionItem>
-  <h2>
-    <AccordionButton>
-      <HamburgerIcon w={7} h={7} mr={3}></HamburgerIcon>
-      <Box as="span" flex='1' textAlign='left'>
-        Family
-      </Box>
-      <AccordionIcon />
-    </AccordionButton>
-  </h2>
-  <AccordionPanel p={0}>
-    <AccordionButton onClick={openAddFamilyModal}>
-      <Box as="span" flex='1' textAlign='left' ml={10}>
-        Manage 
-      </Box>
-    </AccordionButton>
-    <AccordionButton onClick={openViewFamilyModal}>
-      <Box as="span" flex='1' textAlign='left' ml={10}>
-        View Members
-      </Box>
-    </AccordionButton>
-  </AccordionPanel>
-</AccordionItem>
-
-<AccordionItem>
-  <h2>
-    <AccordionButton>
-      <HamburgerIcon w={7} h={7} mr={3}></HamburgerIcon>
-      <Box as="span" flex='1' textAlign='left'>
-        Medical Documents
-      </Box>
-      <AccordionIcon />
-    </AccordionButton>
-  </h2>
-  <AccordionPanel p={0}>
-    <AccordionButton onClick={openUploadDocModal}>
-      <Box as="span" flex='1' textAlign='left' ml={10}>
-        Upload 
-      </Box>
-    </AccordionButton>
-    <AccordionButton onClick={openUploadDocModal}>
-      <Box as="span" flex='1' textAlign='left' ml={10}>
-        View 
-      </Box>
-    </AccordionButton>
-  </AccordionPanel>
-</AccordionItem>
-<AccordionItem>
-  <h2>
-    <AccordionButton>
-      <HamburgerIcon w={7} h={7} mr={3}></HamburgerIcon>
-      <Box as="span" flex='1' textAlign='left'>
-        Doctors
-      </Box>
-      <AccordionIcon />
-    </AccordionButton>
-  </h2>
-
-  <AccordionPanel p={0}>
-
-  
-  <Link to="viewDoctors">
-    <AccordionButton>
-      <Box as="span" flex='1' textAlign='left' ml={10}>
-        View Available Doctors 
-      </Box>
-    </AccordionButton>
-    </Link>
-  </AccordionPanel>
-</AccordionItem>
-
-<AccordionItem>
-  <h2>
-    <AccordionButton >
-      <HamburgerIcon w={7} h={7} mr={3}></HamburgerIcon>
-      <Box as="span" flex='1' textAlign='left'>
-        Address
-      </Box>
-      <AccordionIcon />
-    </AccordionButton>
-  </h2>
-  <AccordionPanel p={0}>
-    <AccordionButton onClick={openAddDeliveryModal}>
-      <Box as="span" flex='1' textAlign='left' ml={10}>
-        Add Delivery Address
-      </Box>
-    </AccordionButton>
-  </AccordionPanel>
-</AccordionItem>
-
+ 
 <AccordionItem style={{ position: 'fixed', bottom: 10, marginTop: 'auto' }}>
   <AccordionButton
     onClick={onLogout}
