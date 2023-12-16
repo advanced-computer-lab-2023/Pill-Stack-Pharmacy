@@ -183,7 +183,7 @@ export const Login = () => {
               <Divider />
             </HStack>
             <Stack direction="row" spacing="4" align="center" justify="center">
-            <Link to="/doctor-register" style={{color:'#4fbbf3', textDecoration:'underline'}}> Register as a pharmacist</Link>
+            <Link to="/pharmacist-register" style={{color:'#4fbbf3', textDecoration:'underline'}}> Register as a pharmacist</Link>
             </Stack>
 
             {/* <OAuthButtonGroup /> */}
