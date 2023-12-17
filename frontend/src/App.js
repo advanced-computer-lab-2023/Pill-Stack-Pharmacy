@@ -26,6 +26,7 @@ import ChatMessages from './Components/Pages/chatMessagesPatient.jsx';
 import ChatMessagesDoctor from './Components/Pages/chatMessagesDoctor.jsx';
 import SalesReport  from './Components/Pages/SalesReport.jsx';
 import io from 'socket.io-client';
+import LandingPage from './Components/Pages/LandingPage.jsx';
 
 
 const socket = io.connect("http://localhost:8001");
@@ -48,8 +49,8 @@ function App() {
   const handleReqs = () => {
       navigate("/admin-requests");
   }; */}
-
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/admin-home" element={<AdminHome />} />
         <Route path="/doctor-home" element={<DoctorHome />} />
