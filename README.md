@@ -491,27 +491,27 @@ Adding items to cart
 ![Alt text](screenshots/loginPage.png) 
 4. Upon successful login, a redirection to the home page will occur
 ![Alt text](screenshots/homePage.png)
-5.In order to start shopping, click on `Buy Medicine`
+5. In order to start shopping, click on `Buy Medicine`
 ![Alt text](screenshots/sideBarPatient.png)
-6.To streamline your selection process, you can filter medicines by their category using the drop-down list.
+6. To streamline your selection process, you can filter medicines by their category using the drop-down list.
 ![Alt text](screenshots/filter.png)
-8.Alternatively, you can quickly find a specific medicine by using the search bar.
+7. Alternatively, you can quickly find a specific medicine by using the search bar.
 ![Alt text](screenshots/searchBar.png)
-9.Browse and select the medicines you want to purchase. If you want to know more about a specific medicine, click on its image. For each chosen medicine, click on `ADD TO CART`.
+8. Browse and select the medicines you want to purchase. If you want to know more about a specific medicine, click on its image. For each chosen medicine, click on `ADD TO CART`.
 ![Alt text](screenshots/addToCart.png)
-10.Navigate to your shopping cart by clicking on the small cart icon at the top of the page to review your selections and proceed to checkout
+9. Navigate to your shopping cart by clicking on the small cart icon at the top of the page to review your selections and proceed to checkout
 ![Alt text](screenshots/cartIcon.png)
-11.Shopping Cart and CheckOut Page
+10. Shopping Cart and CheckOut Page
 ![Alt text](screenshots/shoppingCart.png)
-12.Choose your preferred shipping method and apply discount code if you have during the checkout process.
+11. Choose your preferred shipping method and apply discount code if you have during the checkout process.
 ![Alt text](screenshots/shippingDiscount.png)
-13.After selecting your shipping method, proceed to the payment step by clicking on `Checkout`.
+12. After selecting your shipping method, proceed to the payment step by clicking on `Checkout`.
 ![Alt text](screenshots/checkout.png)
-14.choose your address and payment method as prompted then click on `Pay` to complete your purchase.
+13. choose your address and payment method as prompted then click on `Pay` to complete your purchase.
 ![Alt text](screenshots/addressPayment.png)
-15.Upon successful payment, you will be redirected to a "Thank You" page where you can view your order details and access tracking information for your order.
+14. Upon successful payment, you will be redirected to a "Thank You" page where you can view your order details and access tracking information for your order.
 ![Alt text](screenshots/Tracking.png)
-16.To view all the orders you've made on your account, navigate back to the home page by clicking the back button and select on `My`in the sidebar then `Orders`. You can view all your orders through this page.
+15. To view all the orders you've made on your account, navigate back to the home page by clicking the back button and select on `My`in the sidebar then `Orders`. You can view all your orders through this page.
 ![Alt text](screenshots/MyOrders.png)
 
 # Contribute 
