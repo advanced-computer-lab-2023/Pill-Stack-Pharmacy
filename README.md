@@ -484,7 +484,6 @@ Adding items to cart
 ![Alt text](screenshots/image-10.png)  
 # How to Use
 ### As an Patient:
-
 1. Open `http://localhost:3001/ ` to view the login page in your browser.  
 ![Alt text](screenshots/LandingPage.png) 
 2. Register as a patient in order to be able to login into the system. 
@@ -515,6 +514,15 @@ Adding items to cart
 ![Alt text](screenshots/Tracking.png)
 15. To view all the orders you've made on your account, navigate back to the home page by clicking the back button and select on `My`in the sidebar then `Orders`. You can view all your orders through this page.
 ![Alt text](screenshots/MyOrders.png)
+### As an Pharmacist:
+1. Open `http://localhost:3001/ ` to view the login page in your browser.  
+![Alt text](screenshots/LandingPage.png) 
+2. Register as a pharmacist in order to be able to login into the system. 
+![Alt text](screenshots/pharmacist_registration.png) 
+3. Upon successful registeration, a redirection to the login page will occur. 
+![Alt text](screenshots/pharma_login.png) 
+4. Upon successful login, a redirection to the home page will occur
+![Alt text](screenshots/docOc.png)
 
 ### As an Admin:
 1. Open `http://localhost:3000/ ` to view the landing page in your browser.  

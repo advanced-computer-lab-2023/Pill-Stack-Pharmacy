@@ -144,7 +144,7 @@ export function MedicineList() {
     <>
 
 <Navigation
-      pagetitle={"Over-the-counter medicines"}/>
+      pagetitle={"Medicine"}/>
        <Sidebar
       />
          <div className="content">
@@ -172,7 +172,6 @@ export function MedicineList() {
           </div>
         </div>
       </div>
-      <Text fontSize={'3xl'} color={'Black'} >Over-the-counter medicine</Text>
       <div className="col-lg-12">
 
       <div className="d-flex flex-column h-100">
