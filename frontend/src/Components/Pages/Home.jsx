@@ -442,9 +442,9 @@ export const Home = () => {
             
           </div>
           <div className="Container3">
-          <Link to="/medicine" className="box2" style={{ color: '#005660', textDecoration: 'none' }} >Shop</Link>
-            <Link to="/cart" className="box21" style={{ color: '#005660', textDecoration: 'none' }}>Cart</Link>
-            <Link to="/orderDetails" className="box22" style={{ color: '#005660', textDecoration: 'none' }} >Orders</Link>
+          <Link to="/medicine" className="box2s" style={{ color: '#005660', textDecoration: 'none' }} >Shop</Link>
+            <Link to="/cart" className="box2sc" style={{ color: '#005660', textDecoration: 'none' }}>Cart</Link>
+            <Link to="/orderDetails" className="box2o" style={{ color: '#005660', textDecoration: 'none' }} >Orders</Link>
 
           </div>
         </div>

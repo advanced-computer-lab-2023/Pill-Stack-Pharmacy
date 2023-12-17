@@ -303,7 +303,7 @@ function DoctorHome() {
   )}
 </Box>
 
-              <Link to="/salesReport" className="box23" style={{ color: '#4C4C4C', textDecoration: 'none' }}>Sales Report</Link>
+              <Link to="/salesReport" className="box2sales" style={{ color: '#005660', textDecoration: 'none' }}>Sales Report</Link>
             
             </Box>
             
@@ -412,9 +412,9 @@ function DoctorHome() {
             
           </div>
           <div className="Container3">
-          <Link to="/medicine/sales" className="box2" style={{ color: '#005660', textDecoration: 'none' }} >Stock Management</Link>
-            <Link to="/addMed" className="box21" style={{ color: '#005660', textDecoration: 'none' }}>Add Meds</Link>
-            <Link to="/medicineControl" className="box22" style={{ color: '#005660', textDecoration: 'none' }} >Med Stock</Link>
+          <Link to="/medicine/sales" className="box2sm" style={{ color: '#005660', textDecoration: 'none' }} >Stock Management</Link>
+            <Link to="/addMed" className="box2am" style={{ color: '#005660', textDecoration: 'none' }}>Add Meds</Link>
+            <Link to="/medicineControl" className="box2sm" style={{ color: '#005660', textDecoration: 'none' }} >Med Stock</Link>
 
           </div>
         </div>
