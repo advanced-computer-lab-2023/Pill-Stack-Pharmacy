@@ -301,7 +301,10 @@ const userPrescription=async(req,res)=>{
   const userid=req.user.id;
   const user=await userModel.findById(userid);
   //console.log(user.Prescriptions);
-  res.json(user.Prescriptions).status(200);
+  const x=user.Prescriptions.filter((Prescription)=>{
+    return Prescription.Status !=="Filled"
+  })
+  res.json(x).status(200);
 }
 const getPrescribtionMedicene=async(req,res)=>{
   const userid=req.user.id;
@@ -311,9 +314,10 @@ const getPrescribtionMedicene=async(req,res)=>{
   for(let i=0;i<user.Prescriptions.length;i++){
     if(user.Prescriptions[i].id==PrescriptionId){
       for(let j=0;j<user.Prescriptions[i].Medicine.length;j++){
+        if(user.Prescriptions[i].Status!="Filled"){
         const Medicene=await medModel.find({Name:user.Prescriptions[i].Medicine[j].MedicineName});
         console.log(user.Prescriptions[i].Medicine[j].MedicineName);
-        PrescribedMedicene.push(Medicene);
+        PrescribedMedicene.push(Medicene);}
       }
     }
 
