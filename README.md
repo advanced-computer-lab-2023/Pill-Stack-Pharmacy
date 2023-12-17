@@ -167,48 +167,291 @@ Our APIs is divided into 6 APIs:
 #### Authenticate a user
 - #### Route: /login
 - #### Request type: post
-- #### Request Body: {username: 'Mariam', password: 'Ma12345'}
+- #### Request Body: `{username: 'Mariam', password: 'Ma12345'}`
 ### Handles secure registration of patients 
 - #### Route: /Patientregister
 - #### Request type: post
-- #### Request Body: {username:'Rawan', name:'RawanM',email:'Rou@gmail.com',password:'mdmd123',dob: '1990-01-01',gender: 'female',mobile:'0122354554',EmergencyContact_Name:'rouu',EmergencyContact_MobileNumber:'01233334455',EmergencyContact_Relation:'Mother'}
+- #### Request Body: `{username:'Rawan', name:'RawanM',email:'Rou@gmail.com',password:'mdmd123',dob: '1990-01-01',gender: 'female',mobile:'0122354554',EmergencyContact_Name:'rouu',EmergencyContact_MobileNumber:'01233334455',EmergencyContact_Relation:'Mother'}`
 ### Create a new admin user
 - #### Route: /administration
 - #### Request type: post
-- #### Request Body: {Username: 'Rou', password:'Mssaie1234', email:'rou@gmail.com'}
+- #### Request Body: `{Username: 'Rou', password:'Mssaie1234', email:'rou@gmail.com'}`
 ### Change user password
 - #### Route: /changePassword
 - #### Request type: post
 - #### Middleware: userVerification
-- #### Request Body: {oldPassword:'Mskaoe12', newPassword:'Maadjei1289', Username:'Rou'}
+- #### Request Body: `{oldPassword:'Mskaoe12', newPassword:'Maadjei1289', Username:'Rou'}`
 ### send OTP for user verification
 - #### Route: /sendOTP
 - #### Request type: post
-- #### Request Body: {email:'Rou@gmail.com'}
+- #### Request Body: `{email:'Rou@gmail.com'}`
 ### Reset user password with OTP verification
 - #### Route: /resetPassword
 - #### Request type: post
-- #### Request Body: {otp: '78548',email:'rou@gmail.com',newPassword:'Mass1254'}
+- #### Request Body: `{otp: '78548',email:'rou@gmail.com',newPassword:'Mass1254'}`
 ### Reset user password without OTP verification
 - #### Route: /resetPass
 - #### Request type: post
-- #### Request Body: {email:'rou@gmail.com',newPassword:'Mass1254'}
+- #### Request Body: `{email:'rou@gmail.com',newPassword:'Mass1254'}`
 ### Verify the validity of the OTP
 - #### Route: /checkOTP
 - #### Request type: post
-- #### Request Body: {email:'rou@gmail.com', otp:'12458'}
+- #### Request Body: `{email:'rou@gmail.com', otp:'12458'}`
 ### Register a pharmaceutical professional
 - #### Route: /doc_register
 - #### Request type: post
-- #### Request Body: {username:'Rawan', name:'RawanM',email:'Rou@gmail.com',password:'mdmd123',dob: '1990-01-01',hourly_rate: 50, affiliation:'Pharmacy Affiliation',educational_background: "Pharmacy Education Background",IDDocument:'file content here',pharmacyDegreeDocument: 'file content here',workingLicenseDocument: 'file content here'}     
+- #### Request Body: `{username:'Rawan', name:'RawanM',email:'Rou@gmail.com',password:'mdmd123',dob: '1990-01-01',hourly_rate: 50, affiliation:'Pharmacy Affiliation',educational_background: "Pharmacy Education Background",IDDocument:'file content here',pharmacyDegreeDocument: 'file content here',workingLicenseDocument: 'file content here'}`   
 
 ### Admin Router
+#### Route : (/admin)
+#### Retrieves all pharmacist registration applications
+- #### Route: /applications
+- #### Request type: get
+#### Displays details of a specific pharmacist registration application
+- #### Route: /applications/view/:id
+- #### Request type: get
+- #### Request header: `{id: 'mongoose.type.objectId()'}`
+#### Renders the page to view patient details
+- #### Route: /PatientDetails
+- #### Request type: get
+#### Retrieves patient details based on the provided username or all patients
+- #### Route: /PatientDetailsResults
+- #### Request type: get
+- #### Request query: `{username: 'rouu'}`
+#### Renders the page to view pharmacist details
+- #### Route: /PharmacistDetails
+- #### Request type: get
+#### Retrieves details of a specific pharmacist
+- #### Route: /PharmacistDetailsResults
+- #### Request type: get
+- #### Request query: `{username: 'rouu'}`
+#### Returns a list of all users with their respective roles
+- #### Route: /allUsers
+- #### Request type: get
+#### Retrieves full information about a specific admin
+- #### Route: /myInfo/:username
+- #### Request type: get
+- #### Request Header: `{username: 'rouu'}`
+#### Accepts a pharmacist registration request
+- #### Route: /applications/accept-registeration/:id
+- #### Request type: post
+- #### Request Header: `{id: 'mongoose.type.objectId()'}`
+#### Rejects a pharmacist registration request
+- #### Route: /applications/reject-registeration/:id
+- #### Request type: post
+- #### Request Header: `{id: 'mongoose.type.objectId()'}`
+#### Retrieves the names of all medicines
+- #### Route: /MedNames
+- #### Request type: get
+#### Removes a user (admin, patient, pharmacist) from the system
+- #### Route: /removeUser
+- #### Request type: post
+- #### Request Body: `{id:'mongoose.type.objectId()', role:'patient'}`
+#### Retrieves a list of available medicines
+- #### Route: /availableMedicines
+- #### Request type: get
+
+#### Retrieves a list of available medicines of quantity greater than zero
+- #### Route: /availableMedicinesPH
+- #### Request type: get
+#### Filters medicines based on medicinal use
+- #### Route: /filter-medicines
+- #### Request type: get
+- #### Request query: `{medicinalUse:'aaa'}`
+#### Renders the page to search for a specific medicine
+- #### Route: /searchMedicine
+- #### Request type: get
+
+#### Searches for a specific medicine by name
+- #### Route: /searchMedicine
+- #### Request type: post
+- #### Request Body: `{name:'panadol'}`
 ### Cart Router 
+#### Route : (/cart)
+#### Retrieves the items in the user's cart
+- #### Route: /cart
+- #### Request type: get
+- #### Middleware: userVerification
+#### Adds an item to the user's cart
+- #### Route: /cart
+- #### Request type: post
+- #### Middleware: userVerification
+- #### Request Body: `{productId: 'mongoose.type.objectId()', quantity: '1'}`
+#### Updates the quantity of an item in the user's cart
+- #### Route: /update
+- #### Request type: post
+- #### Middleware: userVerification
+- #### Request Body: `{productId: 'mongoose.type.objectId()', quantity: '1'}`
+
+
+#### Updates the quantity of an item in the user's cart
+- #### Route: /:itemId
+- #### Request type: delete
+- #### Middleware: userVerification
+- #### Request Header: `{itemId: 'mongoose.type.objectId()'}`
 ### Order Router
+#### Route : (/order)
+#### Retrieves the most recent order for the authenticated user
+- #### Route: /recent
+- #### Request type: get
+- #### Middleware: userVerification
+#### Initiates the checkout process using credit card payment
+- #### Route: /orderCredit
+- #### Request type: post
+- #### Middleware: userVerification
+
+#### Confirms the credit card payment
+- #### Route: /orderCredit/confirm
+- #### Request type: post
+- #### Middleware: userVerification
+- #### Request Body: `{address: 'cairo', intentId: 'mongoose.type.objectId()'}`
+
+#### Checkout process using cash on delivery
+- #### Route: /orderCash
+- #### Request type: post
+- #### Middleware: userVerification
+- #### Request Body: `{address: 'cairo'}`
+#### Checkout process using the user's wallet balance
+- #### Route: /orderWallet
+- #### Request type: post
+- #### Middleware: userVerification
+- #### Request Body: `{address: 'cairo'}`
+#### Cancels an order and handles necessary actions
+- #### Route: /cancel-order
+- #### Request type: post
+- #### Middleware: userVerification
+- #### Request Body: `{orderId: 'mongoose.type.objectId()'}`
+#### Generates a report of a specific medicine sales of each month
+- #### Route: /sales
+- #### Request type: post
+- #### Request Body: `{med: 'panadol',month:'January'}`
+#### Retrieves overall statistics for sales in a specified month
+- #### Route: /salesStats
+- #### Request type: post
+- #### Request Body: `{month:'January'}`
+#### daily revenue
+- #### Route: /salesDaily
+- #### Request type: post
+- #### Request Body: `{month:'January'}`
+#### Retrieves all orders for a specified month
+- #### Route: /salesOrder
+- #### Request type: post
+- #### Request Body: `{month:'January'}`
+
+#### Gets the number of orders for cash,credit,wallet, and cancelled orders
+- #### Route: /salesExtraStat
+- #### Request type: post
+- #### Request Body: `{month:'January'}`
+
 ### Patient Router
+#### Route : (/patient)
+
+#### Retrieves the delivery addresses of the user
+- #### Route: /Address
+- #### Request type: get
+
+#### Retrieves details of orders made by the user
+- #### Route: /orderDetails
+- #### Request type: get
+
+#### Retrieves full information about a user
+- #### Route: /myInfo/:username
+- #### Request type: get
+- #### Request header: `{username: 'Mariam'}`
+
+#### Filters medicines based on medicinal use
+- #### Route: /filter-medicines
+- #### Request type: get
+- #### Request query: `{medicinalUse: 'Fever'}`
+
+#### Searches for a medicine by name
+- #### Route: /searchMedicine
+- #### Request type: post
+- #### Request Body: `{name: 'Panadol'}`
+
+#### Add a new delivery address for the specified user
+- #### Route: /addDeliveryAddress/:username
+- #### Request type: post
+- #### Request Body: `{address: 'cairo'}`
+- #### Request Header: `{username: 'Mariam'}`
+
+#### Retrieves usernames of pharmacists
+- #### Route: /getDoctorUsername/:username
+- #### Request type: get
+
+#### Creates or joins a chat room for communication between a patient and pharmacist
+- #### Route: /Chat/:username/:doctorUsername
+- #### Request type: post
+- #### Request header: `{username: 'mariam', doctorUsername:'doctorTesting'}`
+
+#### Sends a message in the chat room between a patient and pharmacist
+- #### Route: /sendMessage/:patientUsername/:selectedDoctor
+- #### Request type: post
+- #### Request header: `{PatientUsername: 'mariam', selectedDoctor:'doctorTesting'}`
+
+#### Retrieves details of a specific medicine
+- #### Route: /medicine/details
+- #### Request type: post
+- #### Request body: `{medicineID: 'mongoose.type.objectId()'}`
+
 ### Pharmacist Router
+#### Route : (/pharmacist)
 
+#### Update Medicine's price and details in the database
+- #### Route: /medicine/details
+- #### Request type: put
+- #### Request body: `{medicineName: 'panadol', newPrice:'500',newDetails:'mmmm'}`
 
+#### Changes the status of a medicine
+- #### Route: /changeMedicineStatus/:id
+- #### Request type: put
+- #### Request header: `{id: 'mongoose.type.objectId()'}`
+
+#### Adds a new medicine to the database
+- #### Route: /createMedicine
+- #### Request type: post
+- #### Request Body: `{name: 'panadol', details:'anti-inflammatory',quantity:'50',price:'50',medicinalUse:'Inflammation',image:'Image'}`
+
+#### Searches for a medicine by name
+- #### Route: /searchMedicine
+- #### Request type: post
+- #### Request Body: `{name: 'panadol'}`
+
+#### Filters medicines based on medicinal use.
+- #### Route: /filter-medicines
+- #### Request type: get
+- #### Request query: `{medicinalUse: 'Inflammation'}`
+
+#### Retrieves usernames of patients
+- #### Route: /getPatientUsername/:username
+- #### Request type: get
+- #### Request header: `{username: 'Mariam'}`
+
+#### Creates or joins a chat room for communication between a pharmacist and a patient
+- #### Route: /ChatDoctor/:doctorUsername/:username
+- #### Request type: post
+- #### Request header: `{doctorUsername: 'doctorName',username:'Mariam'}`
+
+####  Sends a message in the chat room between a pharmacist and a patient
+- #### Route: /sendMessage/:patientUsername/:doctorUsername
+- #### Request type: post
+- #### Request header: `{patientUsername:'mariam',doctorUsername: 'doctorName'}`
+- #### Request Body: `{message:'hi'}`
+
+####  Retrieves usernames of doctors
+- #### Route: /getDoctorUsername/:username
+- #### Request type: get
+
+####  Creates or joins a chat room for communication between a pharmacist and a doctor clinic
+- #### Route:/ChatDoctor2/:doctorUsername/:docClinUsername
+- #### Request type: post
+- #### Request header: `{doctorUsername: 'doctorName',docClinUsername:'mariam'}`
+
+####  Sends a message in the chat room between a pharmacist and a doctor clinic
+- #### Route:/sendMessage2/:docClinUsername/:doctorUsername
+- #### Request type: post
+- #### Request header: `{docClinUsername: 'doctorName',doctorUsername:'mariam'}`
+- #### Request Body: `{message: 'hello'}`
 
 # Postman Testing
 Monthly sales statistics regarding wallet, credit, cash, and cancelled orders  
