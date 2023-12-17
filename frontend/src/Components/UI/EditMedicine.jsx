@@ -35,7 +35,6 @@ export function EditMedicine({ medicine, onUpdate }) {
 
   return (
     <div>
-      <Text fontSize='lg'> Edit Medicine</Text>
       <label>Details:</label>
       <Input
         type="text"
