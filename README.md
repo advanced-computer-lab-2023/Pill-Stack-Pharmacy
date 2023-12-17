@@ -14,28 +14,42 @@ This project serves as a learning opportunity to collaborate effectively within 
 - For reporting bugs or offering contributions or enhancements please check our Contributions section below.  
 
 # Screenshots
+- Landing Page
+![Alt text](./screenshots/Landing_Page.png) 
 - Login Page
-![Alt text](screenshots/image-13.png)
+![Alt text](./screenshots/Login.png)
 - Patient home page
-- View all doctors on the platform
-- Book an appointment
-- chat with a doctor 
-- Add a family member
-- View linked family members
-- View my appointments
-- View my family's appointments
-- View my health packages
-- Subscribe to a health package
-- Doctor's home page
-- View doctor's patients
+![Alt text](./screenshots/Patient_Home.png) 
+- Buy medicines
+![Alt text](./screenshots/View_Meds.png) 
+- View cart
+![Alt text](./screenshots/Cart.png)  
+- View orders' status
+![Alt text](./screenshots/Orders.png) 
+- chat with pharmacists
+![Alt text](./screenshots/Chat_withPharma.png)
+- Pharmacist's home page 
+![Alt text](./screenshots/Pharma_Home.png) 
+- Pharmacist manage medicine stock
+![Alt text](./screenshots/Stock_Manage.png) 
+- Pharmacist add medicine
+![Alt text](./screenshots/Add_Med.png) 
+- Pharmacist view and archive medicines
+![Alt text](./screenshots/View_MedsControl.png) 
+- Pharmacist get a sales report
+![Alt text](./screenshots/Sales_Report.png)
 - chat with a patient
-- Add an appoinmment to my bookings
-- Accept/Reject a follow up requested by a patient
-- Schedule a follow up for a patient
-- Admin home page
-- Add a new admin to the system
-- Delete a user from the system
-- View doctor's applications
+![Alt text](./screenshots/Chat_withPatient.png)
+- Admin Home Page 
+![Alt text](Admin_Home.png) 
+- Admin view Users' Info
+![Alt text](View_UserInfo.png)
+- Admin add new system admin
+![Alt text](Add_Admin.png) 
+- Admin accept/reject pharmacists' requests to join platform
+![Alt text](View_PharmaReqs.png) 
+- Admin get a pharmacy sales report
+![Alt text](Sales_Rep.png)
 
 
 
