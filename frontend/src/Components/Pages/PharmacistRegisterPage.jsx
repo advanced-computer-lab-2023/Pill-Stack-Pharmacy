@@ -29,7 +29,8 @@ import wallpaper from '../UI/Images/tealWall.jpg'
 //mdb style
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 
-
+import Navigation from "../UI/Navigation";
+import '../UI/innerPages.css';
 const PharmacistRegisterPage = () => {
   const toast = useToast();
   const navigate = useNavigate();
@@ -109,11 +110,14 @@ const PharmacistRegisterPage = () => {
   };
 
   return (
+    <>
     <MDBContainer fluid className=' d-flex justify-content-center'  
     style={{height:'max-content', backgroundImage: `url(${wallpaper})`, backgroundSize: 'cover', backgroundPosition: 'center'}}
      >
+      
       <MDBRow className=' d-flex justify-content-center align-items-center w-75' style={{height:'fit-content'}} >
         <MDBCol >
+        <Navigation pagetitle={""}  />
           <MDBCard className='my-4' style={{    
             //frosty glass effect
             backgroundColor: 'rgba(255, 255, 255, 0.5)', // Adjust opacity as needed
@@ -241,6 +245,7 @@ const PharmacistRegisterPage = () => {
       </MDBRow>
 
     </MDBContainer>
+    </>
   );
   };
   export default PharmacistRegisterPage;
