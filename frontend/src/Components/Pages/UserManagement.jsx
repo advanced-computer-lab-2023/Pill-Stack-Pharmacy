@@ -48,6 +48,9 @@ import { faUserDoctor,
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom';
 import '../UI/button.css'
+import Navigation from "../UI/Navigation";
+import '../UI/innerPages.css';
+import SidebarAdmin from '../Pages/sideAdmin';
 
 
 
@@ -153,10 +156,16 @@ function UserManagement() {
 
   return (
     <>
-        <Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
+
+      <Navigation
+      pagetitle={"Manage Users"}/>
+       <SidebarAdmin
+      />
+      <div className="content">
+        {/* <Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
             <Text fontSize={'3xl'} color={'white'} >Manage Users</Text>
             <button className="btn" onClick={back}>back</button>
-        </Box>
+        </Box> */}
         <Box  display={'flex'} justifyContent={'center'} alignItems={'center'} flexDirection={'column'} my={5}>
             <Flex justifyContent={'end'} alignItems={'center'} m={10}>
               <Button colorScheme='blue' variant='solid' size='lg' mr={10}
@@ -424,6 +433,7 @@ function UserManagement() {
             </DrawerContent>
           </Drawer>
         }
+        </div>
     </>
   )
 }

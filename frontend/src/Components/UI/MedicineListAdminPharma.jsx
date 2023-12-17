@@ -85,9 +85,9 @@ export function MedicineListControl() {
     <>
      <Navigation
       pagetitle={"Available Medicines"}/>
-       <SidebarDR
-      />
-      <div className="content" mr={13}>
+       {/* <SidebarDR
+      /> */}
+      {/* <div className="content" mr={13}> */}
       {/* <Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
         <Text fontSize={'3xl'} color={'white'}>
           Available Medicines
@@ -168,7 +168,7 @@ export function MedicineListControl() {
           ))}
         </SimpleGrid>
       </Box>
-      </div>
+      {/* </div> */}
     </>
   );
 }  

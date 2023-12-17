@@ -24,11 +24,11 @@ function Dashboard() {
     };
     return (
         <>
-         <Navigation
-      pagetitle={"Sales Report"}/>
-       <SidebarDR
-      />
-         <div className="content">
+<Navigation pagetitle={"Sales Report"} style={{ transform: 'translateX(-20px)' }} />
+
+       {/* <SidebarDR
+      /> */}
+         
         <Section>
                         <div>
             <label htmlFor="monthDropdown"class="bigger-bold">Month:</label>
@@ -60,7 +60,7 @@ function Dashboard() {
                 
             </div>
         </Section>
-        </div>
+        
         </>
     )
     

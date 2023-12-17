@@ -4,7 +4,7 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import Sidebar from './side';
+import SidebarAdmin from './sideAdmin';
 import WithSubnavigation from './navbar';
 import {
   Modal,
@@ -218,7 +218,7 @@ export const AdminHome = () => {
 
        
         </Box> */}
-        <Sidebar/>
+        <SidebarAdmin onLogout={Logout}/>
          <div style={{ position: 'fixed', top: '0', left: '0', right: '0', zIndex: '1000'}}>
         <WithSubnavigation
          username={username}
