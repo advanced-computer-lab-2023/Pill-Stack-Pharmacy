@@ -514,15 +514,29 @@ Adding items to cart
 ![Alt text](screenshots/Tracking.png)
 15. To view all the orders you've made on your account, navigate back to the home page by clicking the back button and select on `My`in the sidebar then `Orders`. You can view all your orders through this page.
 ![Alt text](screenshots/MyOrders.png)
-### As an Pharmacist:
+### As a Pharmacist:
 1. Open `http://localhost:3001/ ` to view the login page in your browser.  
 ![Alt text](screenshots/LandingPage.png) 
 2. Register as a pharmacist in order to be able to login into the system. 
-![Alt text](screenshots/pharmacist_registration.png) 
+![Alt text](screenshots/pharmacist_registeration.png) 
 3. Upon successful registeration, a redirection to the login page will occur. 
 ![Alt text](screenshots/pharma_login.png) 
 4. Upon successful login, a redirection to the home page will occur
 ![Alt text](screenshots/docOc.png)
+5. Through Stock Management, pharmacist can manage medicines.
+![Alt text](screenshots/stockManage.png) 
+5. To streamline your selection process, you can filter medicines by their category using the drop-down list.
+![Alt text](screenshots/filterMed.png)
+6. Alternatively, you can quickly find a specific medicine by using the search bar.
+![Alt text](screenshots/searchPharma.png)
+7.Through Sales Report, patient can view monthly statitics regarding medicine sales.
+![Alt text](screenshots/pharma_sales.png) 
+8. To add a new medicine you should fill in the following form
+![Alt text](screenshots/addMed.png)
+9. to see the available medicines
+![Alt text](screenshots/Availablemedicine.png)
+10. As a pharmacist you can chat with a patient
+![Alt text](screenshots/pharmaChat.png)
 
 ### As an Admin:
 1. Open `http://localhost:3000/ ` to view the landing page in your browser.  
