@@ -18,6 +18,10 @@ const medicineSchema = new Schema({
     type: Number,
     required: true,
   },
+  Onboard:{
+    type:Boolean,
+    required:true
+  },
   Sales: {
     type: Number,
   },

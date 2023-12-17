@@ -2,7 +2,7 @@ const express = require('express');
 let router = express.Router();
 const {getDoctors,filterMedicinesByMedicinalUse, searchMedicinePat,
     getAddresses,addDeliveryAddress,addDeliveryAddress2, getFullInfo,orderDetails,generateRoom,
-    joinChatRoomPatient,getDoctorUsername,sendMessage,getMedAndRelatedProducts,orders} = require('../Routes/userController');
+    joinChatRoomPatient,getDoctorUsername,sendMessage,getMedAndRelatedProducts,orders,getPrescribtionMedicene,userPrescription} = require('../Routes/userController');
 const {getAvailableMedicines} = require('../Routes/adminController.js');
 const { userVerification } = require('../Middleware/AuthMiddleware');
 
@@ -24,6 +24,7 @@ router.get('/getDoctorUsername/:username',getDoctorUsername);
 router.post('/Chat/:username/:doctorUsername',joinChatRoomPatient)
 router.post('/sendMessage/:patientUsername/:selectedDoctor',sendMessage)
 router.post('/medicine/details',getMedAndRelatedProducts)
-
+router.post('/PrescribedMedicene',userVerification,getPrescribtionMedicene);
+router.post('/Prescriptions',userVerification,userPrescription);
 
 module.exports = router;

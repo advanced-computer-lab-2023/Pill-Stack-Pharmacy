@@ -14,7 +14,7 @@ import {
 
 const MedicineItem = ({ medicine, addToCart }) => {
   const [quantity, setQuantity] = useState(1);
-
+  console.log(medicine);
 //   return (
 //     <div key={medicine._id} className="medicine-card">
 //      <img
@@ -55,11 +55,12 @@ return (
   <div className="col">
     <div className="card shadow-sm">
       <Link to={`/medicine/details/${medicine._id}`} href="!#" replace>
-        <img
+        
+       <img
           className="card-img-top bg-dark cover"
           height="100"
           Width="50"
-          style={{ objectFit: 'cover',minHeight:'400px', maxHeight: '400px' }} 
+          style={{ objectFit: 'cover',minHeight:'400px', maxHeight: '400px' }}  
           src={`data:${medicine.Image.contentType};base64, ${Buffer.from(
                  medicine.Image.data
                ).toString('base64')}`}

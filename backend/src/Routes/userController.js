@@ -297,6 +297,34 @@ const getMedAndRelatedProducts=async(req,res)=>{
     return res.status(401);
   }
 }
+const userPrescription=async(req,res)=>{
+  const userid=req.user.id;
+  const user=await userModel.findById(userid);
+  //console.log(user.Prescriptions);
+  res.json(user.Prescriptions).status(200);
+}
+const getPrescribtionMedicene=async(req,res)=>{
+  const userid=req.user.id;
+  const PrescriptionId=req.body.prescID;
+  const user=await userModel.findById(userid);
+  let PrescribedMedicene=[];
+  for(let i=0;i<user.Prescriptions.length;i++){
+    if(user.Prescriptions[i].id==PrescriptionId){
+      for(let j=0;j<user.Prescriptions[i].Medicine.length;j++){
+        const Medicene=await medModel.find({Name:user.Prescriptions[i].Medicine[j].MedicineName});
+        console.log(user.Prescriptions[i].Medicine[j].MedicineName);
+        PrescribedMedicene.push(Medicene);
+      }
+    }
+
+  }
+  if(PrescribedMedicene[0].length==0){
+    res.send("error").status(400);
+  }
+  else{
+  console.log(PrescribedMedicene);
+  res.json(PrescribedMedicene).status(200);}
+}
 
 module.exports = {searchMedicinePat, filterMedicinesByMedicinalUse,getAddresses,addDeliveryAddress,addDeliveryAddress2, orderDetails,getFullInfo,
-  generateRoom,joinChatRoomPatient,getDoctorUsername,sendMessage,getMedAndRelatedProducts};
+  generateRoom,joinChatRoomPatient,getDoctorUsername,sendMessage,getMedAndRelatedProducts,getPrescribtionMedicene,userPrescription};

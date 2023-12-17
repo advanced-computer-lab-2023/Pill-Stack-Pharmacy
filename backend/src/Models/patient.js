@@ -131,6 +131,7 @@ const patientSchema = new Schema({
           new Schema({
             MedicineID: String,
             MedicineName: String,
+            Onboard:Boolean,
             Dose: String,
             Quantity: Number,
             Instructions: String

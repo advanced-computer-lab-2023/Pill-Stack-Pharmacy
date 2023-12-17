@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, ButtonGroup, Center } from '@chakra-ui/react'
+import { Button, ButtonGroup, Center, Select } from '@chakra-ui/react'
 import { Input } from '@chakra-ui/react'
 import { Text , Box} from '@chakra-ui/react'
 import '../UI/button.css'
@@ -20,6 +20,7 @@ export const AddMedicine = () => {
     quantity: '',
     medicinalUse: [],
     image: null,
+    Onboard:true,
   });
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -63,6 +64,7 @@ export const AddMedicine = () => {
     formData.append('details', medicineData.details);
     formData.append('price', medicineData.price);
     formData.append('quantity', medicineData.quantity);
+    formData.append("Onboard",medicineData.Onboard);
     formData.append('medicinalUse', medicineData.medicinalUse.join(',')); // Join as a comma-separated string
     formData.append('image', medicineData.image);
 
@@ -135,6 +137,13 @@ export const AddMedicine = () => {
             <div>
               <label>Medicinal Use (comma-separated):</label>
               <Input variant='filled' type="text" name="medicinalUse" value={medicineData.medicinalUse} onChange={handleInputChange} />
+            </div>
+            <div>
+              <label>Is on Board Medicene :</label>
+              <Select name="medicinOnboard" value={medicineData.Onboard} onChange={handleInputChange}>
+                <option value={true}>true</option>
+                <option value={false}>false</option>
+              </Select>
             </div>
             <div>
               <label>Image:</label>

@@ -37,6 +37,9 @@ const createMedicine = async (req, res) => {
     if (!req.body.medicinalUse) {
       return res.send('Please enter medicine medicinal use');
     }
+    if (!req.body.Onboard) {
+      return res.send('Please enter medicine type');
+    }
 
     if (!image) {
       return res.send("Please upload an image.");
@@ -49,6 +52,7 @@ const createMedicine = async (req, res) => {
       Details: req.body.details,
       Price: req.body.price,
       Quantity: req.body.quantity,
+      Onboard:req.body.Onboard,
       Image: {
         data: image.buffer,
         contentType: image.mimetype,

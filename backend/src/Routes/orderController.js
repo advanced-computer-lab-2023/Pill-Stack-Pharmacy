@@ -67,6 +67,16 @@ module.exports.creditConfirm=async(req,res)=>{
     const pharms=await Pharmacist.find({});
     for (const item of cart.items) {
         const product = await medModel.findOne({ _id: item.productId });
+        if(item.Onboard==false){
+            for(let i=0;i<user.Prescriptions.length;i++){
+                for(let j=0;j<user.Prescriptions[i].Medicine.length;j++){
+                    if(user.Prescriptions[i].Medicine[j].Onboard==false &&user.Prescriptions[i].Medicine[j].Quantity==item.quantity){
+                        user.Prescriptions[i].Status="Filled";
+                    }
+                }
+            }
+        }
+        await user.save();
         if (product) {
             // Increase the sales by the quantity in the cart
             product.Sales += item.quantity;
@@ -105,6 +115,16 @@ module.exports.checkoutCash = async (req,res) => {
         const pharms=await Pharmacist.find({});
         for (const item of cart.items) {
             const product = await medModel.findOne({ _id: item.productId });
+            if(item.Onboard==false){
+                for(let i=0;i<user.Prescriptions.length;i++){
+                    for(let j=0;j<user.Prescriptions[i].Medicine.length;j++){
+                        if(user.Prescriptions[i].Medicine[j].Onboard==false &&user.Prescriptions[i].Medicine[j].Quantity==item.quantity){
+                            user.Prescriptions[i].Status="Filled";
+                        }
+                    }
+                }
+            }
+            await user.save();
             if (product) {
                 // Increase the sales by the quantity in the cart
                 product.Sales += item.quantity;
@@ -165,6 +185,16 @@ module.exports.checkoutWallet = async (req,res) => {
                    console.log(pharms);
                    for (const item of cart.items) {
                     const product = await medModel.findOne({ _id: item.productId });
+                    if(item.Onboard==false){
+                        for(let i=0;i<user.Prescriptions.length;i++){
+                            for(let j=0;j<user.Prescriptions[i].Medicine.length;j++){
+                                if(user.Prescriptions[i].Medicine[j].Onboard==false &&user.Prescriptions[i].Medicine[j].Quantity==item.quantity){
+                                    user.Prescriptions[i].Status="Filled";
+                                }
+                            }
+                        }
+                    }
+                    await user.save();
                     if (product) {
                         // Increase the sales by the quantity in the cart
                         product.Sales += item.quantity;
@@ -226,6 +256,8 @@ module.exports.cancelOrder = async (req, res) => {
                 case 'wallet':
                     // Refund amount to user's wallet
                     const user = await userModel.findOne({ _id: userId });
+                    
+                    
                     user.WalletBalance += order.bill;
                     await user.save();
                     break;
@@ -237,6 +269,17 @@ module.exports.cancelOrder = async (req, res) => {
             }
             for (const item of order.items) {
                 const product = await medModel.findOne({ _id: item.productId });
+                if(item.Onboard==false){
+                    for(let i=0;i<user.Prescriptions.length;i++){
+                        for(let j=0;j<user.Prescriptions[i].Medicine.length;j++){
+                            if(user.Prescriptions[i].Medicine[j].Onboard==false &&user.Prescriptions[i].Medicine[j].Quantity==item.quantity){
+                                user.Prescriptions[i].Status="Filled";
+                            }
+                        }
+                    }
+                }
+                await user.save();
+                
                 if (product) {
                     product.Sales -= item.quantity;
                     product.Quantity+=item.quantity;
