@@ -161,7 +161,7 @@ Your default browser should automatically open on the web application's address.
 
 
 # API Refrences
-Our APIs is divided into 6 APIs:
+Our APIs are divided into 6 APIs:
 ### Authentication Router
 #### Route : (/)
 #### Authenticate a user
