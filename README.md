@@ -483,6 +483,8 @@ Patient's cart
 Adding items to cart
 ![Alt text](screenshots/image-10.png)  
 # How to Use
+### As an Patient:
+
 1. Open `http://localhost:3001/ ` to view the login page in your browser.  
 ![Alt text](screenshots/LandingPage.png) 
 2. Register as a patient in order to be able to login into the system. 
@@ -514,6 +516,23 @@ Adding items to cart
 15. To view all the orders you've made on your account, navigate back to the home page by clicking the back button and select on `My`in the sidebar then `Orders`. You can view all your orders through this page.
 ![Alt text](screenshots/MyOrders.png)
 
+### As an Admin:
+1. Open `http://localhost:3000/ ` to view the landing page in your browser.  
+![Alt text](screenshots/Landing_Page.png)
+2. Select `Join Now` and redirection to login page occurs
+ ![Alt text](screenshots/Login.png) 
+3. Enter your credentials and a redirection the the admin-home page will occur.
+ ![Alt text](screenshots/Admin_Home.png) 
+ 4. Through `Medicine Control`, the admin can view the medicine on the platform and archive/unarchive any medicine.
+  ![Alt text](screenshots/View_MedsControl.png) 
+5. Through `pharmacist requests`, the admin can view all requests sumbitted and accept or reject.
+![Alt text](screenshots/View_PharmaReqs.png) 
+6.Through `Sales Report`, admin can view monthly statitics regarding medicine sales.
+![Alt text](screenshots/Sales_rep.png) 
+
+7. Through `Users`, the admin can view all users on the system and remove any user or add new Admin.
+![Alt text](screenshots/adminP.png) 
+![Alt text](screenshots/Add_Admin.png)
 # Contribute 
 Thank you for considering contributing to our project! We welcome contributions from everyone.
 ## Contribution Guidelines  
