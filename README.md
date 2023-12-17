@@ -41,15 +41,15 @@ This project serves as a learning opportunity to collaborate effectively within 
 - chat with a patient
 ![Alt text](./screenshots/Chat_withPatient.png)
 - Admin Home Page 
-![Alt text](Admin_Home.png) 
+![Alt text](./screenshots/Admin_Home.png) 
 - Admin view Users' Info
-![Alt text](View_UserInfo.png)
+![Alt text](./screenshots/View_UserInfo.png)
 - Admin add new system admin
-![Alt text](Add_Admin.png) 
+![Alt text](./screenshots/Add_Admin.png) 
 - Admin accept/reject pharmacists' requests to join platform
-![Alt text](View_PharmaReqs.png) 
+![Alt text](./screenshots/View_PharmaReqs.png) 
 - Admin get a pharmacy sales report
-![Alt text](Sales_Rep.png)
+![Alt text](./screenshots/Sales_Rep.png)
 
 
 
