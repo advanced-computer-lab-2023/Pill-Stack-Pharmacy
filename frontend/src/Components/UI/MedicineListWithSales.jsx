@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import MedicinalUseFilter from '../UI/MedicinalUseFilter';
 import EditMedicine from '../UI/EditMedicine';
 import { Button, Input, VStack, HStack, Heading, Text, Box } from '@chakra-ui/react';
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter } from '@chakra-ui/react';
 import '../UI/button.css'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -31,6 +32,7 @@ export function MedicineListwithSales() {
   }, []);
 
   const openEditModal = (medicine) => {
+    console.log('here');
     setEditMedicine(medicine);
     setIsModalOpen(true);
   };
@@ -102,13 +104,23 @@ export function MedicineListwithSales() {
           
         </VStack>
 
-     
         {isModalOpen && (
-          <Box className="modal" p={4} borderWidth="1px" borderRadius="md">
-            <EditMedicine medicine={editMedicine} onUpdate={updateMedicine} />
-            <Button mt={4} size='sm' colorScheme='teal' onClick={closeEditModal}>Close</Button>
-          </Box>
-        )}
+  <Modal isOpen={isModalOpen} onClose={closeEditModal}>
+    <ModalOverlay />
+    <ModalContent>
+      <ModalHeader>Edit Medicine</ModalHeader>
+      <ModalBody>
+        <EditMedicine medicine={editMedicine} onUpdate={updateMedicine} />
+      </ModalBody>
+      <ModalFooter>
+        <Button colorScheme="teal" mr={3} onClick={closeEditModal}>
+          Close
+        </Button>
+        {/* You can add additional buttons or elements here if needed */}
+      </ModalFooter>
+    </ModalContent>
+  </Modal>
+)}
         
         </div>   
       
