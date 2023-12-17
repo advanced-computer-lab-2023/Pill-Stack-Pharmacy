@@ -39,8 +39,10 @@ function LandingPage() {
             </GridItem>
             <GridItem w='100%' as={Flex} justifyContent='flex-end' alignItems={'center'}>
                 <HStack spacing={5} mx={5}>
-                <Button bg={'#1a202c'}
-                _hover={{ bg: '#2d3748' }}
+                <Button 
+                colorScheme='teal'
+                // bg={'#1a202c'}
+                // _hover={{ bg: '#2d3748' }}
                 onClick={
                     () => {
                         navigate('/login')
@@ -49,8 +51,9 @@ function LandingPage() {
                 <Button
                 bg={'#1a202c11'}
                 border={'1px solid #1a202c'}
-                color={'#1a202c'}
-                _hover={{ bg: '#1a202c', color: 'white' }}
+                // color={'#1a202c'}
+                // _hover={{ bg: '#1a202c', color: 'white' }}
+                colorScheme='teal'
                 variant={'outline'}
                 onClick={
                     () => {

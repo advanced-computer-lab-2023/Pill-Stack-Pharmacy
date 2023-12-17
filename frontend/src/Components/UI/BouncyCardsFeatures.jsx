@@ -15,14 +15,14 @@ export const BouncyCardsFeatures = () => {
       w={'80%'}
     >
       <div style={{ marginBottom: "8px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "4px"}}>
-        <h2 style={{ maxWidth: "50rem", fontSize: "2.5rem", fontWeight: "bold", color:'white'}}>
+        <h2 style={{ maxWidth: "50rem", fontSize: "2.5rem", fontWeight: "bold", }}>
         Discover the Power of Our Virtual Clinic: Cutting-Edge Features for 
           <span style={{ color: "#9CA3AF" }}> Seamless Healthcare</span>
         </h2>
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          style={{ whiteSpace: "nowrap", borderRadius: "0.375rem", backgroundColor:"white", padding: "0.5rem 1rem", fontWeight: "medium", color: "black", boxShadow: "0 0 0 0.125rem rgba(38, 43, 54, 0.05), 0 0.0625rem 0.125rem 0 rgba(38, 43, 54, 0.1)", transition: "background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out", ":hover": { backgroundColor: "#1E293B" } }}
+          style={{ whiteSpace: "nowrap", borderRadius: "0.375rem", backgroundColor:"black", padding: "0.5rem 1rem", fontWeight: "medium", color: "white", boxShadow: "0 0 0 0.125rem rgba(38, 43, 54, 0.05), 0 0.0625rem 0.125rem 0 rgba(38, 43, 54, 0.1)", transition: "background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out", ":hover": { backgroundColor: "#1E293B" } }}
         >
           Learn more
         </motion.button>
