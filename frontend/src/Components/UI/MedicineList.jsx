@@ -9,6 +9,9 @@ import '../UI/button.css'
 import { useNavigate } from 'react-router-dom';
 import '../../index.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Navigation from "../UI/Navigation";
+import '../UI/innerPages.css';
+import Sidebar from '../Pages/side';
 
 export function MedicineList() {
   const [medicines, setMedicines] = useState([]);
@@ -139,6 +142,12 @@ export function MedicineList() {
   // );
   return (
     <>
+
+<Navigation
+      pagetitle={"Over-the-counter medicines"}/>
+       <Sidebar
+      />
+         <div className="content">
     <Navbar />
 
          <div className="container mt-5 py-4 px-xl-5">
@@ -207,6 +216,7 @@ export function MedicineList() {
 
         ))}
 
+      </div>
       </div>
       </div>
       </div>

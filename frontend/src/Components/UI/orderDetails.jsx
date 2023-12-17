@@ -27,6 +27,9 @@ import {
   MDBTypography,
 } from "mdb-react-ui-kit";
 import { Buffer } from 'buffer';
+import Navigation from "../UI/Navigation";
+import '../UI/innerPages.css';
+import Sidebar from '../Pages/side';
 
 const OrderDetailsPage = () => {
   const [orderDetailsArray, setOrderDetailsArray] = useState([]);
@@ -34,6 +37,7 @@ const OrderDetailsPage = () => {
   const navigate = useNavigate();
   const back =()=>  navigate(-1);
   const [cancelSuccess, setCancelSuccess] = useState(false); // State for success message
+  
 
 
 
@@ -126,9 +130,13 @@ const OrderDetailsPage = () => {
   
   return (
     <>
-    <nav bg={'#4bbbf3'} class="navbar navbar-expand-lg navbar-blue bg-4bbbf3" height=" 100px" >
+      <Navigation
+      pagetitle={"My Orders"}/>
+       <Sidebar
+      />
+      <div className="content">
+    <nav bg={'white'} class="navbar navbar-expand-lg navbar-blue bg-4bbbf3" height=" 100px" >
     <div class="container-fluid">
-    <button className="btn" onClick={back}>back</button>
       <a class="navbar-brand" href="#"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -324,7 +332,7 @@ const OrderDetailsPage = () => {
         <AlertDescription>Order was successfully Cancelled </AlertDescription>
       </Alert>
     )}
-      
+      </div>
     </>
   );
 };
