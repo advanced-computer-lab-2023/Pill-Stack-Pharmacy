@@ -235,7 +235,9 @@ export const Home = () => {
 
   return (
     <>
-        <Sidebar/>
+        <Sidebar 
+        onLogout={Logout}
+        />
         <div style={{ position: 'fixed', top: '0', left: '0', right: '0', zIndex: '1000'}}>
         <WithSubnavigation
          username={username}
@@ -440,9 +442,9 @@ export const Home = () => {
             
           </div>
           <div className="Container3">
-          <Link to="/medicine" className="box2" style={{ color: '#005660', textDecoration: 'none' }} >Shop</Link>
-            <Link to="/cart" className="box21" style={{ color: '#005660', textDecoration: 'none' }}>Cart</Link>
-            <Link to="/orderDetails" className="box22" style={{ color: '#005660', textDecoration: 'none' }} >Orders</Link>
+          <Link to="/medicine" className="box2s" style={{ color: '#005660', textDecoration: 'none' }} >Shop</Link>
+            <Link to="/cart" className="box2sc" style={{ color: '#005660', textDecoration: 'none' }}>Cart</Link>
+            <Link to="/orderDetails" className="box2o" style={{ color: '#005660', textDecoration: 'none' }} >Orders</Link>
 
           </div>
         </div>

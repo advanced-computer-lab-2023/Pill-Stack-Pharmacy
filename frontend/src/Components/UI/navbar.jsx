@@ -29,7 +29,7 @@ export const Navbar=()=>{
     }
     return(
 <div className="navbar">
-<button className="btn"  onClick={back}>back</button>
+{/* <button className="btn"  onClick={back}>back</button> */}
     <div className="links">
 {/* <Link to="/cart">
     <FontAwesomeIcon icon={faCartShopping} fontSize={'35px'}/>

@@ -5,6 +5,9 @@ import { Text , Box} from '@chakra-ui/react'
 import '../UI/button.css'
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import Navigation from "../UI/Navigation";
+import '../UI/innerPages.css';
+import SidebarDR from '../Pages/sideDR';
 import {
     Alert,
     AlertIcon,
@@ -109,10 +112,17 @@ export const AddMedicine = () => {
   };
 
   return (
-    <><Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
+    <>
+    <Navigation
+      pagetitle={"Add New Medicine"}/>
+       <SidebarDR
+      />
+     <div className="content">
+    {/* <Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
       <Text fontSize={'3xl'} color={'white'}>Add New Medicine</Text>
       <button className="btn" onClick={back}>back</button>
-    </Box><Center>
+    </Box> */}
+    <Center>
 
         <div style={{ margin: "50px", width: "50%" }}>
 
@@ -170,7 +180,10 @@ export const AddMedicine = () => {
 
 
         </div>
-      </Center></>
+        
+      </Center>
+      </div>  
+      </>
 
   );
 };

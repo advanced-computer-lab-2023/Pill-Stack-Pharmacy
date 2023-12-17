@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import Sidebar from './side';
+import SidebarDR from './sideDR';
 import '../UI/home.css';
 import WithSubnavigation from './navbar';
 import { ChatIcon, Icon, EmailIcon,PhoneIcon,BellIcon } from "@chakra-ui/icons";
@@ -226,7 +226,7 @@ function DoctorHome() {
           </Grid>
         </Box> */}
 
-        <Sidebar/>
+        <SidebarDR onLogout={Logout}/>
         <div style={{ position: 'fixed', top: '0', left: '0', right: '0', zIndex: '1000'}}>
         <WithSubnavigation
          username={username}
@@ -303,7 +303,7 @@ function DoctorHome() {
   )}
 </Box>
 
-              <Link to="/salesReport" className="box23" style={{ color: '#4C4C4C', textDecoration: 'none' }}>Sales Report</Link>
+              <Link to="/salesReport" className="box2sales" style={{ color: '#005660', textDecoration: 'none' }}>Sales Report</Link>
             
             </Box>
             
@@ -412,9 +412,9 @@ function DoctorHome() {
             
           </div>
           <div className="Container3">
-          <Link to="/medicine/sales" className="box2" style={{ color: '#005660', textDecoration: 'none' }} >Stock Management</Link>
-            <Link to="/addMed" className="box21" style={{ color: '#005660', textDecoration: 'none' }}>Add Meds</Link>
-            <Link to="/medicineControl" className="box22" style={{ color: '#005660', textDecoration: 'none' }} >Med Stock</Link>
+          <Link to="/medicine/sales" className="box2sm" style={{ color: '#005660', textDecoration: 'none' }} >Stock Management</Link>
+            <Link to="/addMed" className="box2am" style={{ color: '#005660', textDecoration: 'none' }}>Add Meds</Link>
+            <Link to="/medicineControl" className="box2sm" style={{ color: '#005660', textDecoration: 'none' }} >Med Stock</Link>
 
           </div>
         </div>

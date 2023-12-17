@@ -20,9 +20,11 @@ import {
   MDBRow,
   MDBTypography,
 } from "mdb-react-ui-kit";
+import { ArrowLeftIcon } from '@chakra-ui/icons'
+
 import {
   Box,
-  Text}
+  Text,Button,Flex,useColorModeValue}
   from '@chakra-ui/react';
 export default function Completion() {
   // Use the useParams hook to access the route parameters
@@ -54,10 +56,33 @@ export default function Completion() {
    
 	return (
       <>
-       <Box bg={'#4bbbf3'} p={5} boxShadow='2xl' mb={10}>
-        <Text fontSize={'3xl'} color={'white'}></Text>
-        <button className="btn" onClick={back}>back</button>
-      </Box>
+         <Box>
+      <Flex
+        bg={`rgba(255, 255, 255, 0.0)`}
+        color={useColorModeValue('gray.600', 'white')}
+        minH={'70px'}
+        py={{ base: 2 }}
+        px={{ base: 4 }}
+        align={'center'}>
+        {/* Replace the following text with your logo or any other content */}
+        
+
+        {/* Square button with round edges and black background */}
+        <Button
+          onClick={() => navigate('/home')} // This will take you back to the previous page
+          ml={'auto'}
+          bg={'#005660'}
+          color={'white'}
+          borderRadius={'12px'}
+          p={'12px'}
+          _hover={{
+            textDecoration: 'none',
+            bg: '#23859B',
+          }}>
+          <ArrowLeftIcon/>
+        </Button>
+      </Flex>
+    </Box>
       { order? (<section
         className="h-100 gradient-custom"
         style={{ backgroundColor: "#eee" }}

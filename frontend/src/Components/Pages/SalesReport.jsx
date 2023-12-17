@@ -7,6 +7,9 @@ import Sales from '../UI/Sales'
 import Orders from '../UI/Orders'
  import Analytic from '../UI/Analytic'
  import Shopping from '../UI/Shopping'
+ import Navigation from "../UI/Navigation";
+import '../UI/innerPages.css';
+import SidebarDR from '../Pages/sideDR';
 
 function Dashboard() {
     const [selectedMonth, setSelectedMonth] = useState('December');
@@ -20,6 +23,12 @@ function Dashboard() {
         setSelectedMonth(e.target.value);
     };
     return (
+        <>
+<Navigation pagetitle={"Sales Report"} style={{ transform: 'translateX(-20px)' }} />
+
+       {/* <SidebarDR
+      /> */}
+         
         <Section>
                         <div>
             <label htmlFor="monthDropdown"class="bigger-bold">Month:</label>
@@ -51,7 +60,10 @@ function Dashboard() {
                 
             </div>
         </Section>
+        
+        </>
     )
+    
 }
 
 export default Dashboard

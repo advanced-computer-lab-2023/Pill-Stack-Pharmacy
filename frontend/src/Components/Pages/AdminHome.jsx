@@ -4,7 +4,7 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import Sidebar from './side';
+import SidebarAdmin from './sideAdmin';
 import WithSubnavigation from './navbar';
 import {
   Modal,
@@ -218,7 +218,7 @@ export const AdminHome = () => {
 
        
         </Box> */}
-        <Sidebar/>
+        <SidebarAdmin onLogout={Logout}/>
          <div style={{ position: 'fixed', top: '0', left: '0', right: '0', zIndex: '1000'}}>
         <WithSubnavigation
          username={username}
@@ -258,8 +258,8 @@ export const AdminHome = () => {
 
             <Box className="boxL1" >
             {/* <div className="boxT">Recent</div> */}
-            <Link to="/salesReport" className="box23" style={{ color: '#4C4C4C', textDecoration: 'none' }}>Sales Report</Link>
-            <Box onClick={openChangePasswordModal} className="box24"style={{ color: '#4C4C4C', textDecoration: 'none' }} >Control Account</Box>
+            <Link to="/salesReport" className="box2sales" style={{ color: '#4C4C4C', textDecoration: 'none' }}>Sales Report</Link>
+            <Box onClick={openChangePasswordModal} className="box2settings"style={{ color: '#4C4C4C', textDecoration: 'none' }} >Control Account</Box>
             
             </Box>
           </div>
@@ -361,9 +361,9 @@ export const AdminHome = () => {
             
           </div>
           <div className="Container3">
-          <Link to="/admin-users" className="box2" style={{ color: '#005660', textDecoration: 'none' }} >Manage Users</Link>
-            <Link to="/admin-requests" className="box21" style={{ color: '#005660', textDecoration: 'none' }}>Doctor Requests</Link>
-            <Link to="/medicineControl" className="box22" style={{ color: '#005660', textDecoration: 'none' }} >Medicine Control</Link>
+          <Link to="/admin-users" className="box2u" style={{ color: '#005660', textDecoration: 'none' }} >Manage Users</Link>
+            <Link to="/admin-requests" className="box2pr" style={{ color: '#005660', textDecoration: 'none' }}>Pharamcist Requests</Link>
+            <Link to="/medicineControl" className="box2am" style={{ color: '#005660', textDecoration: 'none' }} >Medicine Control</Link>
 
           </div>
         </div>

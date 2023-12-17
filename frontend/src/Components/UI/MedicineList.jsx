@@ -17,6 +17,10 @@ import { useNavigate } from 'react-router-dom';
 import '../../index.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { toast } from 'react-toastify';
+import Navigation from "../UI/Navigation";
+import '../UI/innerPages.css';
+import Sidebar from '../Pages/side';
+
 
 export function MedicineList() {
 //  const toast = useToast();
@@ -191,6 +195,12 @@ Prescription();
   // );
   return (
     <>
+
+<Navigation
+      pagetitle={"Medicine"}/>
+       <Sidebar
+      />
+         <div className="content">
     <Navbar />
 
          <div className="container mt-5 py-4 px-xl-5">
@@ -215,6 +225,7 @@ Prescription();
           </div>
         </div>
       </div>
+
       <RadioGroup onChange={setValue} value={value}>
       <Stack direction='row'>
       <Button onClick={()=>setCheck(false)}>Reset</Button>
@@ -230,6 +241,7 @@ Prescription();
 
 
       <Text fontSize={'3xl'} color={'Black'} >Over-the-counter medicine</Text>
+
       <div className="col-lg-12">
 
       <div className="d-flex flex-column h-100">
@@ -285,6 +297,7 @@ Prescription();
 ))}
          
 
+      </div>
       </div>
       </div>
       </div>

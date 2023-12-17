@@ -125,7 +125,8 @@
     transition: transform 0.1s ease-in-out;
   }
   
-  .box1:hover, .boxW:hover, .box2:hover, .box21:hover,.box22:hover,.box23:hover,.box24:hover {
+  .box1:hover, .boxW:hover, .box2:hover, .box21:hover,.box2sales:hover,.box2settings:hover,.box2u:hover,.box2pr:hover,
+  .box22:hover,.box23:hover,.box24:hover,.box2s:hover,.box2sc:hover,.box2o:hover,.box2sm:hover,.box2am:hover {
     transform: scale(1.005); /* Adjust the values for the desired diagonal movement */
   }
 
@@ -185,6 +186,178 @@
     font-size: 25px;
     top: 38%;
     color: #005660;
+    border-radius: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the shadow values as needed */
+  }
+
+  .box2s {
+    background-image: url('./Images/shop.png');
+    background-position: center 60% !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 345px;
+    height: 295px;
+    justify-content: center;
+    display: flex;
+    font-family: 'Futura Maxi CG Bold';
+    padding-top: 63%;
+    font-size: 25px;
+    top: 38%;
+    color: #005660;
+    border-radius: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the shadow values as needed */
+  }
+
+  .box2u{
+    background-image: url('./Images/users.png');
+    background-position: center 55% !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 345px;
+    height: 295px;
+    justify-content: center;
+    display: flex;
+    font-family: 'Futura Maxi CG Bold';
+    padding-top: 65%;
+    font-size: 25px;
+    top: 40%;
+    color: #4C4C4C;
+    border-radius: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the shadow values as needed */
+  }
+
+  .box2pr{
+    background-image: url('./Images/DrReq.png');
+    background-position: center 55% !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 345px;
+    height: 295px;
+    justify-content: center;
+    display: flex;
+    font-family: 'Futura Maxi CG Bold';
+    padding-top: 65%;
+    font-size: 25px;
+    top: 40%;
+    color: #4C4C4C;
+    border-radius: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the shadow values as needed */
+  }
+
+
+  .box2sc {
+    background-image: url('./Images/shopping.png');
+    background-position: center 60% !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 345px;
+    height: 295px;
+    justify-content: center;
+    display: flex;
+    font-family: 'Futura Maxi CG Bold';
+    padding-top: 63%;
+    font-size: 25px;
+    top: 38%;
+    color: #005660;
+    border-radius: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the shadow values as needed */
+  }
+
+  .box2o {
+    background-image: url('./Images/orders.png');
+    background-position: center 60% !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 345px;
+    height: 295px;
+    justify-content: center;
+    display: flex;
+    font-family: 'Futura Maxi CG Bold';
+    padding-top: 63%;
+    font-size: 25px;
+    top: 38%;
+    color: #005660;
+    border-radius: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the shadow values as needed */
+  }
+
+  .box2sm {
+    background-image: url('./Images/stockM.png');
+    background-position: center 60% !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 345px;
+    height: 295px;
+    justify-content: center;
+    display: flex;
+    font-family: 'Futura Maxi CG Bold';
+    padding-top: 63%;
+    font-size: 25px;
+    top: 38%;
+    color: #005660;
+    border-radius: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the shadow values as needed */
+  }
+
+  .box2am {
+    background-image: url('./Images/addMed.png');
+    background-position: center 60% !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 345px;
+    height: 295px;
+    justify-content: center;
+    display: flex;
+    font-family: 'Futura Maxi CG Bold';
+    padding-top: 63%;
+    font-size: 25px;
+    top: 38%;
+    color: #005660;
+    border-radius: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the shadow values as needed */
+  }
+  .box2sales {
+    background-image: url('./Images/Sales.png');
+    background-position: center 70% !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 345px;
+    height: 265px;
+     justify-content: center;
+    display: flex;
+    text-align: center;
+    font-family: 'Futura Maxi CG Bold';
+    padding-top: 29%; 
+    font-size: 21px; 
+    top: 38%;
+    color: #4C4C4C; 
+    border-radius: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the shadow values as needed */
+  }
+  .box2settings{
+    background-image: url('./Images/settings.png');
+    background-position: center 65% !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 345px;
+    height: 265px;
+     justify-content: center;
+    display: flex;
+    text-align: center;
+    font-family: 'Futura Maxi CG Bold';
+    padding-top: 29%; 
+    font-size: 21px; 
+    top: 38%;
+    color: #4C4C4C; 
     border-radius: 40px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the shadow values as needed */
   }
@@ -252,7 +425,7 @@
     transition: transform 0.2s ease-in-out;
   }
 
-  .pp:hover{
+  .pp:hover,.ppM:hover{
     transform: translateY(-5px);
   }
 
