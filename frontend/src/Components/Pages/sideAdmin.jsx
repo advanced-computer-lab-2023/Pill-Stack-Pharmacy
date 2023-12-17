@@ -76,7 +76,7 @@ function SidebarAdmin(props) {
             <AccordionButton>
               <Box as="span" flex='1' textAlign='left' ml={10}>
               
-                Doctor Requests
+                Pharmacist Requests
                 
               </Box>
             </AccordionButton>

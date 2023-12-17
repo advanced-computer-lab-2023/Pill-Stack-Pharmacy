@@ -362,7 +362,7 @@ export const AdminHome = () => {
           </div>
           <div className="Container3">
           <Link to="/admin-users" className="box2" style={{ color: '#005660', textDecoration: 'none' }} >Manage Users</Link>
-            <Link to="/admin-requests" className="box21" style={{ color: '#005660', textDecoration: 'none' }}>Doctor Requests</Link>
+            <Link to="/admin-requests" className="box21" style={{ color: '#005660', textDecoration: 'none' }}>Pharamcist Requests</Link>
             <Link to="/medicineControl" className="box22" style={{ color: '#005660', textDecoration: 'none' }} >Medicine Control</Link>
 
           </div>
