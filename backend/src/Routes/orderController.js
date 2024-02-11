@@ -244,6 +244,7 @@ module.exports.cancelOrder = async (req, res) => {
         console.log(orderId);
         const userId = req.user._id;
         const order = await orderModel.findById(orderId);
+        const user = await userModel.findOne({ _id: userId });
 
         if (order) {
             switch (order.payment_method) {
@@ -255,7 +256,7 @@ module.exports.cancelOrder = async (req, res) => {
     
                 case 'wallet':
                     // Refund amount to user's wallet
-                    const user = await userModel.findOne({ _id: userId });
+                   // const user = await userModel.findOne({ _id: userId });
                     
                     
                     user.WalletBalance += order.bill;
@@ -268,6 +269,7 @@ module.exports.cancelOrder = async (req, res) => {
                     break;
             }
             for (const item of order.items) {
+
                 const product = await medModel.findOne({ _id: item.productId });
                 if(item.Onboard==false){
                     for(let i=0;i<user.Prescriptions.length;i++){
